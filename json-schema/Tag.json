@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/Tag.json",
+  "title": "Tag",
+  "description": "AWS HealthLake Tag",
+  "type": "object",
+  "properties": {
+    "Key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "Value": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 256,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    }
+  },
+  "required": [
+    "Key",
+    "Value"
+  ]
+}

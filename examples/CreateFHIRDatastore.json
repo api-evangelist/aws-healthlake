@@ -1,0 +1,51 @@
+{
+  "name": "CreateFHIRDatastore Example",
+  "description": "<p>Creates a data store that can ingest and export FHIR formatted data.</p>",
+  "operationId": "createFHIRDatastore",
+  "request": {
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0",
+      "X-Amz-Target": "HealthLake.CreateFHIRDatastore",
+      "X-Amz-Date": "20240115T103000Z",
+      "Authorization": "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20240115/us-east-1/healthlake/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=example"
+    },
+    "body": {
+      "DatastoreName": "my-healthlake-datastore",
+      "DatastoreTypeVersion": "R4",
+      "SseConfiguration": {
+        "KmsEncryptionConfig": {
+          "CmkType": "CUSTOMER_MANAGED_KMS_KEY",
+          "KmsKeyId": "example-encryptionkeyid"
+        }
+      },
+      "PreloadDataConfig": {
+        "PreloadDataType": "SYNTHEA"
+      },
+      "ClientToken": "example-clienttokenstring",
+      "Tags": [
+        {
+          "Key": "example-tagkey",
+          "Value": "example-tagvalue"
+        }
+      ],
+      "IdentityProviderConfiguration": {
+        "AuthorizationStrategy": "SMART_ON_FHIR_V1",
+        "FineGrainedAuthorizationEnabled": true,
+        "Metadata": "example-configurationmetadat",
+        "IdpLambdaArn": "example-lambdaarn"
+      }
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0"
+    },
+    "body": {
+      "DatastoreId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "DatastoreArn": "example-datastorearn",
+      "DatastoreStatus": "CREATING",
+      "DatastoreEndpoint": "example-boundedlengthstring"
+    }
+  }
+}

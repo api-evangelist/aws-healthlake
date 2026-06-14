@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/CreateFHIRDatastoreResponse.json",
+  "title": "CreateFHIRDatastoreResponse",
+  "description": "AWS HealthLake CreateFHIRDatastoreResponse",
+  "type": "object",
+  "properties": {
+    "DatastoreId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "DatastoreArn": {
+      "type": "string",
+      "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?"
+    },
+    "DatastoreStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "DELETING",
+        "DELETED",
+        "CREATE_FAILED"
+      ]
+    },
+    "DatastoreEndpoint": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000,
+      "pattern": "[\\P{M}\\p{M}]{1,5000}"
+    }
+  },
+  "required": [
+    "DatastoreId",
+    "DatastoreArn",
+    "DatastoreStatus",
+    "DatastoreEndpoint"
+  ]
+}

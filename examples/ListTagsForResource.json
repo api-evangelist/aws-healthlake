@@ -1,0 +1,30 @@
+{
+  "name": "ListTagsForResource Example",
+  "description": "<p> Returns a list of all existing tags associated with a data store. </p>",
+  "operationId": "listTagsForResource",
+  "request": {
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0",
+      "X-Amz-Target": "HealthLake.ListTagsForResource",
+      "X-Amz-Date": "20240115T103000Z",
+      "Authorization": "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20240115/us-east-1/healthlake/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=example"
+    },
+    "body": {
+      "ResourceARN": "example-amazonresourcename"
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0"
+    },
+    "body": {
+      "Tags": [
+        {
+          "Key": "example-tagkey",
+          "Value": "example-tagvalue"
+        }
+      ]
+    }
+  }
+}

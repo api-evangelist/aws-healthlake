@@ -1,0 +1,49 @@
+{
+  "name": "ListFHIRExportJobs Example",
+  "description": "<p> Lists all FHIR export jobs associated with an account and their statuses. </p>",
+  "operationId": "listFHIRExportJobs",
+  "request": {
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0",
+      "X-Amz-Target": "HealthLake.ListFHIRExportJobs",
+      "X-Amz-Date": "20240115T103000Z",
+      "Authorization": "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20240115/us-east-1/healthlake/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=example"
+    },
+    "body": {
+      "DatastoreId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "NextToken": "example-nexttoken",
+      "MaxResults": 1,
+      "JobName": "my-import-job",
+      "JobStatus": "SUBMITTED",
+      "SubmittedBefore": "2024-01-15T10:30:00Z",
+      "SubmittedAfter": "2024-01-15T10:30:00Z"
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0"
+    },
+    "body": {
+      "ExportJobPropertiesList": [
+        {
+          "JobId": "job-a1b2c3d4e5f6a1b2c3d4",
+          "JobName": "my-import-job",
+          "JobStatus": "SUBMITTED",
+          "SubmitTime": "2024-01-15T10:30:00Z",
+          "EndTime": "2024-01-15T10:30:00Z",
+          "DatastoreId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+          "OutputDataConfig": {
+            "S3Configuration": {
+              "S3Uri": "example-string",
+              "KmsKeyId": "example-string"
+            }
+          },
+          "DataAccessRoleArn": "arn:aws:iam::123456789012:role/HealthLakeRole",
+          "Message": "Example error message"
+        }
+      ],
+      "NextToken": "example-nexttoken"
+    }
+  }
+}

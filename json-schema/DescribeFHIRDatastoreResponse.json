@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/DescribeFHIRDatastoreResponse.json",
+  "title": "DescribeFHIRDatastoreResponse",
+  "description": "AWS HealthLake DescribeFHIRDatastoreResponse",
+  "type": "object",
+  "properties": {
+    "DatastoreProperties": {
+      "type": "object",
+      "properties": {
+        "DatastoreId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+        },
+        "DatastoreArn": {
+          "type": "string",
+          "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?"
+        },
+        "DatastoreName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+        },
+        "DatastoreStatus": {
+          "type": "string",
+          "enum": [
+            "CREATING",
+            "ACTIVE",
+            "DELETING",
+            "DELETED",
+            "CREATE_FAILED"
+          ]
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "DatastoreTypeVersion": {
+          "type": "string",
+          "enum": [
+            "R4"
+          ]
+        },
+        "DatastoreEndpoint": {
+          "type": "string",
+          "maxLength": 10000,
+          "pattern": "[\\P{M}\\p{M}]{0,10000}"
+        },
+        "SseConfiguration": {
+          "type": "object",
+          "properties": {
+            "KmsEncryptionConfig": {
+              "type": "object",
+              "properties": {
+                "CmkType": {
+                  "type": "string",
+                  "enum": [
+                    "CUSTOMER_MANAGED_KMS_KEY",
+                    "AWS_OWNED_KMS_KEY"
+                  ]
+                },
+                "KmsKeyId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 400,
+                  "pattern": "(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))"
+                }
+              },
+              "required": [
+                "CmkType"
+              ]
+            }
+          },
+          "required": [
+            "KmsEncryptionConfig"
+          ]
+        },
+        "PreloadDataConfig": {
+          "type": "object",
+          "properties": {
+            "PreloadDataType": {
+              "type": "string",
+              "enum": [
+                "SYNTHEA"
+              ]
+            }
+          },
+          "required": [
+            "PreloadDataType"
+          ]
+        },
+        "IdentityProviderConfiguration": {
+          "type": "object",
+          "properties": {
+            "AuthorizationStrategy": {
+              "type": "string",
+              "enum": [
+                "SMART_ON_FHIR_V1",
+                "AWS_AUTH"
+              ]
+            },
+            "FineGrainedAuthorizationEnabled": {
+              "type": "boolean"
+            },
+            "Metadata": {
+              "type": "string"
+            },
+            "IdpLambdaArn": {
+              "type": "string",
+              "minLength": 49,
+              "maxLength": 256,
+              "pattern": "arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9\\-_\\.]+(:(\\$LATEST|[a-zA-Z0-9\\-_]+))?"
+            }
+          },
+          "required": [
+            "AuthorizationStrategy"
+          ]
+        },
+        "ErrorCause": {
+          "type": "object",
+          "properties": {
+            "ErrorMessage": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "ErrorCategory": {
+              "type": "string",
+              "enum": [
+                "RETRYABLE_ERROR",
+                "NON_RETRYABLE_ERROR"
+              ]
+            }
+          }
+        }
+      },
+      "required": [
+        "DatastoreId",
+        "DatastoreArn",
+        "DatastoreStatus",
+        "DatastoreTypeVersion",
+        "DatastoreEndpoint"
+      ]
+    }
+  },
+  "required": [
+    "DatastoreProperties"
+  ]
+}

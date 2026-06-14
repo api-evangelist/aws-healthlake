@@ -1,0 +1,28 @@
+{
+  "name": "DeleteFHIRDatastore Example",
+  "description": "<p>Deletes a data store. </p>",
+  "operationId": "deleteFHIRDatastore",
+  "request": {
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0",
+      "X-Amz-Target": "HealthLake.DeleteFHIRDatastore",
+      "X-Amz-Date": "20240115T103000Z",
+      "Authorization": "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20240115/us-east-1/healthlake/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=example"
+    },
+    "body": {
+      "DatastoreId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0"
+    },
+    "body": {
+      "DatastoreId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "DatastoreArn": "example-datastorearn",
+      "DatastoreStatus": "CREATING",
+      "DatastoreEndpoint": "example-boundedlengthstring"
+    }
+  }
+}

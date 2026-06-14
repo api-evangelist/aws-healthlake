@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/ListTagsForResourceRequest.json",
+  "title": "ListTagsForResourceRequest",
+  "description": "AWS HealthLake ListTagsForResourceRequest",
+  "type": "object",
+  "properties": {
+    "ResourceARN": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1011,
+      "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\\d{12}:datastore\\/fhir\\/.{32}"
+    }
+  },
+  "required": [
+    "ResourceARN"
+  ]
+}

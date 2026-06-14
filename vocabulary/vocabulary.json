@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AWS HealthLake Vocabulary",
+  "description": "Domain vocabulary and terminology for the AWS HealthLake API, covering FHIR R4, healthcare interoperability, and AWS service concepts.",
+  "version": "2017-07-01",
+  "source": "https://docs.aws.amazon.com/healthlake/latest/APIReference/Welcome.html",
+  "terms": [
+    {
+      "term": "FHIR",
+      "abbreviation": "Fast Healthcare Interoperability Resources",
+      "definition": "A standard for health care data exchange, published by HL7. HealthLake implements the FHIR R4 (version 4.0.1) specification.",
+      "url": "https://www.hl7.org/fhir/overview.html"
+    },
+    {
+      "term": "FHIR R4",
+      "definition": "FHIR Release 4, the version supported by AWS HealthLake. R4 is the first normative release of the FHIR standard and the version required for US regulatory compliance.",
+      "url": "https://www.hl7.org/fhir/R4/"
+    },
+    {
+      "term": "Data Store",
+      "definition": "An AWS HealthLake resource that represents a managed FHIR R4 server. Each data store has a unique endpoint for CRUD operations and bulk import/export. Also referred to as a FHIR data store or datastore.",
+      "aliases": ["datastore", "FHIR data store"]
+    },
+    {
+      "term": "DatastoreId",
+      "definition": "A unique identifier assigned to a HealthLake data store at creation time. Used to reference the data store in all management API calls.",
+      "type": "string",
+      "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]{1,32}$"
+    },
+    {
+      "term": "DatastoreStatus",
+      "definition": "The current lifecycle state of a HealthLake data store.",
+      "values": [
+        {"value": "CREATING", "description": "The data store is being provisioned."},
+        {"value": "ACTIVE", "description": "The data store is operational and accepting FHIR requests."},
+        {"value": "DELETING", "description": "The data store is being deleted."},
+        {"value": "DELETED", "description": "The data store has been deleted."}
+      ]
+    },
+    {
+      "term": "SMART on FHIR",
+      "definition": "A set of open specifications to integrate apps with electronic health records and health IT data. HealthLake supports SMART App Launch Framework v1 using an external identity provider or a Lambda-based custom authorizer.",
+      "url": "https://smarthealthit.org/"
+    },
+    {
+      "term": "Bulk Import",
+      "definition": "An asynchronous operation (StartFHIRImportJob) that loads FHIR R4 resources from Amazon S3 NDJSON files into a HealthLake data store. Supports up to 1 million files and 5 TB total data per job.",
+      "operationId": "startFHIRImportJob"
+    },
+    {
+      "term": "Bulk Export",
+      "definition": "An asynchronous operation (StartFHIRExportJob) that exports all FHIR R4 resources from a HealthLake data store to Amazon S3 in NDJSON format. Supports analytics-ready output for use with Amazon Athena.",
+      "operationId": "startFHIRExportJob"
+    },
+    {
+      "term": "NDJSON",
+      "abbreviation": "Newline Delimited JSON",
+      "definition": "A format for streaming structured data where each line is a valid JSON value. Used by HealthLake for both bulk import and export of FHIR resources.",
+      "url": "http://ndjson.org/"
+    },
+    {
+      "term": "KmsEncryptionConfig",
+      "definition": "Configuration for server-side encryption of a HealthLake data store. Supports AWS-owned KMS keys (MANAGED_KMS_KEY type) or customer-managed KMS keys (CUSTOMER_MANAGED_KMS_KEY type).",
+      "schema": "KmsEncryptionConfig"
+    },
+    {
+      "term": "SseConfiguration",
+      "abbreviation": "Server-Side Encryption Configuration",
+      "definition": "The encryption configuration applied to a HealthLake data store, wrapping the KmsEncryptionConfig.",
+      "schema": "SseConfiguration"
+    },
+    {
+      "term": "PreloadDataConfig",
+      "definition": "Optional configuration to preload synthetic Synthea-generated patient data into a new HealthLake data store for development and testing purposes.",
+      "schema": "PreloadDataConfig"
+    },
+    {
+      "term": "Synthea",
+      "definition": "An open-source synthetic patient and population health data simulator. HealthLake can optionally preload Synthea-generated FHIR R4 data into a new data store.",
+      "url": "https://synthetichealth.github.io/synthea/"
+    },
+    {
+      "term": "IdentityProviderConfiguration",
+      "definition": "Configuration for SMART on FHIR authorization of a HealthLake data store. Supports SMART_ON_FHIR_V1 authorization strategy with optional Lambda-based fine-grained authorization.",
+      "schema": "IdentityProviderConfiguration"
+    },
+    {
+      "term": "S3Configuration",
+      "definition": "Configuration for the Amazon S3 location and KMS key used for import/export jobs.",
+      "schema": "S3Configuration"
+    },
+    {
+      "term": "InputDataConfig",
+      "definition": "Specifies the source Amazon S3 location for a FHIR bulk import job.",
+      "schema": "InputDataConfig"
+    },
+    {
+      "term": "OutputDataConfig",
+      "definition": "Specifies the destination Amazon S3 location for a FHIR bulk export job.",
+      "schema": "OutputDataConfig"
+    },
+    {
+      "term": "JobStatus",
+      "definition": "The current state of an import or export job.",
+      "values": [
+        {"value": "SUBMITTED", "description": "The job has been submitted but not yet started."},
+        {"value": "IN_PROGRESS", "description": "The job is currently running."},
+        {"value": "COMPLETED_WITH_ERRORS", "description": "The job completed but some resources had errors."},
+        {"value": "COMPLETED", "description": "The job completed successfully."},
+        {"value": "FAILED", "description": "The job failed."},
+        {"value": "CANCEL_SUBMITTED", "description": "A cancellation request has been submitted."},
+        {"value": "CANCEL_IN_PROGRESS", "description": "The job is being cancelled."},
+        {"value": "CANCEL_COMPLETED", "description": "The job has been cancelled."},
+        {"value": "CANCEL_FAILED", "description": "The cancellation attempt failed."}
+      ]
+    },
+    {
+      "term": "HIPAA",
+      "abbreviation": "Health Insurance Portability and Accountability Act",
+      "definition": "US legislation protecting patient health information. AWS HealthLake is a HIPAA-eligible service and can be used to store protected health information (PHI) when a Business Associate Agreement (BAA) is in place.",
+      "url": "https://aws.amazon.com/compliance/hipaa-compliance/"
+    },
+    {
+      "term": "US Core IG",
+      "definition": "The US Core Implementation Guide, a set of FHIR profiles and value sets meeting the US Core Data for Interoperability (USCDI) requirements. HealthLake supports US Core IG.",
+      "url": "https://www.hl7.org/fhir/us/core/"
+    },
+    {
+      "term": "USCDI",
+      "abbreviation": "United States Core Data for Interoperability",
+      "definition": "A standardized set of health data classes and constituent data elements required for nationwide health information exchange. HealthLake supports USCDI via the US Core IG.",
+      "url": "https://www.healthit.gov/isa/united-states-core-data-interoperability-uscdi"
+    },
+    {
+      "term": "AWS Signature Version 4",
+      "abbreviation": "SigV4",
+      "definition": "The process for adding authentication information to AWS API requests. All HealthLake management API requests must be signed with SigV4 using AWS IAM credentials.",
+      "url": "https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html"
+    },
+    {
+      "term": "IamRoleArn",
+      "definition": "An Amazon Resource Name (ARN) identifying an IAM role. Used in HealthLake import/export jobs to grant the service access to S3 resources.",
+      "type": "string",
+      "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+    },
+    {
+      "term": "ClientToken",
+      "definition": "An idempotency token provided by the client to ensure that a request is not processed more than once. HealthLake uses client tokens for CreateFHIRDatastore, StartFHIRImportJob, and StartFHIRExportJob.",
+      "type": "string"
+    },
+    {
+      "term": "Resource Tag",
+      "definition": "A key-value pair attached to a HealthLake data store for cost allocation, access control, and resource management. Each data store supports up to 200 tags.",
+      "schema": "Tag"
+    },
+    {
+      "term": "FHIR Subscription",
+      "definition": "A FHIR mechanism for receiving notifications when resources change. HealthLake implements FHIR Subscriptions via Amazon EventBridge (channel type rest-hook).",
+      "url": "https://docs.aws.amazon.com/healthlake/latest/devguide/supported-fhir-resources.html"
+    },
+    {
+      "term": "NLP",
+      "abbreviation": "Natural Language Processing",
+      "definition": "AWS HealthLake includes AWS Comprehend Medical integration for extracting structured clinical data from unstructured text (clinical notes, discharge summaries, etc.) as part of the data enrichment pipeline.",
+      "url": "https://docs.aws.amazon.com/comprehend-medical/latest/dev/comprehendmedical-welcome.html"
+    },
+    {
+      "term": "Amazon Athena",
+      "definition": "An interactive query service used with HealthLake export data. HealthLake exports FHIR resources to S3 in analytics-ready format consumable by Amazon Athena for SQL-based querying.",
+      "url": "https://aws.amazon.com/athena/"
+    },
+    {
+      "term": "VPC Endpoint",
+      "definition": "An AWS PrivateLink interface endpoint that allows HealthLake API calls to remain within the AWS network without traversing the public internet.",
+      "url": "https://docs.aws.amazon.com/healthlake/latest/devguide/vpc-endpoints.html"
+    },
+    {
+      "term": "ErrorCause",
+      "definition": "Details about an error encountered during a HealthLake import or export job, including the error code and message.",
+      "schema": "ErrorCause"
+    }
+  ]
+}

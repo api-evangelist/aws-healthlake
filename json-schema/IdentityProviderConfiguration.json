@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/IdentityProviderConfiguration.json",
+  "title": "IdentityProviderConfiguration",
+  "description": "AWS HealthLake IdentityProviderConfiguration",
+  "type": "object",
+  "properties": {
+    "AuthorizationStrategy": {
+      "type": "string",
+      "enum": [
+        "SMART_ON_FHIR_V1",
+        "AWS_AUTH"
+      ]
+    },
+    "FineGrainedAuthorizationEnabled": {
+      "type": "boolean"
+    },
+    "Metadata": {
+      "type": "string"
+    },
+    "IdpLambdaArn": {
+      "type": "string",
+      "minLength": 49,
+      "maxLength": 256,
+      "pattern": "arn:aws:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9\\-_\\.]+(:(\\$LATEST|[a-zA-Z0-9\\-_]+))?"
+    }
+  },
+  "required": [
+    "AuthorizationStrategy"
+  ]
+}

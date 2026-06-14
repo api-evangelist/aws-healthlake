@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/PreloadDataConfig.json",
+  "title": "PreloadDataConfig",
+  "description": "AWS HealthLake PreloadDataConfig",
+  "type": "object",
+  "properties": {
+    "PreloadDataType": {
+      "type": "string",
+      "enum": [
+        "SYNTHEA"
+      ]
+    }
+  },
+  "required": [
+    "PreloadDataType"
+  ]
+}

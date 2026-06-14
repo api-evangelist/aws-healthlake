@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/DescribeFHIRExportJobRequest.json",
+  "title": "DescribeFHIRExportJobRequest",
+  "description": "AWS HealthLake DescribeFHIRExportJobRequest",
+  "type": "object",
+  "properties": {
+    "DatastoreId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "JobId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    }
+  },
+  "required": [
+    "DatastoreId",
+    "JobId"
+  ]
+}

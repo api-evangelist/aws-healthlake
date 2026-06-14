@@ -1,0 +1,29 @@
+{
+  "name": "TagResource Example",
+  "description": "<p> Adds a user specified key and value tag to a data store. </p>",
+  "operationId": "tagResource",
+  "request": {
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0",
+      "X-Amz-Target": "HealthLake.TagResource",
+      "X-Amz-Date": "20240115T103000Z",
+      "Authorization": "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20240115/us-east-1/healthlake/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=example"
+    },
+    "body": {
+      "ResourceARN": "example-amazonresourcename",
+      "Tags": [
+        {
+          "Key": "example-tagkey",
+          "Value": "example-tagvalue"
+        }
+      ]
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0"
+    },
+    "body": {}
+  }
+}

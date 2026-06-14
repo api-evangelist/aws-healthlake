@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/ErrorCause.json",
+  "title": "ErrorCause",
+  "description": "AWS HealthLake ErrorCause",
+  "type": "object",
+  "properties": {
+    "ErrorMessage": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "ErrorCategory": {
+      "type": "string",
+      "enum": [
+        "RETRYABLE_ERROR",
+        "NON_RETRYABLE_ERROR"
+      ]
+    }
+  }
+}

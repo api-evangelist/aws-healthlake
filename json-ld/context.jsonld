@@ -1,0 +1,188 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "fhir": "http://hl7.org/fhir/",
+    "aws": "https://aws.amazon.com/",
+    "healthlake": "https://docs.aws.amazon.com/healthlake/latest/APIReference/",
+
+    "DataStore": {
+      "@id": "healthlake:DataStore",
+      "@type": "@id"
+    },
+    "DatastoreId": {
+      "@id": "healthlake:DatastoreId",
+      "@type": "xsd:string"
+    },
+    "DatastoreName": {
+      "@id": "healthlake:DatastoreName",
+      "@type": "xsd:string"
+    },
+    "DatastoreStatus": {
+      "@id": "healthlake:DatastoreStatus",
+      "@type": "xsd:string"
+    },
+    "DatastoreTypeVersion": {
+      "@id": "healthlake:DatastoreTypeVersion",
+      "@type": "xsd:string"
+    },
+    "DatastoreEndpoint": {
+      "@id": "healthlake:DatastoreEndpoint",
+      "@type": "xsd:anyURI"
+    },
+    "CreatedAt": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+
+    "ImportJob": {
+      "@id": "healthlake:ImportJob",
+      "@type": "@id"
+    },
+    "ExportJob": {
+      "@id": "healthlake:ExportJob",
+      "@type": "@id"
+    },
+    "JobId": {
+      "@id": "healthlake:JobId",
+      "@type": "xsd:string"
+    },
+    "JobName": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "JobStatus": {
+      "@id": "healthlake:JobStatus",
+      "@type": "xsd:string"
+    },
+    "SubmitTime": {
+      "@id": "healthlake:SubmitTime",
+      "@type": "xsd:dateTime"
+    },
+    "EndTime": {
+      "@id": "healthlake:EndTime",
+      "@type": "xsd:dateTime"
+    },
+
+    "InputDataConfig": {
+      "@id": "healthlake:InputDataConfig",
+      "@type": "@id"
+    },
+    "OutputDataConfig": {
+      "@id": "healthlake:OutputDataConfig",
+      "@type": "@id"
+    },
+    "S3Configuration": {
+      "@id": "healthlake:S3Configuration",
+      "@type": "@id"
+    },
+    "S3Uri": {
+      "@id": "healthlake:S3Uri",
+      "@type": "xsd:anyURI"
+    },
+
+    "SseConfiguration": {
+      "@id": "healthlake:SseConfiguration",
+      "@type": "@id"
+    },
+    "KmsEncryptionConfig": {
+      "@id": "healthlake:KmsEncryptionConfig",
+      "@type": "@id"
+    },
+    "CmkType": {
+      "@id": "healthlake:CmkType",
+      "@type": "xsd:string"
+    },
+    "KmsKeyId": {
+      "@id": "healthlake:KmsKeyId",
+      "@type": "xsd:string"
+    },
+
+    "IdentityProviderConfiguration": {
+      "@id": "healthlake:IdentityProviderConfiguration",
+      "@type": "@id"
+    },
+    "AuthorizationStrategy": {
+      "@id": "healthlake:AuthorizationStrategy",
+      "@type": "xsd:string"
+    },
+    "FineGrainedAuthorizationEnabled": {
+      "@id": "healthlake:FineGrainedAuthorizationEnabled",
+      "@type": "xsd:boolean"
+    },
+    "IdpLambdaArn": {
+      "@id": "healthlake:IdpLambdaArn",
+      "@type": "xsd:anyURI"
+    },
+    "Metadata": {
+      "@id": "healthlake:Metadata",
+      "@type": "xsd:string"
+    },
+
+    "PreloadDataConfig": {
+      "@id": "healthlake:PreloadDataConfig",
+      "@type": "@id"
+    },
+    "PreloadDataType": {
+      "@id": "healthlake:PreloadDataType",
+      "@type": "xsd:string"
+    },
+
+    "Tag": {
+      "@id": "schema:PropertyValue",
+      "@type": "@id"
+    },
+    "Key": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "Value": {
+      "@id": "schema:value",
+      "@type": "xsd:string"
+    },
+
+    "IamRoleArn": {
+      "@id": "healthlake:IamRoleArn",
+      "@type": "xsd:anyURI"
+    },
+    "ClientToken": {
+      "@id": "healthlake:ClientToken",
+      "@type": "xsd:string"
+    },
+    "ResourceARN": {
+      "@id": "schema:identifier",
+      "@type": "xsd:anyURI"
+    },
+
+    "ErrorCause": {
+      "@id": "healthlake:ErrorCause",
+      "@type": "@id"
+    },
+    "ErrorCode": {
+      "@id": "healthlake:ErrorCode",
+      "@type": "xsd:string"
+    },
+    "Message": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+
+    "FHIRVersion": {
+      "@id": "fhir:version",
+      "@type": "xsd:string"
+    },
+    "DatastoreProperties": {
+      "@id": "healthlake:DatastoreProperties",
+      "@type": "@id"
+    },
+    "ImportJobProperties": {
+      "@id": "healthlake:ImportJobProperties",
+      "@type": "@id"
+    },
+    "ExportJobProperties": {
+      "@id": "healthlake:ExportJobProperties",
+      "@type": "@id"
+    }
+  }
+}

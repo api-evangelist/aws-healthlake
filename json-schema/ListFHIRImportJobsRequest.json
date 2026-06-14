@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/ListFHIRImportJobsRequest.json",
+  "title": "ListFHIRImportJobsRequest",
+  "description": "AWS HealthLake ListFHIRImportJobsRequest",
+  "type": "object",
+  "properties": {
+    "DatastoreId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "NextToken": {
+      "type": "string",
+      "maxLength": 8192,
+      "pattern": "\\p{ASCII}{0,8192}"
+    },
+    "MaxResults": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 500
+    },
+    "JobName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "JobStatus": {
+      "type": "string",
+      "enum": [
+        "SUBMITTED",
+        "IN_PROGRESS",
+        "COMPLETED_WITH_ERRORS",
+        "COMPLETED",
+        "FAILED",
+        "CANCEL_SUBMITTED",
+        "CANCEL_IN_PROGRESS",
+        "CANCEL_COMPLETED",
+        "CANCEL_FAILED"
+      ]
+    },
+    "SubmittedBefore": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "SubmittedAfter": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "DatastoreId"
+  ]
+}

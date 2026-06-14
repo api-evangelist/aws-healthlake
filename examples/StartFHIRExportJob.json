@@ -1,0 +1,36 @@
+{
+  "name": "StartFHIRExportJob Example",
+  "description": "<p>Begins a FHIR export job.</p>",
+  "operationId": "startFHIRExportJob",
+  "request": {
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0",
+      "X-Amz-Target": "HealthLake.StartFHIRExportJob",
+      "X-Amz-Date": "20240115T103000Z",
+      "Authorization": "AWS4-HMAC-SHA256 Credential=AKIAIOSFODNN7EXAMPLE/20240115/us-east-1/healthlake/aws4_request, SignedHeaders=content-type;host;x-amz-date;x-amz-target, Signature=example"
+    },
+    "body": {
+      "JobName": "my-import-job",
+      "OutputDataConfig": {
+        "S3Configuration": {
+          "S3Uri": "s3://my-bucket/prefix/",
+          "KmsKeyId": "example-encryptionkeyid"
+        }
+      },
+      "DatastoreId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "DataAccessRoleArn": "arn:aws:iam::123456789012:role/HealthLakeRole",
+      "ClientToken": "example-clienttokenstring"
+    }
+  },
+  "response": {
+    "statusCode": 200,
+    "headers": {
+      "Content-Type": "application/x-amz-json-1.0"
+    },
+    "body": {
+      "JobId": "job-a1b2c3d4e5f6a1b2c3d4",
+      "JobStatus": "SUBMITTED",
+      "DatastoreId": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4"
+    }
+  }
+}

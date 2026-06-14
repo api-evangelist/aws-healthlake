@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/aws-healthlake/main/json-schema/ImportJobProperties.json",
+  "title": "ImportJobProperties",
+  "description": "AWS HealthLake ImportJobProperties",
+  "type": "object",
+  "properties": {
+    "JobId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "JobName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "JobStatus": {
+      "type": "string",
+      "enum": [
+        "SUBMITTED",
+        "IN_PROGRESS",
+        "COMPLETED_WITH_ERRORS",
+        "COMPLETED",
+        "FAILED",
+        "CANCEL_SUBMITTED",
+        "CANCEL_IN_PROGRESS",
+        "CANCEL_COMPLETED",
+        "CANCEL_FAILED"
+      ]
+    },
+    "SubmitTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "EndTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "DatastoreId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    },
+    "InputDataConfig": {
+      "type": "object",
+      "properties": {
+        "S3Uri": {
+          "type": "string",
+          "maxLength": 1024,
+          "pattern": "s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?"
+        }
+      }
+    },
+    "JobOutputDataConfig": {
+      "type": "object",
+      "properties": {
+        "S3Configuration": {
+          "type": "object",
+          "properties": {
+            "S3Uri": {
+              "type": "string",
+              "maxLength": 1024,
+              "pattern": "s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?"
+            },
+            "KmsKeyId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 400,
+              "pattern": "(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))"
+            }
+          },
+          "required": [
+            "S3Uri",
+            "KmsKeyId"
+          ]
+        }
+      }
+    },
+    "JobProgressReport": {
+      "type": "object",
+      "properties": {
+        "TotalNumberOfScannedFiles": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "TotalSizeOfScannedFilesInMB": {
+          "type": "number",
+          "format": "double"
+        },
+        "TotalNumberOfImportedFiles": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "TotalNumberOfResourcesScanned": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "TotalNumberOfResourcesImported": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "TotalNumberOfResourcesWithCustomerError": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "TotalNumberOfFilesReadWithCustomerError": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Throughput": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "DataAccessRoleArn": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2048,
+      "pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+    },
+    "Message": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$"
+    }
+  },
+  "required": [
+    "JobId",
+    "JobStatus",
+    "SubmitTime",
+    "DatastoreId",
+    "InputDataConfig"
+  ]
+}
