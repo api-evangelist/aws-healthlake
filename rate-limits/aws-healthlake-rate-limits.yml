@@ -1,0 +1,306 @@
+name: AWS HealthLake Rate Limits
+description: AWS HealthLake enforces service quotas at both the account level and the per-data-store level. Limits differ between HealthLake Advanced (data stores created after 8/21/2023) and HealthLake Standard (legacy data stores). Many limits are adjustable via the AWS Service Quotas console. Write capacity scales with payload size — each 1 KB increment above the base consumes proportionally more write capacity.
+specificationVersion: '0.1'
+url: https://docs.aws.amazon.com/healthlake/latest/devguide/quotas.html
+rateLimits:
+  - name: GET Requests per Account
+    description: Maximum FHIR GET requests per second across all data stores in the account (Advanced tier).
+    scope: per-account
+    limit: 6000
+    period: 1s
+    type: request
+    adjustable: true
+    tier: Advanced
+  - name: GET Requests per Data Store
+    description: Maximum FHIR GET requests per second for a single data store (Advanced tier). Legacy data stores are limited to 100 per second.
+    scope: per-data-store
+    limit: 3000
+    period: 1s
+    type: request
+    adjustable: true
+    tier: Advanced
+    notes: Data stores created prior to 8/21/2023 are limited to 100 requests per second.
+  - name: WRITE Requests per Account
+    description: Maximum FHIR CREATE, UPDATE, and DELETE requests per second across all data stores (Advanced tier).
+    scope: per-account
+    limit: 6000
+    period: 1s
+    type: request
+    adjustable: true
+    tier: Advanced
+  - name: WRITE Requests per Data Store
+    description: Maximum FHIR CREATE, UPDATE, and DELETE requests per second for a single data store (Advanced tier). Legacy data stores are limited to 300 per second.
+    scope: per-data-store
+    limit: 3000
+    period: 1s
+    type: request
+    adjustable: true
+    tier: Advanced
+    notes: >
+      Write capacity scales with payload size — a 4 KB payload consumes 4x write capacity.
+      Setting x-amz-fhir-history-consistency-level header to "strong" doubles write capacity
+      consumption per resource. Bundle type "transaction" consumes twice the write capacity
+      of "batch" type.
+  - name: Search Requests (GET) per Account
+    description: Maximum FHIR search requests using GET per second across all data stores.
+    scope: per-account
+    limit: 200
+    period: 1s
+    type: request
+    adjustable: true
+  - name: Search Requests (GET) per Data Store
+    description: Maximum FHIR search requests using GET per second for a single data store.
+    scope: per-data-store
+    limit: 100
+    period: 1s
+    type: request
+    adjustable: true
+  - name: Search Requests (POST) per Account
+    description: Maximum FHIR search requests using POST per second across all data stores.
+    scope: per-account
+    limit: 200
+    period: 1s
+    type: request
+    adjustable: true
+  - name: Search Requests (POST) per Data Store
+    description: Maximum FHIR search requests using POST per second for a single data store.
+    scope: per-data-store
+    limit: 100
+    period: 1s
+    type: request
+    adjustable: true
+  - name: ValidateResource per Account
+    description: Maximum resource validation requests per second across all data stores (Advanced tier).
+    scope: per-account
+    limit: 2000
+    period: 1s
+    type: request
+    adjustable: true
+    tier: Advanced
+    notes: Legacy data stores limited to 300 per second.
+  - name: ValidateResource per Data Store
+    description: Maximum resource validation requests per second for a single data store (Advanced tier).
+    scope: per-data-store
+    limit: 1000
+    period: 1s
+    type: request
+    adjustable: true
+    tier: Advanced
+  - name: SearchEverything per Account
+    description: Maximum SearchEverything (system-level search) requests per second across all data stores.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: true
+  - name: SearchEverything per Data Store
+    description: Maximum SearchEverything requests per second for a single data store.
+    scope: per-data-store
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: true
+  - name: CreateFHIRDatastore per Account
+    description: Maximum number of CreateFHIRDatastore requests per minute per account. Not adjustable.
+    scope: per-account
+    limit: 1
+    period: 1m
+    type: request
+    adjustable: false
+  - name: DeleteFHIRDatastore per Account
+    description: Maximum number of DeleteFHIRDatastore requests per minute per account. Not adjustable.
+    scope: per-account
+    limit: 1
+    period: 1m
+    type: request
+    adjustable: false
+  - name: DescribeFHIRDatastore per Account
+    description: Maximum number of DescribeFHIRDatastore requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: ListFHIRDatastores per Account
+    description: Maximum number of ListFHIRDatastores requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: StartFHIRImportJob per Account
+    description: Maximum number of StartFHIRImportJob requests per second per account.
+    scope: per-account
+    limit: 25
+    period: 1s
+    type: request
+    adjustable: false
+  - name: Concurrent StartFHIRImportJob Jobs
+    description: Maximum concurrent import jobs running at any time.
+    scope: per-account
+    limit: 1
+    period: concurrent
+    type: concurrency
+    adjustable: false
+  - name: StartFHIRExportJob per Account
+    description: Maximum number of StartFHIRExportJob requests per second per account.
+    scope: per-account
+    limit: 1
+    period: 1s
+    type: request
+    adjustable: false
+  - name: Concurrent StartFHIRExportJob Jobs
+    description: Maximum concurrent export jobs running at any time.
+    scope: per-account
+    limit: 1
+    period: concurrent
+    type: concurrency
+    adjustable: false
+  - name: DescribeFHIRImportJob per Account
+    description: Maximum number of DescribeFHIRImportJob requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: DescribeFHIRExportJob per Account
+    description: Maximum number of DescribeFHIRExportJob requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: ListFHIRImportJobs per Account
+    description: Maximum number of ListFHIRImportJobs requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: ListFHIRExportJobs per Account
+    description: Maximum number of ListFHIRExportJobs requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: TagResource per Account
+    description: Maximum number of TagResource requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: UntagResource per Account
+    description: Maximum number of UntagResource requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: ListTagsForResource per Account
+    description: Maximum number of ListTagsForResource requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: GetCapabilities per Account
+    description: Maximum number of FHIR capability statement requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: false
+  - name: Discovery Requests per Account
+    description: Maximum number of SMART on FHIR discovery requests per minute per account.
+    scope: per-account
+    limit: 10
+    period: 1m
+    type: request
+    adjustable: false
+  - name: StartFHIRBulkDeleteJob per Account
+    description: Maximum number of bulk delete job requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: true
+  - name: StartFHIRBulkDeleteJob per Data Store
+    description: Maximum number of bulk delete job requests per second per data store.
+    scope: per-data-store
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: true
+  - name: StartFHIRBulkMemberMatchJob per Account
+    description: Maximum number of bulk member match job requests per second per account.
+    scope: per-account
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: true
+  - name: StartFHIRBulkMemberMatchJob per Data Store
+    description: Maximum number of bulk member match job requests per second per data store.
+    scope: per-data-store
+    limit: 10
+    period: 1s
+    type: request
+    adjustable: true
+resourceLimits:
+  - name: Data Stores per Account
+    description: Maximum number of active FHIR data stores per account per region.
+    limit: 20
+    adjustable: true
+  - name: Resources per Bundle
+    description: Maximum number of FHIR resources in a single Bundle request.
+    limit: 500
+    adjustable: false
+  - name: Files per Import Job
+    description: Maximum number of files included in a single StartFHIRImportJob.
+    limit: 1000000
+    adjustable: true
+  - name: Individual Import File Size
+    description: Maximum size of a single file in a StartFHIRImportJob.
+    limit: 50 GB
+    adjustable: false
+  - name: Total Import Job Size
+    description: Maximum combined size of all files in a single import job.
+    limit: 5000 GB
+    adjustable: true
+  - name: Medical Note Characters
+    description: Maximum number of characters in an individual medical note within the DocumentReference resource type.
+    limit: 10000
+    adjustable: false
+  - name: Active Subscriptions per Account
+    description: Maximum number of active Subscription resources per account per region.
+    limit: 100
+    adjustable: true
+  - name: Active Subscriptions per Data Store
+    description: Maximum number of active Subscription resources per data store per region.
+    limit: 50
+    adjustable: true
+  - name: Active SubscriptionTopics per Account
+    description: Maximum number of active SubscriptionTopic resources per account per region.
+    limit: 100
+    adjustable: true
+  - name: Active SubscriptionTopics per Data Store
+    description: Maximum number of active SubscriptionTopic resources per data store per region.
+    limit: 50
+    adjustable: true
+  - name: Queued Async Bundle Transactions per Data Store
+    description: Maximum number of queued async bundle transactions per data store at any given time.
+    limit: 500
+    adjustable: true
+  - name: Queued Bulk Export Jobs per Data Store
+    description: Maximum number of queued bulk export jobs per data store at any given time.
+    limit: 25
+    adjustable: true
+  - name: Queued Bulk Import Jobs per Data Store
+    description: Maximum number of queued bulk import jobs per data store at any given time.
+    limit: 25
+    adjustable: true
+errorCodes:
+  - code: ThrottlingException
+    httpStatus: 400
+    description: The user has exceeded their maximum number of allowed calls to the given API.

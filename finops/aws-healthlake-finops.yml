@@ -1,0 +1,139 @@
+name: AWS HealthLake FinOps Framework
+description: FOCUS-aligned FinOps reference for teams consuming AWS HealthLake. Primary cost drivers are data store hourly charges, storage beyond the included 10 GB, FHIR query volume, medical NLP character processing, data export, and FHIR Subscription event delivery. Optimization strategies center on right-sizing data stores, batching FHIR writes, managing NLP usage, using Athena for analytics over repeated API queries, and leveraging the AWS Pricing Calculator for TCO modeling.
+specificationVersion: '1.0'
+url: https://aws.amazon.com/healthlake/pricing/
+costDimensions:
+  - name: Data Store Hourly Charge
+    description: Base charge for each active HealthLake data store, billed hourly. Includes the first 10 GB of storage across all data stores and 3,500 bundled queries per hour. This is the primary fixed-like cost — reducing the number of active data stores directly lowers this charge.
+    billingModel: hourly
+    currency: USD
+    costDrivers:
+      - name: Data Store Hour
+        rate: '$0.27 per data store per hour'
+        notes: Approximately $194/month per always-on data store. Deleting unused or dev/test data stores eliminates this charge.
+  - name: Storage
+    description: Storage costs for FHIR resources and NLP-extracted entities stored beyond the included 10 GB allowance, billed monthly per GB.
+    billingModel: per-GB-month
+    currency: USD
+    costDrivers:
+      - name: Advanced Tier Storage
+        rate: '$0.37 per GB per month'
+        tier: Advanced
+      - name: Standard Tier Storage
+        rate: '$0.25 per GB per month'
+        tier: Standard
+      - name: Included Allowance
+        rate: Free
+        details: First 10 GB across all data stores is included at no extra charge.
+  - name: FHIR Queries
+    description: Query charges for FHIR read and search operations beyond the 3,500 queries per hour included in the data store hourly fee.
+    billingModel: per-10k-queries
+    currency: USD
+    costDrivers:
+      - name: Additional Queries (Advanced)
+        rate: '$0.048 per 10,000 queries'
+        tier: Advanced
+      - name: Additional Queries (Standard)
+        rate: '$0.015 per 10,000 queries'
+        tier: Standard
+      - name: Bundled Queries
+        rate: Free
+        details: 3,500 queries per hour included in data store charge.
+  - name: Medical NLP
+    description: Character-based charge for processing unstructured medical text in DocumentReference resources through the integrated NLP pipeline. NLP extracts entities, relationships, traits, and PHI from free-text clinical notes.
+    billingModel: per-100-characters
+    currency: USD
+    costDrivers:
+      - name: NLP Character Processing
+        rate: '$0.0010 per 100 characters analyzed'
+        notes: A 10,000-character medical note (maximum allowed) costs $0.10. Costs scale linearly with ingestion volume of unstructured notes.
+  - name: Data Export and Analytics Transformation
+    description: Per-GB charge for exporting FHIR data from a data store to Amazon S3 or transforming data for analytics use with Amazon Athena.
+    billingModel: per-GB
+    currency: USD
+    costDrivers:
+      - name: Export / Transform
+        rate: '$0.19 per GB'
+        notes: Applies to both StartFHIRExportJob output and analytics transformation output.
+  - name: FHIR Subscriptions
+    description: Event delivery costs for FHIR R4 Subscription notifications when resources matching subscription criteria are created or updated. Two delivery mechanisms available — Amazon EventBridge and REST-Hook.
+    billingModel: per-million-events
+    currency: USD
+    costDrivers:
+      - name: EventBridge Subscription Events
+        rate: '$2.00 per 1 million events'
+        freeAllowance: '100,000 events per month'
+      - name: REST-Hook Subscription Events
+        rate: '$0.90 per 1 million events'
+        freeAllowance: '100,000 events per month'
+optimizationStrategies:
+  - name: Minimize Active Data Store Count
+    description: Each data store costs ~$194/month regardless of usage. Consolidate environments by sharing a single Advanced data store across teams where HIPAA BAA and data segregation requirements allow, or delete idle development and test data stores when not in use.
+    impact: high
+    effort: medium
+  - name: Use Athena for Analytics Workloads
+    description: Export FHIR data to S3 once using StartFHIRExportJob and query it with Amazon Athena rather than issuing repeated FHIR API GET and search requests. Athena SQL queries against S3 are far cheaper than per-query HealthLake charges at scale.
+    impact: high
+    effort: medium
+    url: https://docs.aws.amazon.com/healthlake/latest/devguide/exporting-and-analyzing.html
+  - name: Batch FHIR Writes Using Bundle Resources
+    description: Use FHIR Bundle resources (batch type preferred over transaction) to group multiple resource writes into a single API call. This reduces per-request overhead and makes more efficient use of write capacity quotas. Batch bundles use half the write capacity of transaction bundles.
+    impact: medium
+    effort: low
+    notes: Maximum 500 resources per Bundle.
+  - name: Control NLP Ingestion Volume
+    description: Medical NLP costs accumulate per character for every DocumentReference with unstructured text. Disable NLP for data stores where NLP-enriched search is not required, or pre-filter documents to exclude clinical notes that do not benefit from entity extraction before ingestion.
+    impact: medium
+    effort: medium
+    url: https://docs.aws.amazon.com/healthlake/latest/devguide/using-medical-nlp.html
+  - name: Schedule Import Jobs During Off-Peak Hours
+    description: StartFHIRImportJob is asynchronous — queue large import jobs during off-peak periods to avoid contention. Only one concurrent import job is allowed per account, so batching strategically reduces wall-clock time and allows the data store to serve queries at full throughput during business hours.
+    impact: low
+    effort: low
+  - name: Right-Size Export Jobs
+    description: Export only the FHIR resource types and date ranges needed for analytics workloads rather than full data store exports. This reduces the per-GB export charge and S3 storage costs for downstream data.
+    impact: medium
+    effort: low
+  - name: Use FHIR Subscription REST-Hook Over EventBridge When Cost Matters
+    description: REST-Hook delivery ($0.90/M events) is less expensive than EventBridge delivery ($2.00/M events) for high-volume subscription scenarios. Evaluate architecture requirements — EventBridge provides richer routing and fanout capabilities that may justify the premium.
+    impact: low
+    effort: medium
+  - name: Use AWS Cost Allocation Tags
+    description: Apply AWS resource tags to each HealthLake data store to attribute costs by team, project, environment (prod/dev/test), or clinical domain. Up to 200 tags per data store are supported. Tags appear in AWS Cost Explorer for charge-back and show-back reporting.
+    impact: medium
+    effort: low
+    url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_TagResource.html
+  - name: Estimate TCO with AWS Pricing Calculator
+    description: Use the AWS Pricing Calculator HealthLake template to model total cost of ownership before provisioning, factoring in data store hours, expected storage growth, query volume, NLP character volume, and subscription event rates.
+    impact: high
+    effort: low
+    url: https://calculator.aws/#/addService/HealthLake
+costAllocation:
+  - dimension: DataStore
+    description: Each HealthLake data store generates a distinct hourly charge visible in Cost Explorer. Use one data store per billing boundary (environment, product line, clinical domain) for clean attribution.
+  - dimension: Environment
+    values:
+      - Production
+      - Staging
+      - Development
+      - Test
+    notes: Tag data stores by environment and delete non-production stores when idle to eliminate hourly charges.
+  - dimension: ResourceTags
+    description: AWS resource tags on data stores propagate to Cost Explorer line items. Recommended tag keys include Team, Project, CostCenter, and Environment.
+  - dimension: NLPVolume
+    description: Track DocumentReference ingestion volume (character counts) to forecast and attribute NLP charges by clinical data source or ingestion pipeline.
+  - dimension: ExportVolume
+    description: S3 export job sizes are visible in CloudWatch Logs and the export job response. Use these to attribute analytics transformation costs to downstream consumers.
+monitoring:
+  - name: CloudWatch Metrics
+    description: Monitor HealthLake data store operation counts, latencies, and errors via Amazon CloudWatch to detect unusual query volume spikes that drive cost.
+    url: https://docs.aws.amazon.com/healthlake/latest/devguide/monitoring-healthlake.html
+  - name: AWS Cost Explorer
+    description: Use Cost Explorer with the HealthLake service filter and resource tag dimensions to view daily and monthly charges broken down by data store and cost category.
+    url: https://aws.amazon.com/aws-cost-management/aws-cost-explorer/
+  - name: AWS Budgets
+    description: Set monthly budgets for HealthLake spend with alert thresholds to receive notifications before costs exceed planned levels.
+    url: https://aws.amazon.com/aws-cost-management/aws-budgets/
+  - name: CloudTrail API Audit
+    description: AWS CloudTrail logs all HealthLake management API calls (CreateFHIRDatastore, StartFHIRImportJob, etc.) with timestamps and caller identity, enabling cost audit trails and detecting unauthorized data store creation.
+    url: https://docs.aws.amazon.com/healthlake/latest/devguide/logging-using-cloudtrail.html

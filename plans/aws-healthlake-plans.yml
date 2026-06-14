@@ -1,0 +1,53 @@
+name: AWS HealthLake Plans and Pricing
+description: AWS HealthLake uses a pay-as-you-go model with no upfront costs. Two service tiers are available — HealthLake Advanced (default, with higher FHIR transaction quotas and newer API capabilities) and HealthLake Standard (legacy tier). Charges are based on data store hours, storage consumed, queries beyond the bundled allowance, medical NLP character processing, data export volume, and FHIR Subscription event delivery.
+specificationVersion: '0.1'
+url: https://aws.amazon.com/healthlake/pricing/
+plans:
+  - name: HealthLake Advanced
+    description: Default tier for newly created data stores. Provides higher FHIR transaction quotas (3,000 reads/sec and 3,000 writes/sec per data store), access to new API capabilities, FHIR Subscriptions, bulk member match, bulk delete, and an included 2-month free data import period.
+    url: https://aws.amazon.com/healthlake/pricing/
+    price: Pay-as-you-go
+    pricingModel: consumption
+    features:
+      - 3,000 GET requests per second per data store (adjustable)
+      - 3,000 WRITE requests per second per data store (adjustable)
+      - First 10 GB storage included across all data stores
+      - First 3,500 queries per hour bundled in data store charge
+      - FHIR Subscriptions (EventBridge and REST-Hook)
+      - Bulk Data FHIR API export
+      - SMART on FHIR authorization
+      - Medical NLP integration
+      - FHIR Bulk Member Match
+      - FHIR Bulk Delete
+      - Free data import for first 2 months
+    pricing:
+      dataStoreHourly: '$0.27 per data store per hour'
+      storageIncluded: '10 GB across all data stores'
+      additionalStorage: '$0.37 per GB stored per month'
+      bundledQueries: '3,500 queries per hour included'
+      additionalQueries: '$0.048 per 10,000 queries beyond bundle'
+      medicalNLP: '$0.0010 per 100 characters analyzed'
+      exportTransform: '$0.19 per GB exported or transformed for analytics'
+      fhirSubscriptionsEventBridge: '$2.00 per 1 million events (100,000 free per month)'
+      fhirSubscriptionsRESTHook: '$0.90 per 1 million events (100,000 free per month)'
+      dataImport: Free for first 2 months
+  - name: HealthLake Standard
+    description: Legacy tier for data stores created before September 22, 2023. Lower per-GB storage and query costs but reduced transaction quotas (100 requests per second per data store). Data import is free indefinitely.
+    url: https://aws.amazon.com/healthlake/pricing/
+    price: Pay-as-you-go
+    pricingModel: consumption
+    features:
+      - 100 requests per second per data store (legacy limit)
+      - First 10 GB storage included across all data stores
+      - First 3,500 queries per hour bundled in data store charge
+      - Free data import (indefinite)
+      - Medical NLP integration
+    pricing:
+      dataStoreHourly: '$0.27 per data store per hour'
+      storageIncluded: '10 GB across all data stores'
+      additionalStorage: '$0.25 per GB stored per month'
+      bundledQueries: '3,500 queries per hour included'
+      additionalQueries: '$0.015 per 10,000 queries beyond bundle'
+      medicalNLP: '$0.0010 per 100 characters analyzed'
+      exportTransform: '$0.19 per GB exported or transformed'
+      dataImport: Free (indefinite)
