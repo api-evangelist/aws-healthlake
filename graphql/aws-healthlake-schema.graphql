@@ -1,0 +1,2928 @@
+"""
+AWS HealthLake GraphQL Schema
+Conceptual schema covering FHIR R4 resources and HealthLake-specific management types.
+AWS HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing,
+transforming, storing, and querying health data.
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar Date
+scalar URI
+scalar Decimal
+scalar XHTML
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum FHIRVersion {
+  R4
+}
+
+enum DataStoreStatus {
+  CREATING
+  ACTIVE
+  DELETING
+  DELETED
+  CREATE_FAILED
+  DELETE_FAILED
+}
+
+enum JobStatus {
+  SUBMITTED
+  IN_PROGRESS
+  COMPLETED_WITH_ERRORS
+  COMPLETED
+  FAILED
+  CANCEL_SUBMITTED
+  CANCEL_IN_PROGRESS
+  CANCEL_COMPLETED
+  CANCEL_FAILED
+}
+
+enum PreloadDataType {
+  SYNTHEA
+}
+
+enum EncryptionType {
+  AWS_OWNED_KMS_KEY
+  CUSTOMER_MANAGED_KMS_KEY
+}
+
+enum BundleType {
+  DOCUMENT
+  MESSAGE
+  TRANSACTION
+  TRANSACTION_RESPONSE
+  BATCH
+  BATCH_RESPONSE
+  HISTORY
+  SEARCHSET
+  COLLECTION
+}
+
+enum ResourceType {
+  Patient
+  Practitioner
+  Organization
+  Encounter
+  Condition
+  Observation
+  MedicationRequest
+  DiagnosticReport
+  Procedure
+  Immunization
+  AllergyIntolerance
+  CarePlan
+  CareTeam
+  Coverage
+  Claim
+  ExplanationOfBenefit
+  DocumentReference
+  ServiceRequest
+  Communication
+  MeasureReport
+  Measure
+  Questionnaire
+  QuestionnaireResponse
+  Device
+  Location
+  HealthcareService
+  PractitionerRole
+  RelatedPerson
+  Substance
+  MedicationAdministration
+  NutritionOrder
+  Task
+  Consent
+  Provenance
+  AuditEvent
+  Bundle
+  CapabilityStatement
+  OperationOutcome
+}
+
+enum AdministrativeGender {
+  MALE
+  FEMALE
+  OTHER
+  UNKNOWN
+}
+
+enum ObservationStatus {
+  REGISTERED
+  PRELIMINARY
+  FINAL
+  AMENDED
+  CORRECTED
+  CANCELLED
+  ENTERED_IN_ERROR
+  UNKNOWN
+}
+
+enum EncounterStatus {
+  PLANNED
+  ARRIVED
+  TRIAGED
+  IN_PROGRESS
+  ON_LEAVE
+  FINISHED
+  CANCELLED
+  ENTERED_IN_ERROR
+  UNKNOWN
+}
+
+enum ConditionClinicalStatus {
+  ACTIVE
+  RECURRENCE
+  RELAPSE
+  INACTIVE
+  REMISSION
+  RESOLVED
+}
+
+enum TaskStatus {
+  DRAFT
+  REQUESTED
+  RECEIVED
+  ACCEPTED
+  REJECTED
+  READY
+  CANCELLED
+  IN_PROGRESS
+  ON_HOLD
+  FAILED
+  COMPLETED
+  ENTERED_IN_ERROR
+}
+
+enum ConsentStatus {
+  DRAFT
+  PROPOSED
+  ACTIVE
+  REJECTED
+  INACTIVE
+  ENTERED_IN_ERROR
+}
+
+enum TaskPriority {
+  ROUTINE
+  URGENT
+  ASAP
+  STAT
+}
+
+# ─── Common FHIR Structures ──────────────────────────────────────────────────
+
+type Coding {
+  system: URI
+  version: String
+  code: String
+  display: String
+  userSelected: Boolean
+}
+
+type CodeableConcept {
+  coding: [Coding!]
+  text: String
+}
+
+type Identifier {
+  use: String
+  type: CodeableConcept
+  system: URI
+  value: String
+  period: Period
+  assigner: Reference
+}
+
+type Reference {
+  reference: String
+  type: URI
+  identifier: Identifier
+  display: String
+}
+
+type Period {
+  start: DateTime
+  end: DateTime
+}
+
+type Quantity {
+  value: Decimal
+  comparator: String
+  unit: String
+  system: URI
+  code: String
+}
+
+type Range {
+  low: Quantity
+  high: Quantity
+}
+
+type Ratio {
+  numerator: Quantity
+  denominator: Quantity
+}
+
+type HumanName {
+  use: String
+  text: String
+  family: String
+  given: [String!]
+  prefix: [String!]
+  suffix: [String!]
+  period: Period
+}
+
+type Address {
+  use: String
+  type: String
+  text: String
+  line: [String!]
+  city: String
+  district: String
+  state: String
+  postalCode: String
+  country: String
+  period: Period
+}
+
+type ContactPoint {
+  system: String
+  value: String
+  use: String
+  rank: Int
+  period: Period
+}
+
+type Annotation {
+  authorReference: Reference
+  authorString: String
+  time: DateTime
+  text: String
+}
+
+type Attachment {
+  contentType: String
+  language: String
+  data: String
+  url: URI
+  size: Int
+  hash: String
+  title: String
+  creation: DateTime
+}
+
+type Timing {
+  event: [DateTime!]
+  repeat: TimingRepeat
+  code: CodeableConcept
+}
+
+type TimingRepeat {
+  boundsDuration: Quantity
+  boundsRange: Range
+  boundsPeriod: Period
+  count: Int
+  countMax: Int
+  duration: Decimal
+  durationMax: Decimal
+  durationUnit: String
+  frequency: Int
+  frequencyMax: Int
+  period: Decimal
+  periodMax: Decimal
+  periodUnit: String
+  dayOfWeek: [String!]
+  timeOfDay: [String!]
+  when: [String!]
+  offset: Int
+}
+
+type Dosage {
+  sequence: Int
+  text: String
+  additionalInstruction: [CodeableConcept!]
+  patientInstruction: String
+  timing: Timing
+  asNeededBoolean: Boolean
+  asNeededCodeableConcept: CodeableConcept
+  site: CodeableConcept
+  route: CodeableConcept
+  method: CodeableConcept
+  doseAndRate: [DosageAndRate!]
+  maxDosePerPeriod: Ratio
+  maxDosePerAdministration: Quantity
+  maxDosePerLifetime: Quantity
+}
+
+type DosageAndRate {
+  type: CodeableConcept
+  doseRange: Range
+  doseQuantity: Quantity
+  rateRatio: Ratio
+  rateRange: Range
+  rateQuantity: Quantity
+}
+
+type Narrative {
+  status: String
+  div: XHTML
+}
+
+type Meta {
+  versionId: String
+  lastUpdated: DateTime
+  source: URI
+  profile: [URI!]
+  security: [Coding!]
+  tag: [Coding!]
+}
+
+# ─── HealthLake Management Types ────────────────────────────────────────────
+
+type Tag {
+  key: String!
+  value: String!
+}
+
+type TagResource {
+  resourceARN: String!
+  tags: [Tag!]!
+}
+
+type S3Configuration {
+  s3Uri: String!
+  kmsKeyId: String
+}
+
+type PreloadDataConfig {
+  preloadDataType: PreloadDataType!
+}
+
+type KmsEncryptionConfig {
+  cmkType: EncryptionType!
+  kmsKeyId: String
+}
+
+type SseConfiguration {
+  kmsEncryptionConfig: KmsEncryptionConfig!
+}
+
+type IdentityProviderConfiguration {
+  authorizationStrategy: String!
+  fineGrainedAuthorizationEnabled: Boolean
+  metadata: String
+  idpLambdaArn: String
+}
+
+type DataStore {
+  datastoreId: String!
+  datastoreArn: String!
+  datastoreName: String!
+  datastoreStatus: DataStoreStatus!
+  createdAt: DateTime
+  datastoreTypeVersion: FHIRVersion!
+  datastoreEndpoint: String!
+  sseConfiguration: SseConfiguration
+  preloadDataConfig: PreloadDataConfig
+  identityProviderConfiguration: IdentityProviderConfiguration
+  tags: [Tag!]
+}
+
+type DataStoreStatus {
+  datastoreId: String!
+  datastoreStatus: DataStoreStatus!
+}
+
+type DataStoreProperties {
+  datastoreId: String!
+  datastoreArn: String!
+  datastoreName: String!
+  datastoreStatus: DataStoreStatus!
+  createdAt: DateTime
+  datastoreTypeVersion: FHIRVersion!
+  datastoreEndpoint: String!
+  sseConfiguration: SseConfiguration
+  preloadDataConfig: PreloadDataConfig
+  identityProviderConfiguration: IdentityProviderConfiguration
+}
+
+type DatastoreFilter {
+  datastoreName: String
+  datastoreStatus: DataStoreStatus
+  createdBefore: DateTime
+  createdAfter: DateTime
+}
+
+type ImportJobProperties {
+  jobId: String!
+  jobName: String
+  jobStatus: JobStatus!
+  submitTime: DateTime!
+  endTime: DateTime
+  datastoreId: String!
+  inputDataConfig: S3Configuration!
+  jobOutputDataConfig: S3Configuration
+  dataAccessRoleArn: String!
+  message: String
+}
+
+type ExportJobProperties {
+  jobId: String!
+  jobName: String
+  jobStatus: JobStatus!
+  submitTime: DateTime!
+  endTime: DateTime
+  datastoreId: String!
+  outputDataConfig: S3Configuration!
+  dataAccessRoleArn: String!
+  message: String
+}
+
+# ─── FHIR R4 Resource Types ──────────────────────────────────────────────────
+
+type Patient {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  active: Boolean
+  name: [HumanName!]
+  telecom: [ContactPoint!]
+  gender: AdministrativeGender
+  birthDate: Date
+  deceasedBoolean: Boolean
+  deceasedDateTime: DateTime
+  address: [Address!]
+  maritalStatus: CodeableConcept
+  multipleBirthBoolean: Boolean
+  multipleBirthInteger: Int
+  photo: [Attachment!]
+  contact: [PatientContact!]
+  communication: [PatientCommunication!]
+  generalPractitioner: [Reference!]
+  managingOrganization: Reference
+  link: [PatientLink!]
+}
+
+type PatientContact {
+  relationship: [CodeableConcept!]
+  name: HumanName
+  telecom: [ContactPoint!]
+  address: Address
+  gender: AdministrativeGender
+  organization: Reference
+  period: Period
+}
+
+type PatientCommunication {
+  language: CodeableConcept!
+  preferred: Boolean
+}
+
+type PatientLink {
+  other: Reference!
+  type: String!
+}
+
+type Practitioner {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  active: Boolean
+  name: [HumanName!]
+  telecom: [ContactPoint!]
+  address: [Address!]
+  gender: AdministrativeGender
+  birthDate: Date
+  photo: [Attachment!]
+  qualification: [PractitionerQualification!]
+  communication: [CodeableConcept!]
+}
+
+type PractitionerQualification {
+  identifier: [Identifier!]
+  code: CodeableConcept!
+  period: Period
+  issuer: Reference
+}
+
+type PractitionerRole {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  active: Boolean
+  period: Period
+  practitioner: Reference
+  organization: Reference
+  code: [CodeableConcept!]
+  specialty: [CodeableConcept!]
+  location: [Reference!]
+  healthcareService: [Reference!]
+  telecom: [ContactPoint!]
+  availableTime: [PractitionerRoleAvailableTime!]
+  notAvailable: [PractitionerRoleNotAvailable!]
+  availabilityExceptions: String
+  endpoint: [Reference!]
+}
+
+type PractitionerRoleAvailableTime {
+  daysOfWeek: [String!]
+  allDay: Boolean
+  availableStartTime: String
+  availableEndTime: String
+}
+
+type PractitionerRoleNotAvailable {
+  description: String!
+  during: Period
+}
+
+type Organization {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  active: Boolean
+  type: [CodeableConcept!]
+  name: String
+  alias: [String!]
+  telecom: [ContactPoint!]
+  address: [Address!]
+  partOf: Reference
+  contact: [OrganizationContact!]
+  endpoint: [Reference!]
+}
+
+type OrganizationContact {
+  purpose: CodeableConcept
+  name: HumanName
+  telecom: [ContactPoint!]
+  address: Address
+}
+
+type Location {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String
+  operationalStatus: Coding
+  name: String
+  alias: [String!]
+  description: String
+  mode: String
+  type: [CodeableConcept!]
+  telecom: [ContactPoint!]
+  address: Address
+  physicalType: CodeableConcept
+  position: LocationPosition
+  managingOrganization: Reference
+  partOf: Reference
+  hoursOfOperation: [LocationHoursOfOperation!]
+  availabilityExceptions: String
+  endpoint: [Reference!]
+}
+
+type LocationPosition {
+  longitude: Decimal!
+  latitude: Decimal!
+  altitude: Decimal
+}
+
+type LocationHoursOfOperation {
+  daysOfWeek: [String!]
+  allDay: Boolean
+  openingTime: String
+  closingTime: String
+}
+
+type HealthcareService {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  active: Boolean
+  providedBy: Reference
+  category: [CodeableConcept!]
+  type: [CodeableConcept!]
+  specialty: [CodeableConcept!]
+  location: [Reference!]
+  name: String
+  comment: String
+  extraDetails: String
+  photo: Attachment
+  telecom: [ContactPoint!]
+  coverageArea: [Reference!]
+  serviceProvisionCode: [CodeableConcept!]
+  eligibility: [HealthcareServiceEligibility!]
+  program: [CodeableConcept!]
+  characteristic: [CodeableConcept!]
+  communication: [CodeableConcept!]
+  referralMethod: [CodeableConcept!]
+  appointmentRequired: Boolean
+  availableTime: [HealthcareServiceAvailableTime!]
+  notAvailable: [HealthcareServiceNotAvailable!]
+  availabilityExceptions: String
+  endpoint: [Reference!]
+}
+
+type HealthcareServiceEligibility {
+  code: CodeableConcept
+  comment: String
+}
+
+type HealthcareServiceAvailableTime {
+  daysOfWeek: [String!]
+  allDay: Boolean
+  availableStartTime: String
+  availableEndTime: String
+}
+
+type HealthcareServiceNotAvailable {
+  description: String!
+  during: Period
+}
+
+type RelatedPerson {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  active: Boolean
+  patient: Reference!
+  relationship: [CodeableConcept!]
+  name: [HumanName!]
+  telecom: [ContactPoint!]
+  gender: AdministrativeGender
+  birthDate: Date
+  address: [Address!]
+  photo: [Attachment!]
+  period: Period
+  communication: [RelatedPersonCommunication!]
+}
+
+type RelatedPersonCommunication {
+  language: CodeableConcept!
+  preferred: Boolean
+}
+
+type Encounter {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: EncounterStatus!
+  statusHistory: [EncounterStatusHistory!]
+  class: Coding!
+  classHistory: [EncounterClassHistory!]
+  type: [CodeableConcept!]
+  serviceType: CodeableConcept
+  priority: CodeableConcept
+  subject: Reference
+  episodeOfCare: [Reference!]
+  basedOn: [Reference!]
+  participant: [EncounterParticipant!]
+  appointment: [Reference!]
+  period: Period
+  length: Quantity
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  diagnosis: [EncounterDiagnosis!]
+  account: [Reference!]
+  hospitalization: EncounterHospitalization
+  location: [EncounterLocation!]
+  serviceProvider: Reference
+  partOf: Reference
+}
+
+type EncounterStatusHistory {
+  status: EncounterStatus!
+  period: Period!
+}
+
+type EncounterClassHistory {
+  class: Coding!
+  period: Period!
+}
+
+type EncounterParticipant {
+  type: [CodeableConcept!]
+  period: Period
+  individual: Reference
+}
+
+type EncounterDiagnosis {
+  condition: Reference!
+  use: CodeableConcept
+  rank: Int
+}
+
+type EncounterHospitalization {
+  preAdmissionIdentifier: Identifier
+  origin: Reference
+  admitSource: CodeableConcept
+  reAdmission: CodeableConcept
+  dietPreference: [CodeableConcept!]
+  specialCourtesy: [CodeableConcept!]
+  specialArrangement: [CodeableConcept!]
+  destination: Reference
+  dischargeDisposition: CodeableConcept
+}
+
+type EncounterLocation {
+  location: Reference!
+  status: String
+  physicalType: CodeableConcept
+  period: Period
+}
+
+type Condition {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  clinicalStatus: CodeableConcept
+  verificationStatus: CodeableConcept
+  category: [CodeableConcept!]
+  severity: CodeableConcept
+  code: CodeableConcept
+  bodySite: [CodeableConcept!]
+  subject: Reference!
+  encounter: Reference
+  onsetDateTime: DateTime
+  onsetAge: Quantity
+  onsetPeriod: Period
+  onsetRange: Range
+  onsetString: String
+  abatementDateTime: DateTime
+  abatementAge: Quantity
+  abatementPeriod: Period
+  abatementRange: Range
+  abatementString: String
+  recordedDate: DateTime
+  recorder: Reference
+  asserter: Reference
+  stage: [ConditionStage!]
+  evidence: [ConditionEvidence!]
+  note: [Annotation!]
+}
+
+type ConditionStage {
+  summary: CodeableConcept
+  assessment: [Reference!]
+  type: CodeableConcept
+}
+
+type ConditionEvidence {
+  code: [CodeableConcept!]
+  detail: [Reference!]
+}
+
+type Observation {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  basedOn: [Reference!]
+  partOf: [Reference!]
+  status: ObservationStatus!
+  category: [CodeableConcept!]
+  code: CodeableConcept!
+  subject: Reference
+  focus: [Reference!]
+  encounter: Reference
+  effectiveDateTime: DateTime
+  effectivePeriod: Period
+  effectiveTiming: Timing
+  effectiveInstant: DateTime
+  issued: DateTime
+  performer: [Reference!]
+  valueQuantity: Quantity
+  valueCodeableConcept: CodeableConcept
+  valueString: String
+  valueBoolean: Boolean
+  valueInteger: Int
+  valueRange: Range
+  valueRatio: Ratio
+  valueSampledData: String
+  valueTime: String
+  valueDateTime: DateTime
+  valuePeriod: Period
+  dataAbsentReason: CodeableConcept
+  interpretation: [CodeableConcept!]
+  note: [Annotation!]
+  bodySite: CodeableConcept
+  method: CodeableConcept
+  specimen: Reference
+  device: Reference
+  referenceRange: [ObservationReferenceRange!]
+  hasMember: [Reference!]
+  derivedFrom: [Reference!]
+  component: [ObservationComponent!]
+}
+
+type ObservationReferenceRange {
+  low: Quantity
+  high: Quantity
+  type: CodeableConcept
+  appliesTo: [CodeableConcept!]
+  age: Range
+  text: String
+}
+
+type ObservationComponent {
+  code: CodeableConcept!
+  valueQuantity: Quantity
+  valueCodeableConcept: CodeableConcept
+  valueString: String
+  valueBoolean: Boolean
+  valueInteger: Int
+  valueRange: Range
+  valueRatio: Ratio
+  valueSampledData: String
+  valueTime: String
+  valueDateTime: DateTime
+  valuePeriod: Period
+  dataAbsentReason: CodeableConcept
+  interpretation: [CodeableConcept!]
+  referenceRange: [ObservationReferenceRange!]
+}
+
+type MedicationRequest {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String!
+  statusReason: CodeableConcept
+  intent: String!
+  category: [CodeableConcept!]
+  priority: String
+  doNotPerform: Boolean
+  reportedBoolean: Boolean
+  reportedReference: Reference
+  medicationCodeableConcept: CodeableConcept
+  medicationReference: Reference
+  subject: Reference!
+  encounter: Reference
+  supportingInformation: [Reference!]
+  authoredOn: DateTime
+  requester: Reference
+  performer: Reference
+  performerType: CodeableConcept
+  recorder: Reference
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  instantiatesCanonical: [String!]
+  instantiatesUri: [URI!]
+  basedOn: [Reference!]
+  groupIdentifier: Identifier
+  courseOfTherapyType: CodeableConcept
+  insurance: [Reference!]
+  note: [Annotation!]
+  dosageInstruction: [Dosage!]
+  dispenseRequest: MedicationRequestDispenseRequest
+  substitution: MedicationRequestSubstitution
+  priorPrescription: Reference
+  detectedIssue: [Reference!]
+  eventHistory: [Reference!]
+}
+
+type MedicationRequestDispenseRequest {
+  initialFill: MedicationRequestInitialFill
+  dispenseInterval: Quantity
+  validityPeriod: Period
+  numberOfRepeatsAllowed: Int
+  quantity: Quantity
+  expectedSupplyDuration: Quantity
+  performer: Reference
+}
+
+type MedicationRequestInitialFill {
+  quantity: Quantity
+  duration: Quantity
+}
+
+type MedicationRequestSubstitution {
+  allowedBoolean: Boolean
+  allowedCodeableConcept: CodeableConcept
+  reason: CodeableConcept
+}
+
+type MedicationAdministration {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  instantiates: [URI!]
+  partOf: [Reference!]
+  status: String!
+  statusReason: [CodeableConcept!]
+  category: CodeableConcept
+  medicationCodeableConcept: CodeableConcept
+  medicationReference: Reference
+  subject: Reference!
+  context: Reference
+  supportingInformation: [Reference!]
+  effectiveDateTime: DateTime
+  effectivePeriod: Period
+  performer: [MedicationAdministrationPerformer!]
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  request: Reference
+  device: [Reference!]
+  note: [Annotation!]
+  dosage: MedicationAdministrationDosage
+  eventHistory: [Reference!]
+}
+
+type MedicationAdministrationPerformer {
+  function: CodeableConcept
+  actor: Reference!
+}
+
+type MedicationAdministrationDosage {
+  text: String
+  site: CodeableConcept
+  route: CodeableConcept
+  method: CodeableConcept
+  dose: Quantity
+  rateRatio: Ratio
+  rateQuantity: Quantity
+}
+
+type DiagnosticReport {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  basedOn: [Reference!]
+  status: String!
+  category: [CodeableConcept!]
+  code: CodeableConcept!
+  subject: Reference
+  encounter: Reference
+  effectiveDateTime: DateTime
+  effectivePeriod: Period
+  issued: DateTime
+  performer: [Reference!]
+  resultsInterpreter: [Reference!]
+  specimen: [Reference!]
+  result: [Reference!]
+  imagingStudy: [Reference!]
+  media: [DiagnosticReportMedia!]
+  conclusion: String
+  conclusionCode: [CodeableConcept!]
+  presentedForm: [Attachment!]
+}
+
+type DiagnosticReportMedia {
+  comment: String
+  link: Reference!
+}
+
+type Procedure {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  instantiatesCanonical: [String!]
+  instantiatesUri: [URI!]
+  basedOn: [Reference!]
+  partOf: [Reference!]
+  status: String!
+  statusReason: CodeableConcept
+  category: CodeableConcept
+  code: CodeableConcept
+  subject: Reference!
+  encounter: Reference
+  performedDateTime: DateTime
+  performedPeriod: Period
+  performedString: String
+  performedAge: Quantity
+  performedRange: Range
+  recorder: Reference
+  asserter: Reference
+  performer: [ProcedurePerformer!]
+  location: Reference
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  bodySite: [CodeableConcept!]
+  outcome: CodeableConcept
+  report: [Reference!]
+  complication: [CodeableConcept!]
+  complicationDetail: [Reference!]
+  followUp: [CodeableConcept!]
+  note: [Annotation!]
+  focalDevice: [ProcedureFocalDevice!]
+  usedReference: [Reference!]
+  usedCode: [CodeableConcept!]
+}
+
+type ProcedurePerformer {
+  function: CodeableConcept
+  actor: Reference!
+  onBehalfOf: Reference
+}
+
+type ProcedureFocalDevice {
+  action: CodeableConcept
+  manipulated: Reference!
+}
+
+type Immunization {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String!
+  statusReason: CodeableConcept
+  vaccineCode: CodeableConcept!
+  patient: Reference!
+  encounter: Reference
+  occurrenceDateTime: DateTime
+  occurrenceString: String
+  recorded: DateTime
+  primarySource: Boolean
+  reportOrigin: CodeableConcept
+  location: Reference
+  manufacturer: Reference
+  lotNumber: String
+  expirationDate: Date
+  site: CodeableConcept
+  route: CodeableConcept
+  doseQuantity: Quantity
+  performer: [ImmunizationPerformer!]
+  note: [Annotation!]
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  isSubpotent: Boolean
+  subpotentReason: [CodeableConcept!]
+  education: [ImmunizationEducation!]
+  programEligibility: [CodeableConcept!]
+  fundingSource: CodeableConcept
+  reaction: [ImmunizationReaction!]
+  protocolApplied: [ImmunizationProtocolApplied!]
+}
+
+type ImmunizationPerformer {
+  function: CodeableConcept
+  actor: Reference!
+}
+
+type ImmunizationEducation {
+  documentType: String
+  reference: URI
+  publicationDate: DateTime
+  presentationDate: DateTime
+}
+
+type ImmunizationReaction {
+  date: DateTime
+  detail: Reference
+  reported: Boolean
+}
+
+type ImmunizationProtocolApplied {
+  series: String
+  authority: Reference
+  targetDisease: [CodeableConcept!]
+  doseNumberPositiveInt: Int
+  doseNumberString: String
+  seriesDosesPositiveInt: Int
+  seriesDosesString: String
+}
+
+type AllergyIntolerance {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  clinicalStatus: CodeableConcept
+  verificationStatus: CodeableConcept
+  type: String
+  category: [String!]
+  criticality: String
+  code: CodeableConcept
+  patient: Reference!
+  encounter: Reference
+  onsetDateTime: DateTime
+  onsetAge: Quantity
+  onsetPeriod: Period
+  onsetRange: Range
+  onsetString: String
+  recordedDate: DateTime
+  recorder: Reference
+  asserter: Reference
+  lastOccurrence: DateTime
+  note: [Annotation!]
+  reaction: [AllergyIntoleranceReaction!]
+}
+
+type AllergyIntoleranceReaction {
+  substance: CodeableConcept
+  manifestation: [CodeableConcept!]!
+  description: String
+  onset: DateTime
+  severity: String
+  exposureRoute: CodeableConcept
+  note: [Annotation!]
+}
+
+type CarePlan {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  instantiatesCanonical: [String!]
+  instantiatesUri: [URI!]
+  basedOn: [Reference!]
+  replaces: [Reference!]
+  partOf: [Reference!]
+  status: String!
+  intent: String!
+  category: [CodeableConcept!]
+  title: String
+  description: String
+  subject: Reference!
+  encounter: Reference
+  period: Period
+  created: DateTime
+  author: Reference
+  contributor: [Reference!]
+  careTeam: [Reference!]
+  addresses: [Reference!]
+  supportingInfo: [Reference!]
+  goal: [Reference!]
+  activity: [CarePlanActivity!]
+  note: [Annotation!]
+}
+
+type CarePlanActivity {
+  outcomeCodeableConcept: [CodeableConcept!]
+  outcomeReference: [Reference!]
+  progress: [Annotation!]
+  reference: Reference
+  detail: CarePlanActivityDetail
+}
+
+type CarePlanActivityDetail {
+  kind: String
+  instantiatesCanonical: [String!]
+  instantiatesUri: [URI!]
+  code: CodeableConcept
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  goal: [Reference!]
+  status: String!
+  statusReason: CodeableConcept
+  doNotPerform: Boolean
+  scheduledTiming: Timing
+  scheduledPeriod: Period
+  scheduledString: String
+  location: Reference
+  performer: [Reference!]
+  productCodeableConcept: CodeableConcept
+  productReference: Reference
+  dailyAmount: Quantity
+  quantity: Quantity
+  description: String
+}
+
+type CareTeam {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String
+  category: [CodeableConcept!]
+  name: String
+  subject: Reference
+  encounter: Reference
+  period: Period
+  participant: [CareTeamParticipant!]
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  managingOrganization: [Reference!]
+  telecom: [ContactPoint!]
+  note: [Annotation!]
+}
+
+type CareTeamParticipant {
+  role: [CodeableConcept!]
+  member: Reference
+  onBehalfOf: Reference
+  period: Period
+}
+
+type Coverage {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String!
+  type: CodeableConcept
+  policyHolder: Reference
+  subscriber: Reference
+  subscriberId: String
+  beneficiary: Reference!
+  dependent: String
+  relationship: CodeableConcept
+  period: Period
+  payor: [Reference!]!
+  class: [CoverageClass!]
+  order: Int
+  network: String
+  costToBeneficiary: [CoverageCostToBeneficiary!]
+  subrogation: Boolean
+  contract: [Reference!]
+}
+
+type CoverageClass {
+  type: CodeableConcept!
+  value: String!
+  name: String
+}
+
+type CoverageCostToBeneficiary {
+  type: CodeableConcept
+  valueQuantity: Quantity
+  valueMoney: Money
+  exception: [CoverageCostToBeneficiaryException!]
+}
+
+type Money {
+  value: Decimal
+  currency: String
+}
+
+type CoverageCostToBeneficiaryException {
+  type: CodeableConcept!
+  period: Period
+}
+
+type Claim {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String!
+  type: CodeableConcept!
+  subType: CodeableConcept
+  use: String!
+  patient: Reference!
+  billablePeriod: Period
+  created: DateTime!
+  enterer: Reference
+  insurer: Reference
+  provider: Reference!
+  priority: CodeableConcept!
+  fundsReserve: CodeableConcept
+  related: [ClaimRelated!]
+  prescription: Reference
+  originalPrescription: Reference
+  payee: ClaimPayee
+  referral: Reference
+  facility: Reference
+  careTeam: [ClaimCareTeam!]
+  supportingInfo: [ClaimSupportingInfo!]
+  diagnosis: [ClaimDiagnosis!]
+  procedure: [ClaimProcedure!]
+  insurance: [ClaimInsurance!]!
+  accident: ClaimAccident
+  item: [ClaimItem!]
+  total: Money
+}
+
+type ClaimRelated {
+  claim: Reference
+  relationship: CodeableConcept
+  reference: Identifier
+}
+
+type ClaimPayee {
+  type: CodeableConcept!
+  party: Reference
+}
+
+type ClaimCareTeam {
+  sequence: Int!
+  provider: Reference!
+  responsible: Boolean
+  role: CodeableConcept
+  qualification: CodeableConcept
+}
+
+type ClaimSupportingInfo {
+  sequence: Int!
+  category: CodeableConcept!
+  code: CodeableConcept
+  timingDate: Date
+  timingPeriod: Period
+  valueBoolean: Boolean
+  valueString: String
+  valueQuantity: Quantity
+  valueAttachment: Attachment
+  valueReference: Reference
+  reason: CodeableConcept
+}
+
+type ClaimDiagnosis {
+  sequence: Int!
+  diagnosisCodeableConcept: CodeableConcept
+  diagnosisReference: Reference
+  type: [CodeableConcept!]
+  onAdmission: CodeableConcept
+  packageCode: CodeableConcept
+}
+
+type ClaimProcedure {
+  sequence: Int!
+  type: [CodeableConcept!]
+  date: DateTime
+  procedureCodeableConcept: CodeableConcept
+  procedureReference: Reference
+  udi: [Reference!]
+}
+
+type ClaimInsurance {
+  sequence: Int!
+  focal: Boolean!
+  identifier: Identifier
+  coverage: Reference!
+  businessArrangement: String
+  preAuthRef: [String!]
+  claimResponse: Reference
+}
+
+type ClaimAccident {
+  date: Date!
+  type: CodeableConcept
+  locationAddress: Address
+  locationReference: Reference
+}
+
+type ClaimItem {
+  sequence: Int!
+  careTeamSequence: [Int!]
+  diagnosisSequence: [Int!]
+  procedureSequence: [Int!]
+  informationSequence: [Int!]
+  revenue: CodeableConcept
+  category: CodeableConcept
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  programCode: [CodeableConcept!]
+  servicedDate: Date
+  servicedPeriod: Period
+  locationCodeableConcept: CodeableConcept
+  locationAddress: Address
+  locationReference: Reference
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  udi: [Reference!]
+  bodySite: CodeableConcept
+  subSite: [CodeableConcept!]
+  encounter: [Reference!]
+  detail: [ClaimItemDetail!]
+}
+
+type ClaimItemDetail {
+  sequence: Int!
+  revenue: CodeableConcept
+  category: CodeableConcept
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  programCode: [CodeableConcept!]
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  udi: [Reference!]
+  subDetail: [ClaimItemSubDetail!]
+}
+
+type ClaimItemSubDetail {
+  sequence: Int!
+  revenue: CodeableConcept
+  category: CodeableConcept
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  programCode: [CodeableConcept!]
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  udi: [Reference!]
+}
+
+type ExplanationOfBenefit {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String!
+  type: CodeableConcept!
+  subType: CodeableConcept
+  use: String!
+  patient: Reference!
+  billablePeriod: Period
+  created: DateTime!
+  enterer: Reference
+  insurer: Reference!
+  provider: Reference!
+  priority: CodeableConcept
+  fundsReserveRequested: CodeableConcept
+  fundsReserve: CodeableConcept
+  related: [ExplanationOfBenefitRelated!]
+  prescription: Reference
+  originalPrescription: Reference
+  payee: ExplanationOfBenefitPayee
+  referral: Reference
+  facility: Reference
+  claim: Reference
+  claimResponse: Reference
+  outcome: String!
+  disposition: String
+  preAuthRef: [String!]
+  preAuthRefPeriod: [Period!]
+  careTeam: [ExplanationOfBenefitCareTeam!]
+  supportingInfo: [ExplanationOfBenefitSupportingInfo!]
+  diagnosis: [ExplanationOfBenefitDiagnosis!]
+  procedure: [ExplanationOfBenefitProcedure!]
+  precedence: Int
+  insurance: [ExplanationOfBenefitInsurance!]!
+  accident: ExplanationOfBenefitAccident
+  item: [ExplanationOfBenefitItem!]
+  addItem: [ExplanationOfBenefitAddItem!]
+  adjudication: [ExplanationOfBenefitAdjudication!]
+  total: [ExplanationOfBenefitTotal!]
+  payment: ExplanationOfBenefitPayment
+  formCode: CodeableConcept
+  form: Attachment
+  processNote: [ExplanationOfBenefitProcessNote!]
+  benefitPeriod: Period
+  benefitBalance: [ExplanationOfBenefitBenefitBalance!]
+}
+
+type ExplanationOfBenefitRelated {
+  claim: Reference
+  relationship: CodeableConcept
+  reference: Identifier
+}
+
+type ExplanationOfBenefitPayee {
+  type: CodeableConcept
+  party: Reference
+}
+
+type ExplanationOfBenefitCareTeam {
+  sequence: Int!
+  provider: Reference!
+  responsible: Boolean
+  role: CodeableConcept
+  qualification: CodeableConcept
+}
+
+type ExplanationOfBenefitSupportingInfo {
+  sequence: Int!
+  category: CodeableConcept!
+  code: CodeableConcept
+  timingDate: Date
+  timingPeriod: Period
+  valueBoolean: Boolean
+  valueString: String
+  valueQuantity: Quantity
+  valueAttachment: Attachment
+  valueReference: Reference
+  reason: Coding
+}
+
+type ExplanationOfBenefitDiagnosis {
+  sequence: Int!
+  diagnosisCodeableConcept: CodeableConcept
+  diagnosisReference: Reference
+  type: [CodeableConcept!]
+  onAdmission: CodeableConcept
+  packageCode: CodeableConcept
+}
+
+type ExplanationOfBenefitProcedure {
+  sequence: Int!
+  type: [CodeableConcept!]
+  date: DateTime
+  procedureCodeableConcept: CodeableConcept
+  procedureReference: Reference
+  udi: [Reference!]
+}
+
+type ExplanationOfBenefitInsurance {
+  focal: Boolean!
+  coverage: Reference!
+  preAuthRef: [String!]
+}
+
+type ExplanationOfBenefitAccident {
+  date: Date
+  type: CodeableConcept
+  locationAddress: Address
+  locationReference: Reference
+}
+
+type ExplanationOfBenefitItem {
+  sequence: Int!
+  careTeamSequence: [Int!]
+  diagnosisSequence: [Int!]
+  procedureSequence: [Int!]
+  informationSequence: [Int!]
+  revenue: CodeableConcept
+  category: CodeableConcept
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  programCode: [CodeableConcept!]
+  servicedDate: Date
+  servicedPeriod: Period
+  locationCodeableConcept: CodeableConcept
+  locationAddress: Address
+  locationReference: Reference
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  udi: [Reference!]
+  bodySite: CodeableConcept
+  subSite: [CodeableConcept!]
+  encounter: [Reference!]
+  noteNumber: [Int!]
+  adjudication: [ExplanationOfBenefitAdjudication!]
+  detail: [ExplanationOfBenefitDetail!]
+}
+
+type ExplanationOfBenefitAdjudication {
+  category: CodeableConcept!
+  reason: CodeableConcept
+  amount: Money
+  value: Decimal
+}
+
+type ExplanationOfBenefitDetail {
+  sequence: Int!
+  revenue: CodeableConcept
+  category: CodeableConcept
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  programCode: [CodeableConcept!]
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  udi: [Reference!]
+  noteNumber: [Int!]
+  adjudication: [ExplanationOfBenefitAdjudication!]
+  subDetail: [ExplanationOfBenefitSubDetail!]
+}
+
+type ExplanationOfBenefitSubDetail {
+  sequence: Int!
+  revenue: CodeableConcept
+  category: CodeableConcept
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  programCode: [CodeableConcept!]
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  udi: [Reference!]
+  noteNumber: [Int!]
+  adjudication: [ExplanationOfBenefitAdjudication!]
+}
+
+type ExplanationOfBenefitAddItem {
+  itemSequence: [Int!]
+  detailSequence: [Int!]
+  subDetailSequence: [Int!]
+  provider: [Reference!]
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  programCode: [CodeableConcept!]
+  servicedDate: Date
+  servicedPeriod: Period
+  locationCodeableConcept: CodeableConcept
+  locationAddress: Address
+  locationReference: Reference
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  bodySite: CodeableConcept
+  subSite: [CodeableConcept!]
+  noteNumber: [Int!]
+  adjudication: [ExplanationOfBenefitAdjudication!]
+  detail: [ExplanationOfBenefitAddItemDetail!]
+}
+
+type ExplanationOfBenefitAddItemDetail {
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  noteNumber: [Int!]
+  adjudication: [ExplanationOfBenefitAdjudication!]
+  subDetail: [ExplanationOfBenefitAddItemSubDetail!]
+}
+
+type ExplanationOfBenefitAddItemSubDetail {
+  productOrService: CodeableConcept!
+  modifier: [CodeableConcept!]
+  quantity: Quantity
+  unitPrice: Money
+  factor: Decimal
+  net: Money
+  noteNumber: [Int!]
+  adjudication: [ExplanationOfBenefitAdjudication!]
+}
+
+type ExplanationOfBenefitTotal {
+  category: CodeableConcept!
+  amount: Money!
+}
+
+type ExplanationOfBenefitPayment {
+  type: CodeableConcept
+  adjustment: Money
+  adjustmentReason: CodeableConcept
+  date: Date
+  amount: Money
+  identifier: Identifier
+}
+
+type ExplanationOfBenefitProcessNote {
+  number: Int
+  type: String
+  text: String
+  language: CodeableConcept
+}
+
+type ExplanationOfBenefitBenefitBalance {
+  category: CodeableConcept!
+  excluded: Boolean
+  name: String
+  description: String
+  network: CodeableConcept
+  unit: CodeableConcept
+  term: CodeableConcept
+  financial: [ExplanationOfBenefitBenefitBalanceFinancial!]
+}
+
+type ExplanationOfBenefitBenefitBalanceFinancial {
+  type: CodeableConcept!
+  allowedUnsignedInt: Int
+  allowedString: String
+  allowedMoney: Money
+  usedUnsignedInt: Int
+  usedMoney: Money
+}
+
+type DocumentReference {
+  id: String!
+  meta: Meta
+  text: Narrative
+  masterIdentifier: Identifier
+  identifier: [Identifier!]
+  status: String!
+  docStatus: String
+  type: CodeableConcept
+  category: [CodeableConcept!]
+  subject: Reference
+  date: DateTime
+  author: [Reference!]
+  authenticator: Reference
+  custodian: Reference
+  relatesTo: [DocumentReferenceRelatesTo!]
+  description: String
+  securityLabel: [CodeableConcept!]
+  content: [DocumentReferenceContent!]!
+  context: DocumentReferenceContext
+}
+
+type DocumentReferenceRelatesTo {
+  code: String!
+  target: Reference!
+}
+
+type DocumentReferenceContent {
+  attachment: Attachment!
+  format: Coding
+}
+
+type DocumentReferenceContext {
+  encounter: [Reference!]
+  event: [CodeableConcept!]
+  period: Period
+  facilityType: CodeableConcept
+  practiceSetting: CodeableConcept
+  sourcePatientInfo: Reference
+  related: [Reference!]
+}
+
+type ServiceRequest {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  instantiatesCanonical: [String!]
+  instantiatesUri: [URI!]
+  basedOn: [Reference!]
+  replaces: [Reference!]
+  requisition: Identifier
+  status: String!
+  intent: String!
+  category: [CodeableConcept!]
+  priority: String
+  doNotPerform: Boolean
+  code: CodeableConcept
+  orderDetail: [CodeableConcept!]
+  quantityQuantity: Quantity
+  quantityRatio: Ratio
+  quantityRange: Range
+  subject: Reference!
+  encounter: Reference
+  occurrenceDateTime: DateTime
+  occurrencePeriod: Period
+  occurrenceTiming: Timing
+  asNeededBoolean: Boolean
+  asNeededCodeableConcept: CodeableConcept
+  authoredOn: DateTime
+  requester: Reference
+  performerType: CodeableConcept
+  performer: [Reference!]
+  locationCode: [CodeableConcept!]
+  locationReference: [Reference!]
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  insurance: [Reference!]
+  supportingInfo: [Reference!]
+  specimen: [Reference!]
+  bodySite: [CodeableConcept!]
+  note: [Annotation!]
+  patientInstruction: String
+  relevantHistory: [Reference!]
+}
+
+type Communication {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  instantiatesCanonical: [String!]
+  instantiatesUri: [URI!]
+  basedOn: [Reference!]
+  partOf: [Reference!]
+  inResponseTo: [Reference!]
+  status: String!
+  statusReason: CodeableConcept
+  category: [CodeableConcept!]
+  priority: String
+  medium: [CodeableConcept!]
+  subject: Reference
+  topic: CodeableConcept
+  about: [Reference!]
+  encounter: Reference
+  sent: DateTime
+  received: DateTime
+  recipient: [Reference!]
+  sender: Reference
+  reasonCode: [CodeableConcept!]
+  reasonReference: [Reference!]
+  payload: [CommunicationPayload!]
+  note: [Annotation!]
+}
+
+type CommunicationPayload {
+  contentString: String
+  contentAttachment: Attachment
+  contentReference: Reference
+}
+
+type Measure {
+  id: String!
+  meta: Meta
+  text: Narrative
+  url: URI
+  identifier: [Identifier!]
+  version: String
+  name: String
+  title: String
+  subtitle: String
+  status: String!
+  experimental: Boolean
+  subjectCodeableConcept: CodeableConcept
+  subjectReference: Reference
+  date: DateTime
+  publisher: String
+  contact: [ContactDetail!]
+  description: String
+  useContext: [UsageContext!]
+  jurisdiction: [CodeableConcept!]
+  purpose: String
+  usage: String
+  copyright: String
+  approvalDate: Date
+  lastReviewDate: Date
+  effectivePeriod: Period
+  topic: [CodeableConcept!]
+  author: [ContactDetail!]
+  editor: [ContactDetail!]
+  reviewer: [ContactDetail!]
+  endorser: [ContactDetail!]
+  relatedArtifact: [RelatedArtifact!]
+  library: [String!]
+  disclaimer: String
+  scoring: CodeableConcept
+  compositeScoring: CodeableConcept
+  type: [CodeableConcept!]
+  riskAdjustment: String
+  rateAggregation: String
+  rationale: String
+  clinicalRecommendationStatement: String
+  improvementNotation: CodeableConcept
+  definition: [String!]
+  guidance: String
+  group: [MeasureGroup!]
+  supplementalData: [MeasureSupplementalData!]
+}
+
+type ContactDetail {
+  name: String
+  telecom: [ContactPoint!]
+}
+
+type UsageContext {
+  code: Coding!
+  valueCodeableConcept: CodeableConcept
+  valueQuantity: Quantity
+  valueRange: Range
+  valueReference: Reference
+}
+
+type RelatedArtifact {
+  type: String!
+  label: String
+  display: String
+  citation: String
+  url: URI
+  document: Attachment
+  resource: String
+}
+
+type MeasureGroup {
+  code: CodeableConcept
+  description: String
+  population: [MeasureGroupPopulation!]
+  stratifier: [MeasureGroupStratifier!]
+}
+
+type MeasureGroupPopulation {
+  code: CodeableConcept
+  description: String
+  criteria: Expression!
+}
+
+type Expression {
+  description: String
+  name: String
+  language: String!
+  expression: String
+  reference: URI
+}
+
+type MeasureGroupStratifier {
+  code: CodeableConcept
+  description: String
+  criteria: Expression
+  component: [MeasureGroupStratifierComponent!]
+}
+
+type MeasureGroupStratifierComponent {
+  code: CodeableConcept
+  description: String
+  criteria: Expression!
+}
+
+type MeasureSupplementalData {
+  code: CodeableConcept
+  usage: [CodeableConcept!]
+  description: String
+  criteria: Expression!
+}
+
+type MeasureReport {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String!
+  type: String!
+  measure: String!
+  subject: Reference
+  date: DateTime
+  reporter: Reference
+  period: Period!
+  improvementNotation: CodeableConcept
+  group: [MeasureReportGroup!]
+  evaluatedResource: [Reference!]
+}
+
+type MeasureReportGroup {
+  code: CodeableConcept
+  population: [MeasureReportGroupPopulation!]
+  measureScore: Quantity
+  stratifier: [MeasureReportGroupStratifier!]
+}
+
+type MeasureReportGroupPopulation {
+  code: CodeableConcept
+  count: Int
+  subjectResults: Reference
+}
+
+type MeasureReportGroupStratifier {
+  code: [CodeableConcept!]
+  stratum: [MeasureReportGroupStratifierStratum!]
+}
+
+type MeasureReportGroupStratifierStratum {
+  value: CodeableConcept
+  component: [MeasureReportGroupStratifierStratumComponent!]
+  population: [MeasureReportGroupStratifierStratumPopulation!]
+  measureScore: Quantity
+}
+
+type MeasureReportGroupStratifierStratumComponent {
+  code: CodeableConcept!
+  value: CodeableConcept!
+}
+
+type MeasureReportGroupStratifierStratumPopulation {
+  code: CodeableConcept
+  count: Int
+  subjectResults: Reference
+}
+
+type Questionnaire {
+  id: String!
+  meta: Meta
+  text: Narrative
+  url: URI
+  identifier: [Identifier!]
+  version: String
+  name: String
+  title: String
+  derivedFrom: [String!]
+  status: String!
+  experimental: Boolean
+  subjectType: [String!]
+  date: DateTime
+  publisher: String
+  contact: [ContactDetail!]
+  description: String
+  useContext: [UsageContext!]
+  jurisdiction: [CodeableConcept!]
+  purpose: String
+  copyright: String
+  approvalDate: Date
+  lastReviewDate: Date
+  effectivePeriod: Period
+  code: [Coding!]
+  item: [QuestionnaireItem!]
+}
+
+type QuestionnaireItem {
+  linkId: String!
+  definition: URI
+  code: [Coding!]
+  prefix: String
+  text: String
+  type: String!
+  enableWhen: [QuestionnaireItemEnableWhen!]
+  enableBehavior: String
+  required: Boolean
+  repeats: Boolean
+  readOnly: Boolean
+  maxLength: Int
+  answerValueSet: String
+  answerOption: [QuestionnaireItemAnswerOption!]
+  initial: [QuestionnaireItemInitial!]
+  item: [QuestionnaireItem!]
+}
+
+type QuestionnaireItemEnableWhen {
+  question: String!
+  operator: String!
+  answerBoolean: Boolean
+  answerDecimal: Decimal
+  answerInteger: Int
+  answerDate: Date
+  answerDateTime: DateTime
+  answerTime: String
+  answerString: String
+  answerCoding: Coding
+  answerQuantity: Quantity
+  answerReference: Reference
+}
+
+type QuestionnaireItemAnswerOption {
+  valueInteger: Int
+  valueDate: Date
+  valueTime: String
+  valueString: String
+  valueCoding: Coding
+  valueReference: Reference
+  initialSelected: Boolean
+}
+
+type QuestionnaireItemInitial {
+  valueBoolean: Boolean
+  valueDecimal: Decimal
+  valueInteger: Int
+  valueDate: Date
+  valueDateTime: DateTime
+  valueTime: String
+  valueString: String
+  valueUri: URI
+  valueAttachment: Attachment
+  valueCoding: Coding
+  valueQuantity: Quantity
+  valueReference: Reference
+}
+
+type QuestionnaireResponse {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: Identifier
+  basedOn: [Reference!]
+  partOf: [Reference!]
+  questionnaire: String
+  status: String!
+  subject: Reference
+  encounter: Reference
+  authored: DateTime
+  author: Reference
+  source: Reference
+  item: [QuestionnaireResponseItem!]
+}
+
+type QuestionnaireResponseItem {
+  linkId: String!
+  definition: URI
+  text: String
+  answer: [QuestionnaireResponseItemAnswer!]
+  item: [QuestionnaireResponseItem!]
+}
+
+type QuestionnaireResponseItemAnswer {
+  valueBoolean: Boolean
+  valueDecimal: Decimal
+  valueInteger: Int
+  valueDate: Date
+  valueDateTime: DateTime
+  valueTime: String
+  valueString: String
+  valueUri: URI
+  valueAttachment: Attachment
+  valueCoding: Coding
+  valueQuantity: Quantity
+  valueReference: Reference
+  item: [QuestionnaireResponseItem!]
+}
+
+type Device {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  definition: Reference
+  udiCarrier: [DeviceUdiCarrier!]
+  status: String
+  statusReason: [CodeableConcept!]
+  distinctIdentifier: String
+  manufacturer: String
+  manufactureDate: DateTime
+  expirationDate: DateTime
+  lotNumber: String
+  serialNumber: String
+  deviceName: [DeviceName!]
+  modelNumber: String
+  partNumber: String
+  type: CodeableConcept
+  specialization: [DeviceSpecialization!]
+  version: [DeviceVersion!]
+  property: [DeviceProperty!]
+  patient: Reference
+  owner: Reference
+  contact: [ContactPoint!]
+  location: Reference
+  url: URI
+  note: [Annotation!]
+  safety: [CodeableConcept!]
+  parent: Reference
+}
+
+type DeviceUdiCarrier {
+  deviceIdentifier: String
+  issuer: URI
+  jurisdiction: URI
+  carrierAIDC: String
+  carrierHRF: String
+  entryType: String
+}
+
+type DeviceName {
+  name: String!
+  type: String!
+}
+
+type DeviceSpecialization {
+  systemType: CodeableConcept!
+  version: String
+}
+
+type DeviceVersion {
+  type: CodeableConcept
+  component: Identifier
+  value: String!
+}
+
+type DeviceProperty {
+  type: CodeableConcept!
+  valueQuantity: [Quantity!]
+  valueCode: [CodeableConcept!]
+}
+
+type Substance {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: String
+  category: [CodeableConcept!]
+  code: CodeableConcept!
+  description: String
+  instance: [SubstanceInstance!]
+  ingredient: [SubstanceIngredient!]
+}
+
+type SubstanceInstance {
+  identifier: Identifier
+  expiry: DateTime
+  quantity: Quantity
+}
+
+type SubstanceIngredient {
+  quantity: Ratio
+  substanceCodeableConcept: CodeableConcept
+  substanceReference: Reference
+}
+
+type NutritionOrder {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  instantiatesCanonical: [String!]
+  instantiatesUri: [URI!]
+  instantiates: [URI!]
+  status: String!
+  intent: String!
+  patient: Reference!
+  encounter: Reference
+  dateTime: DateTime!
+  orderer: Reference
+  allergyIntolerance: [Reference!]
+  foodPreferenceModifier: [CodeableConcept!]
+  excludeFoodModifier: [CodeableConcept!]
+  oralDiet: NutritionOrderOralDiet
+  supplement: [NutritionOrderSupplement!]
+  enteralFormula: NutritionOrderEnteralFormula
+  note: [Annotation!]
+}
+
+type NutritionOrderOralDiet {
+  type: [CodeableConcept!]
+  schedule: [Timing!]
+  nutrient: [NutritionOrderOralDietNutrient!]
+  texture: [NutritionOrderOralDietTexture!]
+  fluidConsistencyType: [CodeableConcept!]
+  instruction: String
+}
+
+type NutritionOrderOralDietNutrient {
+  modifier: CodeableConcept
+  amount: Quantity
+}
+
+type NutritionOrderOralDietTexture {
+  modifier: CodeableConcept
+  foodType: CodeableConcept
+}
+
+type NutritionOrderSupplement {
+  type: CodeableConcept
+  productName: String
+  schedule: [Timing!]
+  quantity: Quantity
+  instruction: String
+}
+
+type NutritionOrderEnteralFormula {
+  baseFormulaType: CodeableConcept
+  baseFormulaProductName: String
+  additiveType: CodeableConcept
+  additiveProductName: String
+  caloricDensity: Quantity
+  routeofAdministration: CodeableConcept
+  administration: [NutritionOrderEnteralFormulaAdministration!]
+  maxVolumeToDeliver: Quantity
+  administrationInstruction: String
+}
+
+type NutritionOrderEnteralFormulaAdministration {
+  schedule: Timing
+  quantity: Quantity
+  rateQuantity: Quantity
+  rateRatio: Ratio
+}
+
+type Task {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  instantiatesCanonical: String
+  instantiatesUri: URI
+  basedOn: [Reference!]
+  groupIdentifier: Identifier
+  partOf: [Reference!]
+  status: TaskStatus!
+  statusReason: CodeableConcept
+  businessStatus: CodeableConcept
+  intent: String!
+  priority: TaskPriority
+  code: CodeableConcept
+  description: String
+  focus: Reference
+  for: Reference
+  encounter: Reference
+  executionPeriod: Period
+  authoredOn: DateTime
+  lastModified: DateTime
+  requester: Reference
+  performerType: [CodeableConcept!]
+  owner: Reference
+  location: Reference
+  reasonCode: CodeableConcept
+  reasonReference: Reference
+  insurance: [Reference!]
+  note: [Annotation!]
+  relevantHistory: [Reference!]
+  restriction: TaskRestriction
+  input: [TaskInput!]
+  output: [TaskOutput!]
+}
+
+type TaskRestriction {
+  repetitions: Int
+  period: Period
+  recipient: [Reference!]
+}
+
+type TaskInput {
+  type: CodeableConcept!
+  valueBase64Binary: String
+  valueBoolean: Boolean
+  valueCanonical: String
+  valueCode: String
+  valueDate: Date
+  valueDateTime: DateTime
+  valueDecimal: Decimal
+  valueId: String
+  valueInstant: DateTime
+  valueInteger: Int
+  valueMarkdown: String
+  valueOid: String
+  valuePositiveInt: Int
+  valueString: String
+  valueTime: String
+  valueUnsignedInt: Int
+  valueUri: URI
+  valueUrl: URI
+  valueUuid: String
+  valueAddress: Address
+  valueAge: Quantity
+  valueAnnotation: Annotation
+  valueAttachment: Attachment
+  valueCodeableConcept: CodeableConcept
+  valueCoding: Coding
+  valueContactPoint: ContactPoint
+  valueCount: Quantity
+  valueDistance: Quantity
+  valueDuration: Quantity
+  valueHumanName: HumanName
+  valueIdentifier: Identifier
+  valueMoney: Money
+  valuePeriod: Period
+  valueQuantity: Quantity
+  valueRange: Range
+  valueRatio: Ratio
+  valueReference: Reference
+  valueSampledData: String
+  valueSignature: String
+  valueTiming: Timing
+}
+
+type TaskOutput {
+  type: CodeableConcept!
+  valueBase64Binary: String
+  valueBoolean: Boolean
+  valueString: String
+  valueReference: Reference
+  valueQuantity: Quantity
+  valueCodeableConcept: CodeableConcept
+}
+
+type Consent {
+  id: String!
+  meta: Meta
+  text: Narrative
+  identifier: [Identifier!]
+  status: ConsentStatus!
+  scope: CodeableConcept!
+  category: [CodeableConcept!]!
+  patient: Reference
+  dateTime: DateTime
+  performer: [Reference!]
+  organization: [Reference!]
+  sourceAttachment: Attachment
+  sourceReference: Reference
+  policy: [ConsentPolicy!]
+  policyRule: CodeableConcept
+  verification: [ConsentVerification!]
+  provision: ConsentProvision
+}
+
+type ConsentPolicy {
+  authority: URI
+  uri: URI
+}
+
+type ConsentVerification {
+  verified: Boolean!
+  verifiedWith: Reference
+  verificationDate: DateTime
+}
+
+type ConsentProvision {
+  type: String
+  period: Period
+  actor: [ConsentProvisionActor!]
+  action: [CodeableConcept!]
+  securityLabel: [Coding!]
+  purpose: [Coding!]
+  class: [Coding!]
+  code: [CodeableConcept!]
+  dataPeriod: Period
+  data: [ConsentProvisionData!]
+  provision: [ConsentProvision!]
+}
+
+type ConsentProvisionActor {
+  role: CodeableConcept!
+  reference: Reference!
+}
+
+type ConsentProvisionData {
+  meaning: String!
+  reference: Reference!
+}
+
+type Provenance {
+  id: String!
+  meta: Meta
+  text: Narrative
+  target: [Reference!]!
+  occurredPeriod: Period
+  occurredDateTime: DateTime
+  recorded: DateTime!
+  policy: [URI!]
+  location: Reference
+  reason: [CodeableConcept!]
+  activity: CodeableConcept
+  agent: [ProvenanceAgent!]!
+  entity: [ProvenanceEntity!]
+  signature: [ProvenanceSignature!]
+}
+
+type ProvenanceAgent {
+  type: CodeableConcept
+  role: [CodeableConcept!]
+  who: Reference!
+  onBehalfOf: Reference
+}
+
+type ProvenanceEntity {
+  role: String!
+  what: Reference!
+  agent: [ProvenanceAgent!]
+}
+
+type ProvenanceSignature {
+  type: [Coding!]!
+  when: DateTime!
+  who: Reference!
+  onBehalfOf: Reference
+  targetFormat: String
+  sigFormat: String
+  data: String
+}
+
+type AuditEvent {
+  id: String!
+  meta: Meta
+  text: Narrative
+  type: Coding!
+  subtype: [Coding!]
+  action: String
+  period: Period
+  recorded: DateTime!
+  outcome: String
+  outcomeDesc: String
+  purposeOfEvent: [CodeableConcept!]
+  agent: [AuditEventAgent!]!
+  source: AuditEventSource!
+  entity: [AuditEventEntity!]
+}
+
+type AuditEventAgent {
+  type: CodeableConcept
+  role: [CodeableConcept!]
+  who: Reference
+  altId: String
+  name: String
+  requestor: Boolean!
+  location: Reference
+  policy: [URI!]
+  media: Coding
+  network: AuditEventAgentNetwork
+  purposeOfUse: [CodeableConcept!]
+}
+
+type AuditEventAgentNetwork {
+  address: String
+  type: String
+}
+
+type AuditEventSource {
+  site: String
+  observer: Reference!
+  type: [Coding!]
+}
+
+type AuditEventEntity {
+  what: Reference
+  type: Coding
+  role: Coding
+  lifecycle: Coding
+  securityLabel: [Coding!]
+  name: String
+  description: String
+  query: String
+  detail: [AuditEventEntityDetail!]
+}
+
+type AuditEventEntityDetail {
+  type: String!
+  valueString: String
+  valueBase64Binary: String
+}
+
+type Bundle {
+  id: String!
+  meta: Meta
+  identifier: Identifier
+  type: BundleType!
+  timestamp: DateTime
+  total: Int
+  link: [BundleLink!]
+  entry: [BundleEntry!]
+  signature: ProvenanceSignature
+}
+
+type BundleLink {
+  relation: String!
+  url: URI!
+}
+
+type BundleEntry {
+  link: [BundleLink!]
+  fullUrl: URI
+  resource: String
+  search: BundleEntrySearch
+  request: BundleEntryRequest
+  response: BundleEntryResponse
+}
+
+type BundleEntrySearch {
+  mode: String
+  score: Decimal
+}
+
+type BundleEntryRequest {
+  method: String!
+  url: URI!
+  ifNoneMatch: String
+  ifModifiedSince: DateTime
+  ifMatch: String
+  ifNoneExist: String
+}
+
+type BundleEntryResponse {
+  status: String!
+  location: URI
+  etag: String
+  lastModified: DateTime
+  outcome: String
+}
+
+type CapabilityStatement {
+  id: String!
+  meta: Meta
+  text: Narrative
+  url: URI
+  version: String
+  name: String
+  title: String
+  status: String!
+  experimental: Boolean
+  date: DateTime!
+  publisher: String
+  contact: [ContactDetail!]
+  description: String
+  useContext: [UsageContext!]
+  jurisdiction: [CodeableConcept!]
+  purpose: String
+  copyright: String
+  kind: String!
+  instantiates: [String!]
+  imports: [String!]
+  software: CapabilityStatementSoftware
+  implementation: CapabilityStatementImplementation
+  fhirVersion: String!
+  format: [String!]!
+  patchFormat: [String!]
+  implementationGuide: [String!]
+  rest: [CapabilityStatementRest!]
+  messaging: [CapabilityStatementMessaging!]
+  document: [CapabilityStatementDocument!]
+}
+
+type CapabilityStatementSoftware {
+  name: String!
+  version: String
+  releaseDate: DateTime
+}
+
+type CapabilityStatementImplementation {
+  description: String!
+  url: URI
+  custodian: Reference
+}
+
+type CapabilityStatementRest {
+  mode: String!
+  documentation: String
+  security: CapabilityStatementRestSecurity
+  resource: [CapabilityStatementRestResource!]
+  interaction: [CapabilityStatementRestInteraction!]
+  searchParam: [CapabilityStatementRestResourceSearchParam!]
+  operation: [CapabilityStatementRestResourceOperation!]
+  compartment: [String!]
+}
+
+type CapabilityStatementRestSecurity {
+  cors: Boolean
+  service: [CodeableConcept!]
+  description: String
+}
+
+type CapabilityStatementRestResource {
+  type: String!
+  profile: String
+  supportedProfile: [String!]
+  documentation: String
+  interaction: [CapabilityStatementRestResourceInteraction!]
+  versioning: String
+  readHistory: Boolean
+  updateCreate: Boolean
+  conditionalCreate: Boolean
+  conditionalRead: String
+  conditionalUpdate: Boolean
+  conditionalDelete: String
+  referencePolicy: [String!]
+  searchInclude: [String!]
+  searchRevInclude: [String!]
+  searchParam: [CapabilityStatementRestResourceSearchParam!]
+  operation: [CapabilityStatementRestResourceOperation!]
+}
+
+type CapabilityStatementRestResourceInteraction {
+  code: String!
+  documentation: String
+}
+
+type CapabilityStatementRestResourceSearchParam {
+  name: String!
+  definition: String
+  type: String!
+  documentation: String
+}
+
+type CapabilityStatementRestResourceOperation {
+  name: String!
+  definition: String!
+  documentation: String
+}
+
+type CapabilityStatementRestInteraction {
+  code: String!
+  documentation: String
+}
+
+type CapabilityStatementMessaging {
+  endpoint: [CapabilityStatementMessagingEndpoint!]
+  reliableCache: Int
+  documentation: String
+  supportedMessage: [CapabilityStatementMessagingSupportedMessage!]
+}
+
+type CapabilityStatementMessagingEndpoint {
+  protocol: Coding!
+  address: URI!
+}
+
+type CapabilityStatementMessagingSupportedMessage {
+  mode: String!
+  definition: String!
+}
+
+type CapabilityStatementDocument {
+  mode: String!
+  documentation: String
+  profile: String!
+}
+
+type OperationOutcome {
+  id: String!
+  meta: Meta
+  text: Narrative
+  issue: [OperationOutcomeIssue!]!
+}
+
+type OperationOutcomeIssue {
+  severity: String!
+  code: String!
+  details: CodeableConcept
+  diagnostics: String
+  location: [String!]
+  expression: [String!]
+}
+
+# ─── Root Query Type ────────────────────────────────────────────────────────
+
+type Query {
+  # DataStore Management
+  getDataStore(datastoreId: String!): DataStore
+  listDataStores(filter: DatastoreFilterInput, maxResults: Int, nextToken: String): DataStoreConnection!
+  describeDataStore(datastoreId: String!): DataStoreProperties
+
+  # Import Jobs
+  describeFHIRImportJob(datastoreId: String!, jobId: String!): ImportJobProperties
+  listFHIRImportJobs(datastoreId: String!, jobName: String, jobStatus: JobStatus, submittedBefore: DateTime, submittedAfter: DateTime, maxResults: Int, nextToken: String): ImportJobConnection!
+
+  # Export Jobs
+  describeFHIRExportJob(datastoreId: String!, jobId: String!): ExportJobProperties
+  listFHIRExportJobs(datastoreId: String!, jobName: String, jobStatus: JobStatus, submittedBefore: DateTime, submittedAfter: DateTime, maxResults: Int, nextToken: String): ExportJobConnection!
+
+  # Tagging
+  listTagsForResource(resourceARN: String!): TagResource
+
+  # FHIR Resources
+  getPatient(datastoreId: String!, id: String!): Patient
+  listPatients(datastoreId: String!, filter: FHIRSearchParams, count: Int, pageToken: String): PatientConnection!
+  getPractitioner(datastoreId: String!, id: String!): Practitioner
+  getPractitionerRole(datastoreId: String!, id: String!): PractitionerRole
+  getOrganization(datastoreId: String!, id: String!): Organization
+  getLocation(datastoreId: String!, id: String!): Location
+  getHealthcareService(datastoreId: String!, id: String!): HealthcareService
+  getRelatedPerson(datastoreId: String!, id: String!): RelatedPerson
+  getEncounter(datastoreId: String!, id: String!): Encounter
+  listEncounters(datastoreId: String!, filter: FHIRSearchParams, count: Int, pageToken: String): EncounterConnection!
+  getCondition(datastoreId: String!, id: String!): Condition
+  listConditions(datastoreId: String!, filter: FHIRSearchParams, count: Int, pageToken: String): ConditionConnection!
+  getObservation(datastoreId: String!, id: String!): Observation
+  listObservations(datastoreId: String!, filter: FHIRSearchParams, count: Int, pageToken: String): ObservationConnection!
+  getMedicationRequest(datastoreId: String!, id: String!): MedicationRequest
+  getMedicationAdministration(datastoreId: String!, id: String!): MedicationAdministration
+  getDiagnosticReport(datastoreId: String!, id: String!): DiagnosticReport
+  getProcedure(datastoreId: String!, id: String!): Procedure
+  getImmunization(datastoreId: String!, id: String!): Immunization
+  getAllergyIntolerance(datastoreId: String!, id: String!): AllergyIntolerance
+  getCarePlan(datastoreId: String!, id: String!): CarePlan
+  getCareTeam(datastoreId: String!, id: String!): CareTeam
+  getCoverage(datastoreId: String!, id: String!): Coverage
+  getClaim(datastoreId: String!, id: String!): Claim
+  getExplanationOfBenefit(datastoreId: String!, id: String!): ExplanationOfBenefit
+  getDocumentReference(datastoreId: String!, id: String!): DocumentReference
+  getServiceRequest(datastoreId: String!, id: String!): ServiceRequest
+  getCommunication(datastoreId: String!, id: String!): Communication
+  getMeasure(datastoreId: String!, id: String!): Measure
+  getMeasureReport(datastoreId: String!, id: String!): MeasureReport
+  getQuestionnaire(datastoreId: String!, id: String!): Questionnaire
+  getQuestionnaireResponse(datastoreId: String!, id: String!): QuestionnaireResponse
+  getDevice(datastoreId: String!, id: String!): Device
+  getSubstance(datastoreId: String!, id: String!): Substance
+  getNutritionOrder(datastoreId: String!, id: String!): NutritionOrder
+  getTask(datastoreId: String!, id: String!): Task
+  getConsent(datastoreId: String!, id: String!): Consent
+  getProvenance(datastoreId: String!, id: String!): Provenance
+  getAuditEvent(datastoreId: String!, id: String!): AuditEvent
+  getBundle(datastoreId: String!, id: String!): Bundle
+  getCapabilityStatement(datastoreId: String!): CapabilityStatement
+}
+
+# ─── Mutations ───────────────────────────────────────────────────────────────
+
+type Mutation {
+  # DataStore Management
+  createDataStore(input: CreateDataStoreInput!): DataStore!
+  deleteDataStore(datastoreId: String!): DataStoreStatus!
+
+  # Import / Export
+  startFHIRImportJob(input: StartFHIRImportJobInput!): ImportJobProperties!
+  startFHIRExportJob(input: StartFHIRExportJobInput!): ExportJobProperties!
+  cancelFHIRExportJob(datastoreId: String!, jobId: String!): ExportJobProperties!
+
+  # Tagging
+  tagResource(resourceARN: String!, tags: [TagInput!]!): Boolean!
+  untagResource(resourceARN: String!, tagKeys: [String!]!): Boolean!
+
+  # FHIR Create / Update / Delete
+  createPatient(datastoreId: String!, resource: String!): Patient!
+  updatePatient(datastoreId: String!, id: String!, resource: String!): Patient!
+  deletePatient(datastoreId: String!, id: String!): OperationOutcome!
+  createEncounter(datastoreId: String!, resource: String!): Encounter!
+  updateEncounter(datastoreId: String!, id: String!, resource: String!): Encounter!
+  createCondition(datastoreId: String!, resource: String!): Condition!
+  updateCondition(datastoreId: String!, id: String!, resource: String!): Condition!
+  createObservation(datastoreId: String!, resource: String!): Observation!
+  updateObservation(datastoreId: String!, id: String!, resource: String!): Observation!
+  createMedicationRequest(datastoreId: String!, resource: String!): MedicationRequest!
+  createDiagnosticReport(datastoreId: String!, resource: String!): DiagnosticReport!
+  createProcedure(datastoreId: String!, resource: String!): Procedure!
+  createImmunization(datastoreId: String!, resource: String!): Immunization!
+  createTask(datastoreId: String!, resource: String!): Task!
+  updateTask(datastoreId: String!, id: String!, resource: String!): Task!
+  createConsent(datastoreId: String!, resource: String!): Consent!
+  createBundle(datastoreId: String!, bundle: String!): Bundle!
+}
+
+# ─── Input Types ─────────────────────────────────────────────────────────────
+
+input CreateDataStoreInput {
+  datastoreName: String!
+  datastoreTypeVersion: FHIRVersion!
+  sseConfiguration: SseConfigurationInput
+  preloadDataConfig: PreloadDataConfigInput
+  clientToken: String
+  tags: [TagInput!]
+  identityProviderConfiguration: IdentityProviderConfigurationInput
+}
+
+input SseConfigurationInput {
+  kmsEncryptionConfig: KmsEncryptionConfigInput!
+}
+
+input KmsEncryptionConfigInput {
+  cmkType: EncryptionType!
+  kmsKeyId: String
+}
+
+input PreloadDataConfigInput {
+  preloadDataType: PreloadDataType!
+}
+
+input IdentityProviderConfigurationInput {
+  authorizationStrategy: String!
+  fineGrainedAuthorizationEnabled: Boolean
+  metadata: String
+  idpLambdaArn: String
+}
+
+input TagInput {
+  key: String!
+  value: String!
+}
+
+input StartFHIRImportJobInput {
+  jobName: String
+  inputDataConfig: S3ConfigurationInput!
+  jobOutputDataConfig: S3ConfigurationInput!
+  datastoreId: String!
+  dataAccessRoleArn: String!
+  clientToken: String
+}
+
+input StartFHIRExportJobInput {
+  jobName: String
+  outputDataConfig: S3ConfigurationInput!
+  datastoreId: String!
+  dataAccessRoleArn: String!
+  clientToken: String
+}
+
+input S3ConfigurationInput {
+  s3Uri: String!
+  kmsKeyId: String
+}
+
+input DatastoreFilterInput {
+  datastoreName: String
+  datastoreStatus: DataStoreStatus
+  createdBefore: DateTime
+  createdAfter: DateTime
+}
+
+input FHIRSearchParams {
+  subject: String
+  patient: String
+  encounter: String
+  date: String
+  status: String
+  category: String
+  code: String
+  identifier: String
+  _lastUpdated: String
+  _count: Int
+}
+
+# ─── Connection / Pagination Types ───────────────────────────────────────────
+
+type DataStoreConnection {
+  datastorePropertiesList: [DataStoreProperties!]!
+  nextToken: String
+}
+
+type ImportJobConnection {
+  importJobPropertiesList: [ImportJobProperties!]!
+  nextToken: String
+}
+
+type ExportJobConnection {
+  exportJobPropertiesList: [ExportJobProperties!]!
+  nextToken: String
+}
+
+type PatientConnection {
+  entry: [Patient!]!
+  total: Int
+  nextPageToken: String
+}
+
+type EncounterConnection {
+  entry: [Encounter!]!
+  total: Int
+  nextPageToken: String
+}
+
+type ConditionConnection {
+  entry: [Condition!]!
+  total: Int
+  nextPageToken: String
+}
+
+type ObservationConnection {
+  entry: [Observation!]!
+  total: Int
+  nextPageToken: String
+}
