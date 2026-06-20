@@ -4,7 +4,7 @@ description: Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed se
   clinical systems. It provides a transactional FHIR server with bulk import/export,
   medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration
   with AWS analytics services.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/aws-healthlake/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -27,7 +27,7 @@ apis:
   description: REST API for creating, describing, listing, and deleting FHIR R4 data
     stores. Supports server-side encryption configuration, identity provider configuration
     for SMART on FHIR, and optional preloading of synthetic Synthea data for development.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
   tags:
@@ -48,7 +48,7 @@ apis:
   description: Asynchronous bulk import API for loading FHIR R4 resources from Amazon
     S3 into a HealthLake data store. Supports starting, describing, and listing import
     jobs with up to 1 million files and 5 TB total per job.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_StartFHIRImportJob.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
   tags:
@@ -65,7 +65,7 @@ apis:
     HealthLake data store to Amazon S3. Supports starting, describing, listing, and
     canceling export jobs, and exporting to analytics-ready formats for use with Amazon
     Athena.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_StartFHIRExportJob.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
   tags:
@@ -84,7 +84,7 @@ apis:
     FHIR Bulk Data Access, US Core IG, HL7 SMART App Launch Framework, OAuth 2.0,
     and OpenID Connect. Also includes FHIR Subscriptions via Amazon EventBridge and
     REST-Hook.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/devguide/working-with-FHIR-healthlake.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
   tags:
@@ -103,7 +103,7 @@ apis:
   description: API operations for adding, listing, and removing tags on HealthLake
     resources such as data stores. Supports up to 200 tags per resource for cost allocation
     and resource management.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_TagResource.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
   tags:
