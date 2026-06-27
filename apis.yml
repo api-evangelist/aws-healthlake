@@ -132,7 +132,7 @@ common:
   url: https://aws.amazon.com/developer/tools/
 - type: CLI
   url: https://docs.aws.amazon.com/cli/latest/reference/healthlake/
-- type: Changelog
+- type: ChangeLog
   url: https://docs.aws.amazon.com/healthlake/latest/devguide/releases.html
 - type: Authentication
   url: https://docs.aws.amazon.com/healthlake/latest/devguide/security-iam.html
@@ -148,7 +148,7 @@ common:
   url: finops/aws-healthlake-finops.yml
 - type: Partners
   url: https://aws.amazon.com/healthlake/partners/
-- type: Forum
+- type: Forums
   url: https://repost.aws/tags/questions/TAFhiamjeiTUCXp3LbfpEJhw/aws-health-lake
 maintainers:
 - FN: Kin Lane
