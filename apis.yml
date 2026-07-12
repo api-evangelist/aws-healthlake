@@ -114,6 +114,14 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_TagResource.html
 common:
+- type: TrustCenter
+  url: security/aws-healthlake-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/aws-healthlake-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/aws-healthlake-domain-security.yml
+- type: Authentication
+  url: authentication/aws-healthlake-authentication.yml
 - type: Website
   url: https://aws.amazon.com/healthlake/
 - type: Documentation
@@ -150,6 +158,8 @@ common:
   url: https://aws.amazon.com/healthlake/partners/
 - type: Forums
   url: https://repost.aws/tags/questions/TAFhiamjeiTUCXp3LbfpEJhw/aws-health-lake
+- url: https://aws.amazon.com/blogs/publicsector/feed/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
