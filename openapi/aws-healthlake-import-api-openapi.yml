@@ -1,0 +1,571 @@
+openapi: 3.0.3
+info:
+  title: Amazon HealthLake Datastore Import API
+  description: Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.
+  version: '2017-07-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://healthlake.{region}.amazonaws.com
+  description: AWS HealthLake regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region identifier
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-2
+      - ap-southeast-2
+      - eu-west-1
+security:
+- aws_v4: []
+tags:
+- name: Import
+  description: Asynchronous bulk import operations for loading FHIR resources from Amazon S3
+paths:
+  /#X-Amz-Target=HealthLake.DescribeFHIRImportJob:
+    post:
+      operationId: describeFHIRImportJob
+      summary: DescribeFHIRImportJob
+      description: <p>Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job. </p>
+      tags:
+      - Import
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - HealthLake.DescribeFHIRImportJob
+        description: 'The AWS service action target: HealthLake.DescribeFHIRImportJob'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DescribeFHIRImportJobResponse'
+        '400':
+          description: Client error (validation, throttling, conflict, access denied)
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/DescribeFHIRImportJobRequest'
+  /#X-Amz-Target=HealthLake.ListFHIRImportJobs:
+    post:
+      operationId: listFHIRImportJobs
+      summary: ListFHIRImportJobs
+      description: <p> Lists all FHIR import jobs associated with an account and their statuses. </p>
+      tags:
+      - Import
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - HealthLake.ListFHIRImportJobs
+        description: 'The AWS service action target: HealthLake.ListFHIRImportJobs'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ListFHIRImportJobsResponse'
+        '400':
+          description: Client error (validation, throttling, conflict, access denied)
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ListFHIRImportJobsRequest'
+  /#X-Amz-Target=HealthLake.StartFHIRImportJob:
+    post:
+      operationId: startFHIRImportJob
+      summary: StartFHIRImportJob
+      description: <p>Begins a FHIR Import job.</p>
+      tags:
+      - Import
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - HealthLake.StartFHIRImportJob
+        description: 'The AWS service action target: HealthLake.StartFHIRImportJob'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/StartFHIRImportJobResponse'
+        '400':
+          description: Client error (validation, throttling, conflict, access denied)
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/StartFHIRImportJobRequest'
+components:
+  schemas:
+    StartFHIRImportJobRequest:
+      type: object
+      properties:
+        JobName:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        InputDataConfig:
+          type: object
+          properties:
+            S3Uri:
+              type: string
+              maxLength: 1024
+              pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+        JobOutputDataConfig:
+          type: object
+          properties:
+            S3Configuration:
+              type: object
+              properties:
+                S3Uri:
+                  type: string
+                  maxLength: 1024
+                  pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+                KmsKeyId:
+                  type: string
+                  minLength: 1
+                  maxLength: 400
+                  pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+              required:
+              - S3Uri
+              - KmsKeyId
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        DataAccessRoleArn:
+          type: string
+          minLength: 20
+          maxLength: 2048
+          pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
+        ClientToken:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[a-zA-Z0-9-]+$
+      required:
+      - InputDataConfig
+      - JobOutputDataConfig
+      - DatastoreId
+      - DataAccessRoleArn
+      - ClientToken
+    ListFHIRImportJobsResponse:
+      type: object
+      properties:
+        ImportJobPropertiesList:
+          type: array
+          items:
+            type: object
+            properties:
+              JobId:
+                type: string
+                minLength: 1
+                maxLength: 32
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+              JobName:
+                type: string
+                minLength: 1
+                maxLength: 64
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+              JobStatus:
+                type: string
+                enum:
+                - SUBMITTED
+                - IN_PROGRESS
+                - COMPLETED_WITH_ERRORS
+                - COMPLETED
+                - FAILED
+                - CANCEL_SUBMITTED
+                - CANCEL_IN_PROGRESS
+                - CANCEL_COMPLETED
+                - CANCEL_FAILED
+              SubmitTime:
+                type: string
+                format: date-time
+              EndTime:
+                type: string
+                format: date-time
+              DatastoreId:
+                type: string
+                minLength: 1
+                maxLength: 32
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+              InputDataConfig:
+                type: object
+                properties:
+                  S3Uri:
+                    type: string
+                    maxLength: 1024
+                    pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+              JobOutputDataConfig:
+                type: object
+                properties:
+                  S3Configuration:
+                    type: object
+                    properties:
+                      S3Uri:
+                        type: string
+                        maxLength: 1024
+                        pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+                      KmsKeyId:
+                        type: string
+                        minLength: 1
+                        maxLength: 400
+                        pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+                    required:
+                    - S3Uri
+                    - KmsKeyId
+              JobProgressReport:
+                type: object
+                properties:
+                  TotalNumberOfScannedFiles:
+                    type: integer
+                    format: int64
+                  TotalSizeOfScannedFilesInMB:
+                    type: number
+                    format: double
+                  TotalNumberOfImportedFiles:
+                    type: integer
+                    format: int64
+                  TotalNumberOfResourcesScanned:
+                    type: integer
+                    format: int64
+                  TotalNumberOfResourcesImported:
+                    type: integer
+                    format: int64
+                  TotalNumberOfResourcesWithCustomerError:
+                    type: integer
+                    format: int64
+                  TotalNumberOfFilesReadWithCustomerError:
+                    type: integer
+                    format: int64
+                  Throughput:
+                    type: number
+                    format: double
+              DataAccessRoleArn:
+                type: string
+                minLength: 20
+                maxLength: 2048
+                pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
+              Message:
+                type: string
+                minLength: 1
+                maxLength: 2048
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            required:
+            - JobId
+            - JobStatus
+            - SubmitTime
+            - DatastoreId
+            - InputDataConfig
+        NextToken:
+          type: string
+          maxLength: 8192
+          pattern: \p{ASCII}{0,8192}
+      required:
+      - ImportJobPropertiesList
+    StartFHIRImportJobResponse:
+      type: object
+      properties:
+        JobId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobStatus:
+          type: string
+          enum:
+          - SUBMITTED
+          - IN_PROGRESS
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED
+          - FAILED
+          - CANCEL_SUBMITTED
+          - CANCEL_IN_PROGRESS
+          - CANCEL_COMPLETED
+          - CANCEL_FAILED
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - JobId
+      - JobStatus
+    ListFHIRImportJobsRequest:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        NextToken:
+          type: string
+          maxLength: 8192
+          pattern: \p{ASCII}{0,8192}
+        MaxResults:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 500
+        JobName:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobStatus:
+          type: string
+          enum:
+          - SUBMITTED
+          - IN_PROGRESS
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED
+          - FAILED
+          - CANCEL_SUBMITTED
+          - CANCEL_IN_PROGRESS
+          - CANCEL_COMPLETED
+          - CANCEL_FAILED
+        SubmittedBefore:
+          type: string
+          format: date-time
+        SubmittedAfter:
+          type: string
+          format: date-time
+      required:
+      - DatastoreId
+    DescribeFHIRImportJobRequest:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - DatastoreId
+      - JobId
+    DescribeFHIRImportJobResponse:
+      type: object
+      properties:
+        ImportJobProperties:
+          type: object
+          properties:
+            JobId:
+              type: string
+              minLength: 1
+              maxLength: 32
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            JobName:
+              type: string
+              minLength: 1
+              maxLength: 64
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            JobStatus:
+              type: string
+              enum:
+              - SUBMITTED
+              - IN_PROGRESS
+              - COMPLETED_WITH_ERRORS
+              - COMPLETED
+              - FAILED
+              - CANCEL_SUBMITTED
+              - CANCEL_IN_PROGRESS
+              - CANCEL_COMPLETED
+              - CANCEL_FAILED
+            SubmitTime:
+              type: string
+              format: date-time
+            EndTime:
+              type: string
+              format: date-time
+            DatastoreId:
+              type: string
+              minLength: 1
+              maxLength: 32
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            InputDataConfig:
+              type: object
+              properties:
+                S3Uri:
+                  type: string
+                  maxLength: 1024
+                  pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+            JobOutputDataConfig:
+              type: object
+              properties:
+                S3Configuration:
+                  type: object
+                  properties:
+                    S3Uri:
+                      type: string
+                      maxLength: 1024
+                      pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+                    KmsKeyId:
+                      type: string
+                      minLength: 1
+                      maxLength: 400
+                      pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+                  required:
+                  - S3Uri
+                  - KmsKeyId
+            JobProgressReport:
+              type: object
+              properties:
+                TotalNumberOfScannedFiles:
+                  type: integer
+                  format: int64
+                TotalSizeOfScannedFilesInMB:
+                  type: number
+                  format: double
+                TotalNumberOfImportedFiles:
+                  type: integer
+                  format: int64
+                TotalNumberOfResourcesScanned:
+                  type: integer
+                  format: int64
+                TotalNumberOfResourcesImported:
+                  type: integer
+                  format: int64
+                TotalNumberOfResourcesWithCustomerError:
+                  type: integer
+                  format: int64
+                TotalNumberOfFilesReadWithCustomerError:
+                  type: integer
+                  format: int64
+                Throughput:
+                  type: number
+                  format: double
+            DataAccessRoleArn:
+              type: string
+              minLength: 20
+              maxLength: 2048
+              pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
+            Message:
+              type: string
+              minLength: 1
+              maxLength: 2048
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+          required:
+          - JobId
+          - JobStatus
+          - SubmitTime
+          - DatastoreId
+          - InputDataConfig
+      required:
+      - ImportJobProperties
+  securitySchemes:
+    aws_v4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'AWS Signature Version 4. Sign requests with your AWS access key and secret key. See: https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html'
+externalDocs:
+  description: Amazon HealthLake API Reference
+  url: https://docs.aws.amazon.com/healthlake/latest/APIReference/Welcome.html

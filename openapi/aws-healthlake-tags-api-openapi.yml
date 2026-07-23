@@ -1,0 +1,291 @@
+openapi: 3.0.3
+info:
+  title: Amazon HealthLake Datastore Tags API
+  description: Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.
+  version: '2017-07-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/contact-us/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://healthlake.{region}.amazonaws.com
+  description: AWS HealthLake regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region identifier
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-2
+      - ap-southeast-2
+      - eu-west-1
+security:
+- aws_v4: []
+tags:
+- name: Tags
+  description: Resource tagging operations for cost allocation and resource management
+paths:
+  /#X-Amz-Target=HealthLake.ListTagsForResource:
+    post:
+      operationId: listTagsForResource
+      summary: ListTagsForResource
+      description: <p> Returns a list of all existing tags associated with a data store. </p>
+      tags:
+      - Tags
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - HealthLake.ListTagsForResource
+        description: 'The AWS service action target: HealthLake.ListTagsForResource'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '400':
+          description: Client error (validation, throttling, conflict, access denied)
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ListTagsForResourceRequest'
+  /#X-Amz-Target=HealthLake.TagResource:
+    post:
+      operationId: tagResource
+      summary: TagResource
+      description: <p> Adds a user specified key and value tag to a data store. </p>
+      tags:
+      - Tags
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - HealthLake.TagResource
+        description: 'The AWS service action target: HealthLake.TagResource'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '400':
+          description: Client error (validation, throttling, conflict, access denied)
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+  /#X-Amz-Target=HealthLake.UntagResource:
+    post:
+      operationId: untagResource
+      summary: UntagResource
+      description: <p> Removes tags from a data store. </p>
+      tags:
+      - Tags
+      parameters:
+      - name: X-Amz-Target
+        in: header
+        required: true
+        schema:
+          type: string
+          enum:
+          - HealthLake.UntagResource
+        description: 'The AWS service action target: HealthLake.UntagResource'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '400':
+          description: Client error (validation, throttling, conflict, access denied)
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                type: object
+                properties:
+                  __type:
+                    type: string
+                    description: Exception type
+                  Message:
+                    type: string
+                    description: Error message
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/UntagResourceRequest'
+components:
+  schemas:
+    UntagResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+        TagKeys:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 128
+            pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+      required:
+      - ResourceARN
+      - TagKeys
+    ListTagsForResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+      required:
+      - ResourceARN
+    TagResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+        Tags:
+          type: array
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+                minLength: 1
+                maxLength: 128
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+              Value:
+                type: string
+                minLength: 0
+                maxLength: 256
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+            required:
+            - Key
+            - Value
+      required:
+      - ResourceARN
+      - Tags
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+                minLength: 1
+                maxLength: 128
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+              Value:
+                type: string
+                minLength: 0
+                maxLength: 256
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+            required:
+            - Key
+            - Value
+    TagResourceResponse:
+      type: object
+      properties: {}
+  securitySchemes:
+    aws_v4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'AWS Signature Version 4. Sign requests with your AWS access key and secret key. See: https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html'
+externalDocs:
+  description: Amazon HealthLake API Reference
+  url: https://docs.aws.amazon.com/healthlake/latest/APIReference/Welcome.html
