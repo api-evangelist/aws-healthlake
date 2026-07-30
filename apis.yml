@@ -4,7 +4,20 @@ description: Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed se
   clinical systems. It provides a transactional FHIR server with bulk import/export,
   medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration
   with AWS analytics services.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/aws-healthlake.png
 url: https://raw.githubusercontent.com/api-evangelist/aws-healthlake/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -23,31 +36,11 @@ tags:
 - HL7
 - AWS
 apis:
-- name: AWS HealthLake Data Store Management API
-  description: REST API for creating, describing, listing, and deleting FHIR R4 data
-    stores. Supports server-side encryption configuration, identity provider configuration
-    for SMART on FHIR, and optional preloading of synthetic Synthea data for development.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
-  baseURL: https://healthlake.us-east-1.amazonaws.com
-  tags:
-  - Data Store
-  - FHIR
-  - Create
-  - Delete
-  - Describe
-  - List
-  properties:
-  - type: Documentation
-    url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
-  - type: OpenAPI
-    url: https://github.com/aws/aws-sdk/blob/main/apis/healthlake/2017-07-01/api-2.json
-  - url: graphql/aws-healthlake-graphql.md
-    type: GraphQL
 - name: AWS HealthLake FHIR Import API
-  description: Asynchronous bulk import API for loading FHIR R4 resources from Amazon
-    S3 into a HealthLake data store. Supports starting, describing, and listing import
-    jobs with up to 1 million files and 5 TB total per job.
+  description: >-
+    Asynchronous bulk import API for loading FHIR R4 resources from Amazon S3 into a HealthLake data store.
+    Supports starting, describing, and listing import jobs with up to 1 million files and 5 TB total per
+    job.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_StartFHIRImportJob.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
@@ -61,10 +54,10 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_StartFHIRImportJob.html
 - name: AWS HealthLake FHIR Export API
-  description: Asynchronous bulk export API for exporting FHIR R4 resources from a
-    HealthLake data store to Amazon S3. Supports starting, describing, listing, and
-    canceling export jobs, and exporting to analytics-ready formats for use with Amazon
-    Athena.
+  description: >-
+    Asynchronous bulk export API for exporting FHIR R4 resources from a HealthLake data store to Amazon
+    S3. Supports starting, describing, listing, and canceling export jobs, and exporting to analytics-ready
+    formats for use with Amazon Athena.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_StartFHIRExportJob.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
@@ -79,11 +72,11 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_StartFHIRExportJob.html
 - name: AWS HealthLake FHIR R4 Server API
-  description: Transactional FHIR R4 server endpoints for reading, writing, searching,
-    and validating FHIR resources within a data store. Supports SMART on FHIR authorization,
-    FHIR Bulk Data Access, US Core IG, HL7 SMART App Launch Framework, OAuth 2.0,
-    and OpenID Connect. Also includes FHIR Subscriptions via Amazon EventBridge and
-    REST-Hook.
+  description: >-
+    Transactional FHIR R4 server endpoints for reading, writing, searching, and validating FHIR resources
+    within a data store. Supports SMART on FHIR authorization, FHIR Bulk Data Access, US Core IG, HL7
+    SMART App Launch Framework, OAuth 2.0, and OpenID Connect. Also includes FHIR Subscriptions via Amazon
+    EventBridge and REST-Hook.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/devguide/working-with-FHIR-healthlake.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
@@ -100,9 +93,9 @@ apis:
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/devguide/working-with-FHIR-healthlake.html
 - name: AWS HealthLake Resource Tagging API
-  description: API operations for adding, listing, and removing tags on HealthLake
-    resources such as data stores. Supports up to 200 tags per resource for cost allocation
-    and resource management.
+  description: >-
+    API operations for adding, listing, and removing tags on HealthLake resources such as data stores.
+    Supports up to 200 tags per resource for cost allocation and resource management.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_TagResource.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
@@ -113,7 +106,65 @@ apis:
   properties:
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_TagResource.html
+- aid: aws-healthlake:aws-healthlake-datastore-api
+  name: AWS HealthLake Datastore API
+  description: Operations for creating, describing, listing, and deleting FHIR R4 data stores
+  humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  baseURL: https://healthlake.us-east-1.amazonaws.com
+  tags:
+  - Datastore
+  properties:
+  - type: OpenAPI
+    url: openapi/aws-healthlake-datastore-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  - type: GraphQL
+    url: graphql/aws-healthlake-graphql.md
+- aid: aws-healthlake:aws-healthlake-export-api
+  name: AWS HealthLake Export API
+  description: Asynchronous bulk export operations for exporting FHIR resources to Amazon S3
+  humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  baseURL: https://healthlake.us-east-1.amazonaws.com
+  tags:
+  - Export
+  properties:
+  - type: OpenAPI
+    url: openapi/aws-healthlake-export-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  - type: GraphQL
+    url: graphql/aws-healthlake-graphql.md
+- aid: aws-healthlake:aws-healthlake-import-api
+  name: AWS HealthLake Import API
+  description: Asynchronous bulk import operations for loading FHIR resources from Amazon S3
+  humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  baseURL: https://healthlake.us-east-1.amazonaws.com
+  tags:
+  - Import
+  properties:
+  - type: OpenAPI
+    url: openapi/aws-healthlake-import-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  - type: GraphQL
+    url: graphql/aws-healthlake-graphql.md
+- aid: aws-healthlake:aws-healthlake-tags-api
+  name: AWS HealthLake Tags API
+  description: Resource tagging operations for cost allocation and resource management
+  humanURL: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  baseURL: https://healthlake.us-east-1.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/aws-healthlake-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
+  - type: GraphQL
+    url: graphql/aws-healthlake-graphql.md
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/aws-healthlake/overview
 - type: AgenticAccess
   url: agentic-access/aws-healthlake-agentic-access.yml
 - type: TrustCenter
