@@ -1,0 +1,932 @@
+{
+  "info": {
+    "_postman_id": "0b16d97f-1702-412b-8c20-b32618d7b47b",
+    "name": "Amazon HealthLake Datastore API",
+    "description": "Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:07:04.000Z",
+    "updatedAt": "2026-07-28T01:07:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0b16d97f-1702-412b-8c20-b32618d7b47b"
+  },
+  "item": [
+    {
+      "name": "#X-Amz-Target=HealthLake.CreateFHIRDatastore",
+      "item": [
+        {
+          "name": "CreateFHIRDatastore",
+          "id": "85e4a9ab-4c75-4b4a-a861-4d0f2cd240ae",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                "key": "X-Amz-Target",
+                "value": "HealthLake.CreateFHIRDatastore"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreTypeVersion\": \"R4\",\n  \"DatastoreName\": \"%/==\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"CUSTOMER_MANAGED_KMS_KEY\",\n      \"KmsKeyId\": \"arn:aws:kms:key/LOF7hfK\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"SYNTHEA\"\n  },\n  \"ClientToken\": \"JQsY\",\n  \"Tags\": [\n    {\n      \"Key\": \"Z:.{L@-.\",\n      \"Value\": \"\"\n    },\n    {\n      \"Key\": \" \",\n      \"Value\": \"\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"SMART_ON_FHIR_V1\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"arn:aws:lambda:md-zmhgxcmdis-9:638074616632:function:qGnS2:D7mjwnwgR\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.CreateFHIRDatastore",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore"
+            },
+            "description": "<p>Creates a data store that can ingest and export FHIR formatted data.</p>"
+          },
+          "response": [
+            {
+              "id": "466b0cb3-6bea-4346-9500-e313e6abcb7f",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.CreateFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreTypeVersion\": \"R4\",\n  \"DatastoreName\": \"%/==\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"CUSTOMER_MANAGED_KMS_KEY\",\n      \"KmsKeyId\": \"arn:aws:kms:key/LOF7hfK\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"SYNTHEA\"\n  },\n  \"ClientToken\": \"JQsY\",\n  \"Tags\": [\n    {\n      \"Key\": \"Z:.{L@-.\",\n      \"Value\": \"\"\n    },\n    {\n      \"Key\": \" \",\n      \"Value\": \"\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"SMART_ON_FHIR_V1\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"arn:aws:lambda:md-zmhgxcmdis-9:638074616632:function:qGnS2:D7mjwnwgR\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.CreateFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"DatastoreId\": \"p__%\",\n  \"DatastoreArn\": \"arn:aws:healthlake:8:303849613134:datastore/\",\n  \"DatastoreStatus\": \"CREATING\",\n  \"DatastoreEndpoint\": \"p{{M{{pMPP}}{{P}pM}MP}p}M}P{pMM{MMMM}}{Pp}{M{P}PpPpP{{M{MpP{PMp{}{M}PMMM}}}}P}p}pp}MpP}pMMPPPp}p}{}}P}M}PpP{pM{}Mp}M{M{}pM}}PMM{MM}M}}MpMpMPPP{P}MpMPMMp}}PP}M}MP}pM{pp}pPppppMpPp}M}{}PPM{P}Pp{{MPPP{{}MMMMPMPMM}}M{P}pMPpMP}}P}PpPP{{{p{}p{P}MPMpPMMp}p}}Mpp{{\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-466b0cb3-6bea-4346-9500-e313e6abcb7f"
+            },
+            {
+              "id": "93a3c4e4-1622-4b3a-bba1-ffd5fa4d450d",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.CreateFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreTypeVersion\": \"R4\",\n  \"DatastoreName\": \"%/==\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"CUSTOMER_MANAGED_KMS_KEY\",\n      \"KmsKeyId\": \"arn:aws:kms:key/LOF7hfK\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"SYNTHEA\"\n  },\n  \"ClientToken\": \"JQsY\",\n  \"Tags\": [\n    {\n      \"Key\": \"Z:.{L@-.\",\n      \"Value\": \"\"\n    },\n    {\n      \"Key\": \" \",\n      \"Value\": \"\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"SMART_ON_FHIR_V1\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"arn:aws:lambda:md-zmhgxcmdis-9:638074616632:function:qGnS2:D7mjwnwgR\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.CreateFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-93a3c4e4-1622-4b3a-bba1-ffd5fa4d450d"
+            },
+            {
+              "id": "13bb5f3d-1d53-4d54-aa9f-cf33acf1221e",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.CreateFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreTypeVersion\": \"R4\",\n  \"DatastoreName\": \"%/==\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"CUSTOMER_MANAGED_KMS_KEY\",\n      \"KmsKeyId\": \"arn:aws:kms:key/LOF7hfK\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"SYNTHEA\"\n  },\n  \"ClientToken\": \"JQsY\",\n  \"Tags\": [\n    {\n      \"Key\": \"Z:.{L@-.\",\n      \"Value\": \"\"\n    },\n    {\n      \"Key\": \" \",\n      \"Value\": \"\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"SMART_ON_FHIR_V1\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"arn:aws:lambda:md-zmhgxcmdis-9:638074616632:function:qGnS2:D7mjwnwgR\"\n  }\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.CreateFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-13bb5f3d-1d53-4d54-aa9f-cf33acf1221e"
+            }
+          ],
+          "createdAt": "2026-07-28T01:07:04.000Z",
+          "updatedAt": "2026-07-28T01:07:04.000Z",
+          "uid": "35240-85e4a9ab-4c75-4b4a-a861-4d0f2cd240ae"
+        }
+      ],
+      "id": "90a04486-b0da-4212-a60c-4ef4691ed53d",
+      "createdAt": "2026-07-28T01:07:04.000Z",
+      "updatedAt": "2026-07-28T01:07:04.000Z",
+      "uid": "35240-90a04486-b0da-4212-a60c-4ef4691ed53d"
+    },
+    {
+      "name": "#X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+      "item": [
+        {
+          "name": "DeleteFHIRDatastore",
+          "id": "c81aca7e-0c81-47a1-9ad3-f0c692d635c4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                "key": "X-Amz-Target",
+                "value": "HealthLake.DeleteFHIRDatastore"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore"
+            },
+            "description": "<p>Deletes a data store. </p>"
+          },
+          "response": [
+            {
+              "id": "4c7917fc-f99c-4704-88e1-363a49229f57",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.DeleteFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"DatastoreId\": \"p__%\",\n  \"DatastoreArn\": \"arn:aws:healthlake:8:303849613134:datastore/\",\n  \"DatastoreStatus\": \"CREATING\",\n  \"DatastoreEndpoint\": \"p{{M{{pMPP}}{{P}pM}MP}p}M}P{pMM{MMMM}}{Pp}{M{P}PpPpP{{M{MpP{PMp{}{M}PMMM}}}}P}p}pp}MpP}pMMPPPp}p}{}}P}M}PpP{pM{}Mp}M{M{}pM}}PMM{MM}M}}MpMpMPPP{P}MpMPMMp}}PP}M}MP}pM{pp}pPppppMpPp}M}{}PPM{P}Pp{{MPPP{{}MMMMPMPMM}}M{P}pMPpMP}}P}PpPP{{{p{}p{P}MPMpPMMp}p}}Mpp{{\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-4c7917fc-f99c-4704-88e1-363a49229f57"
+            },
+            {
+              "id": "413fffad-d483-4632-b223-6b3144166257",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.DeleteFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-413fffad-d483-4632-b223-6b3144166257"
+            },
+            {
+              "id": "1760d17a-fdcb-414d-a4fa-8cdfc95e6287",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.DeleteFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-1760d17a-fdcb-414d-a4fa-8cdfc95e6287"
+            }
+          ],
+          "createdAt": "2026-07-28T01:07:04.000Z",
+          "updatedAt": "2026-07-28T01:07:04.000Z",
+          "uid": "35240-c81aca7e-0c81-47a1-9ad3-f0c692d635c4"
+        }
+      ],
+      "id": "4dcc8b19-91ec-447f-9302-1cf9e221fa21",
+      "createdAt": "2026-07-28T01:07:04.000Z",
+      "updatedAt": "2026-07-28T01:07:04.000Z",
+      "uid": "35240-4dcc8b19-91ec-447f-9302-1cf9e221fa21"
+    },
+    {
+      "name": "#X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+      "item": [
+        {
+          "name": "DescribeFHIRDatastore",
+          "id": "885750c9-93a2-49d9-8be1-faa73e33df51",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                "key": "X-Amz-Target",
+                "value": "HealthLake.DescribeFHIRDatastore"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore"
+            },
+            "description": "<p>Gets the properties associated with the FHIR data store, including the data store ID, data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store's endpoint.</p>"
+          },
+          "response": [
+            {
+              "id": "2ba036f7-b287-4718-a6b9-0d2413cc829e",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.DescribeFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"DatastoreProperties\": {\n    \"DatastoreId\": \"LZ+/@\",\n    \"DatastoreArn\": \"arn:aws:healthlake:YaeXT:441357666458:datastore/\",\n    \"DatastoreStatus\": \"CREATE_FAILED\",\n    \"DatastoreTypeVersion\": \"R4\",\n    \"DatastoreEndpoint\": \"PMppPp}}{}p{p{MM{MPp}}MpP}M}Pp}Mp}{MpPPPPMPp}P{p}P}pMM{P}}M{p}}p}p{M{pMPp{}}Mp{{Pp{}p{P{M}}MPpp}}}}P}PPMPPpp{p{pp{{M{{ppppPMP{Mp{P}PMPPp{{{MMPP}p}}Mpp{{Mp{M{M}PMpM{MPP{{pPp}pM}PpMM}PpPp}PMMpM}Mp}}PMpPp}}MPPMp}{M}}pMP{MM}}MPpP{M{MMP{{p{pP{M{MPPMP}PpPMpM{P}}\",\n    \"DatastoreName\": \"/@{+N.p{{:\",\n    \"CreatedAt\": \"<dateTime>\",\n    \"SseConfiguration\": {\n      \"KmsEncryptionConfig\": {\n        \"CmkType\": \"CUSTOMER_MANAGED_KMS_KEY\",\n        \"KmsKeyId\": \"arn:aws:kms:key/SHQdz\"\n      }\n    },\n    \"PreloadDataConfig\": {\n      \"PreloadDataType\": \"SYNTHEA\"\n    },\n    \"IdentityProviderConfiguration\": {\n      \"AuthorizationStrategy\": \"AWS_AUTH\",\n      \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n      \"Metadata\": \"<string>\",\n      \"IdpLambdaArn\": \"arn:aws:lambda:oq-argjyd-7:883879776985:function:z79mM1XFWC:$LATEST\"\n    },\n    \"ErrorCause\": {\n      \"ErrorMessage\": \"<string>\",\n      \"ErrorCategory\": \"NON_RETRYABLE_ERROR\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-2ba036f7-b287-4718-a6b9-0d2413cc829e"
+            },
+            {
+              "id": "8713d9d7-a5cf-4422-a48b-2fccb1eadab6",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.DescribeFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-8713d9d7-a5cf-4422-a48b-2fccb1eadab6"
+            },
+            {
+              "id": "d0fba79f-8f8d-43fc-8c0f-111d00dfd306",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.DescribeFHIRDatastore"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"N@%.\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-d0fba79f-8f8d-43fc-8c0f-111d00dfd306"
+            }
+          ],
+          "createdAt": "2026-07-28T01:07:04.000Z",
+          "updatedAt": "2026-07-28T01:07:04.000Z",
+          "uid": "35240-885750c9-93a2-49d9-8be1-faa73e33df51"
+        }
+      ],
+      "id": "2315a3b3-5d34-42dd-826e-b28994234ce3",
+      "createdAt": "2026-07-28T01:07:04.000Z",
+      "updatedAt": "2026-07-28T01:07:04.000Z",
+      "uid": "35240-2315a3b3-5d34-42dd-826e-b28994234ce3"
+    },
+    {
+      "name": "#X-Amz-Target=HealthLake.ListFHIRDatastores",
+      "item": [
+        {
+          "name": "ListFHIRDatastores",
+          "id": "49235911-3d2d-4352-88c0-e4bfe9c7d01e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                "key": "X-Amz-Target",
+                "value": "HealthLake.ListFHIRDatastores"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"_-+=:.:@Z\",\n    \"DatastoreStatus\": \"DELETED\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"p{ASCII}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}\",\n  \"MaxResults\": \"<integer>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListFHIRDatastores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores"
+            },
+            "description": "<p>Lists all FHIR data stores that are in the user\u2019s account, regardless of data store status.</p>"
+          },
+          "response": [
+            {
+              "id": "467b8260-7ab0-4675-9769-c4f8a7300c34",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.ListFHIRDatastores"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"_-+=:.:@Z\",\n    \"DatastoreStatus\": \"DELETED\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"p{ASCII}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}\",\n  \"MaxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListFHIRDatastores",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"DatastorePropertiesList\": [\n    {\n      \"DatastoreId\": \".{N@%\",\n      \"DatastoreArn\": \"arn:aws:healthlake:5YQ8c:681412084038:datastore/,w%g5U\",\n      \"DatastoreStatus\": \"CREATE_FAILED\",\n      \"DatastoreTypeVersion\": \"R4\",\n      \"DatastoreEndpoint\": \"MMp}{}}P}PpMPMp{{}{M{{}MM}P{}}p}PpMMP}{MPp}{MppMMPMMMM}}{}}{pM{}}PM}P{MPM{PP{MPPPM{}p{P{pM}}{MM}pPPp}pMM}P{PMM{pPMPp}}M}pMpM{MpMp}{}}MPP}MPM{Pp}p{M{MP{MM{PP}}P{}pPM}PP{pP}}P{pP}pM}}MppM}P{{P{pP}{}pPpPPp{p{}ppM{}MPP{p{PM{{Pp}{P}}M}{pPMM}pPPMppP{P}{p}MP}pPP{\",\n      \"DatastoreName\": \"///\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"SseConfiguration\": {\n        \"KmsEncryptionConfig\": {\n          \"CmkType\": \"AWS_OWNED_KMS_KEY\",\n          \"KmsKeyId\": \"jb-dkq-vdi-4:195925277411:alias/I_s/Jw\"\n        }\n      },\n      \"PreloadDataConfig\": {\n        \"PreloadDataType\": \"SYNTHEA\"\n      },\n      \"IdentityProviderConfiguration\": {\n        \"AuthorizationStrategy\": \"SMART_ON_FHIR_V1\",\n        \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n        \"Metadata\": \"<string>\",\n        \"IdpLambdaArn\": \"arn:aws:lambda:la-bd-5:198458721704:function:JwJzkkPP\"\n      },\n      \"ErrorCause\": {\n        \"ErrorMessage\": \"<string>\",\n        \"ErrorCategory\": \"NON_RETRYABLE_ERROR\"\n      }\n    },\n    {\n      \"DatastoreId\": \" \",\n      \"DatastoreArn\": \"arn:aws:healthlake:O97:685524736138:datastore/YD\",\n      \"DatastoreStatus\": \"ACTIVE\",\n      \"DatastoreTypeVersion\": \"R4\",\n      \"DatastoreEndpoint\": \"{}}}P}PpMMM}}pPp{}PP{p}p}PMM}PpPpp{p{P{{}MP}}}{p{P}M{}{}{p{p}}PP}Mpp{{{{P}{{MPpM}{M}}}{{P}}}MM}PP{pM}{p}}P}PPp}p{}{p{{PpMMpp{}P}Mp{M}}P{pM}p{MP{p{PP{MMp}}M}M}ppMM{MPP{pPpMp}{{{}M{MM{M{pPMPpM{pp}P}P{pP{Mpp{M{M{P{MPpM{{p}M}MPpp{M}p}{Mp}}Mp{}{}MM}M{P{}}pMpM{p\",\n      \"DatastoreName\": \"}%_N._p@\",\n      \"CreatedAt\": \"<dateTime>\",\n      \"SseConfiguration\": {\n        \"KmsEncryptionConfig\": {\n          \"CmkType\": \"AWS_OWNED_KMS_KEY\",\n          \"KmsKeyId\": \"nj-cdtdyqfe-nhigl-3:yeYYiS\"\n        }\n      },\n      \"PreloadDataConfig\": {\n        \"PreloadDataType\": \"SYNTHEA\"\n      },\n      \"IdentityProviderConfiguration\": {\n        \"AuthorizationStrategy\": \"SMART_ON_FHIR_V1\",\n        \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n        \"Metadata\": \"<string>\",\n        \"IdpLambdaArn\": \"arn:aws:lambda:zv-ujcdbtaj-8:044605913989:function:8:bKUmtA\"\n      },\n      \"ErrorCause\": {\n        \"ErrorMessage\": \"<string>\",\n        \"ErrorCategory\": \"RETRYABLE_ERROR\"\n      }\n    }\n  ],\n  \"NextToken\": \"p{ASCII}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-467b8260-7ab0-4675-9769-c4f8a7300c34"
+            },
+            {
+              "id": "7dc840a1-4b7b-4460-8af9-409a255e1d07",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.ListFHIRDatastores"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"_-+=:.:@Z\",\n    \"DatastoreStatus\": \"DELETED\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"p{ASCII}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}\",\n  \"MaxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListFHIRDatastores",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-7dc840a1-4b7b-4460-8af9-409a255e1d07"
+            },
+            {
+              "id": "0cf03a34-bce6-4331-a0f7-213215a5a532",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.ListFHIRDatastores"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"_-+=:.:@Z\",\n    \"DatastoreStatus\": \"DELETED\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"p{ASCII}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}\",\n  \"MaxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListFHIRDatastores",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:04.000Z",
+              "updatedAt": "2026-07-28T01:07:04.000Z",
+              "uid": "35240-0cf03a34-bce6-4331-a0f7-213215a5a532"
+            }
+          ],
+          "createdAt": "2026-07-28T01:07:04.000Z",
+          "updatedAt": "2026-07-28T01:07:04.000Z",
+          "uid": "35240-49235911-3d2d-4352-88c0-e4bfe9c7d01e"
+        }
+      ],
+      "id": "140aab96-9bc3-4c28-ab0f-4c605ad7ac99",
+      "createdAt": "2026-07-28T01:07:04.000Z",
+      "updatedAt": "2026-07-28T01:07:04.000Z",
+      "uid": "35240-140aab96-9bc3-4c28-ab0f-4c605ad7ac99"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://healthlake.{{region}}.amazonaws.com"
+    }
+  ]
+}

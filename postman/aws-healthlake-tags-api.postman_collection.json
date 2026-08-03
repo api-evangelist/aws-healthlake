@@ -1,0 +1,710 @@
+{
+  "info": {
+    "_postman_id": "72331d11-19ce-4c1c-9010-d45e4f858766",
+    "name": "Amazon HealthLake Datastore Tags API",
+    "description": "Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:07:23.000Z",
+    "updatedAt": "2026-07-28T01:07:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-72331d11-19ce-4c1c-9010-d45e4f858766"
+  },
+  "item": [
+    {
+      "name": "#X-Amz-Target=HealthLake.ListTagsForResource",
+      "item": [
+        {
+          "name": "ListTagsForResource",
+          "id": "d75d7963-4065-4079-86be-40b6ba305507",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The AWS service action target: HealthLake.ListTagsForResource",
+                "key": "X-Amz-Target",
+                "value": "HealthLake.ListTagsForResource"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ResourceARN\": \"arn:aws-us-gov:healthlake:6jypvvgd15:473830994604:datastore/fhir/ny5w2ccj]G|h*/{qI-up\\\\^~5hCQ-Kr9C\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListTagsForResource",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.ListTagsForResource"
+            },
+            "description": "<p> Returns a list of all existing tags associated with a data store. </p>"
+          },
+          "response": [
+            {
+              "id": "4440255d-b22f-4f91-bb02-629620df153d",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.ListTagsForResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.ListTagsForResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws-us-gov:healthlake:6jypvvgd15:473830994604:datastore/fhir/ny5w2ccj]G|h*/{qI-up\\\\^~5hCQ-Kr9C\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListTagsForResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListTagsForResource"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"Tags\": [\n    {\n      \"Key\": \"{.==L{L{\",\n      \"Value\": \"\"\n    },\n    {\n      \"Key\": \"}{@p_://\",\n      \"Value\": \"-}\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-4440255d-b22f-4f91-bb02-629620df153d"
+            },
+            {
+              "id": "9ea47a91-d808-4680-814b-9efac9b9a498",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.ListTagsForResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.ListTagsForResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws-us-gov:healthlake:6jypvvgd15:473830994604:datastore/fhir/ny5w2ccj]G|h*/{qI-up\\\\^~5hCQ-Kr9C\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListTagsForResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListTagsForResource"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-9ea47a91-d808-4680-814b-9efac9b9a498"
+            },
+            {
+              "id": "b8a979f8-1fb5-45c6-91fe-cea1d1b5fbca",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.ListTagsForResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.ListTagsForResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws-us-gov:healthlake:6jypvvgd15:473830994604:datastore/fhir/ny5w2ccj]G|h*/{qI-up\\\\^~5hCQ-Kr9C\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.ListTagsForResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListTagsForResource"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-b8a979f8-1fb5-45c6-91fe-cea1d1b5fbca"
+            }
+          ],
+          "createdAt": "2026-07-28T01:07:23.000Z",
+          "updatedAt": "2026-07-28T01:07:23.000Z",
+          "uid": "35240-d75d7963-4065-4079-86be-40b6ba305507"
+        }
+      ],
+      "id": "438b91af-2b46-42f8-900e-aba8d1bca7ee",
+      "createdAt": "2026-07-28T01:07:23.000Z",
+      "updatedAt": "2026-07-28T01:07:23.000Z",
+      "uid": "35240-438b91af-2b46-42f8-900e-aba8d1bca7ee"
+    },
+    {
+      "name": "#X-Amz-Target=HealthLake.TagResource",
+      "item": [
+        {
+          "name": "TagResource",
+          "id": "f7f91ac1-94c4-43f6-8399-38eabf7b3fb5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The AWS service action target: HealthLake.TagResource",
+                "key": "X-Amz-Target",
+                "value": "HealthLake.TagResource"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ResourceARN\": \"arn:aws-iso-b:healthlake:avq8:456506179454:datastore/fhir/{yBw4pf|\\\\f@@g]*XJ-.]z>7m'rv6Cg~l\",\n  \"Tags\": [\n    {\n      \"Key\": \"+:ZL/}N\",\n      \"Value\": \"+-/+=_Z=\"\n    },\n    {\n      \"Key\": \"::N{@.=p-=\",\n      \"Value\": \"_{Lp.\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.TagResource",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.TagResource"
+            },
+            "description": "<p> Adds a user specified key and value tag to a data store. </p>"
+          },
+          "response": [
+            {
+              "id": "4e52799f-7f44-402a-85c4-5f74c68bd908",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.TagResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.TagResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws-iso-b:healthlake:avq8:456506179454:datastore/fhir/{yBw4pf|\\\\f@@g]*XJ-.]z>7m'rv6Cg~l\",\n  \"Tags\": [\n    {\n      \"Key\": \"+:ZL/}N\",\n      \"Value\": \"+-/+=_Z=\"\n    },\n    {\n      \"Key\": \"::N{@.=p-=\",\n      \"Value\": \"_{Lp.\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.TagResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.TagResource"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-4e52799f-7f44-402a-85c4-5f74c68bd908"
+            },
+            {
+              "id": "1de9b415-e7c5-4e4c-b382-ab9251858e9f",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.TagResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.TagResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws-iso-b:healthlake:avq8:456506179454:datastore/fhir/{yBw4pf|\\\\f@@g]*XJ-.]z>7m'rv6Cg~l\",\n  \"Tags\": [\n    {\n      \"Key\": \"+:ZL/}N\",\n      \"Value\": \"+-/+=_Z=\"\n    },\n    {\n      \"Key\": \"::N{@.=p-=\",\n      \"Value\": \"_{Lp.\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.TagResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.TagResource"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-1de9b415-e7c5-4e4c-b382-ab9251858e9f"
+            },
+            {
+              "id": "1ef20fc4-5156-4e99-aa6c-5ef86a6e5274",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.TagResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.TagResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws-iso-b:healthlake:avq8:456506179454:datastore/fhir/{yBw4pf|\\\\f@@g]*XJ-.]z>7m'rv6Cg~l\",\n  \"Tags\": [\n    {\n      \"Key\": \"+:ZL/}N\",\n      \"Value\": \"+-/+=_Z=\"\n    },\n    {\n      \"Key\": \"::N{@.=p-=\",\n      \"Value\": \"_{Lp.\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.TagResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.TagResource"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-1ef20fc4-5156-4e99-aa6c-5ef86a6e5274"
+            }
+          ],
+          "createdAt": "2026-07-28T01:07:23.000Z",
+          "updatedAt": "2026-07-28T01:07:23.000Z",
+          "uid": "35240-f7f91ac1-94c4-43f6-8399-38eabf7b3fb5"
+        }
+      ],
+      "id": "8294c635-2c2c-4cb8-85dc-aaf4ff2f27b6",
+      "createdAt": "2026-07-28T01:07:23.000Z",
+      "updatedAt": "2026-07-28T01:07:23.000Z",
+      "uid": "35240-8294c635-2c2c-4cb8-85dc-aaf4ff2f27b6"
+    },
+    {
+      "name": "#X-Amz-Target=HealthLake.UntagResource",
+      "item": [
+        {
+          "name": "UntagResource",
+          "id": "4fa64edc-9760-4f50-8726-1d013f20602f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The AWS service action target: HealthLake.UntagResource",
+                "key": "X-Amz-Target",
+                "value": "HealthLake.UntagResource"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ResourceARN\": \"arn:aws:healthlake:mv1l1d6s70:808415390444:datastore/fhir/xa@B+0&FFE|J2>5Zcbt*w`6x;58Q=7$A\",\n  \"TagKeys\": [\n    \"{:\",\n    \"=}=Z-/\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.UntagResource",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.UntagResource"
+            },
+            "description": "<p> Removes tags from a data store. </p>"
+          },
+          "response": [
+            {
+              "id": "d9c3ae10-e0f2-4c9f-8a86-856e79d136ff",
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.UntagResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.UntagResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws:healthlake:mv1l1d6s70:808415390444:datastore/fhir/xa@B+0&FFE|J2>5Zcbt*w`6x;58Q=7$A\",\n  \"TagKeys\": [\n    \"{:\",\n    \"=}=Z-/\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.UntagResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.UntagResource"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-d9c3ae10-e0f2-4c9f-8a86-856e79d136ff"
+            },
+            {
+              "id": "60f34071-bc4e-4e9a-89e2-57061a7035d4",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.UntagResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.UntagResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws:healthlake:mv1l1d6s70:808415390444:datastore/fhir/xa@B+0&FFE|J2>5Zcbt*w`6x;58Q=7$A\",\n  \"TagKeys\": [\n    \"{:\",\n    \"=}=Z-/\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.UntagResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.UntagResource"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-60f34071-bc4e-4e9a-89e2-57061a7035d4"
+            },
+            {
+              "id": "7b6faa25-1c41-4e75-9c21-74f3c89f27d7",
+              "name": "Internal server error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The AWS service action target: HealthLake.UntagResource",
+                    "key": "X-Amz-Target",
+                    "value": "HealthLake.UntagResource"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ResourceARN\": \"arn:aws:healthlake:mv1l1d6s70:808415390444:datastore/fhir/xa@B+0&FFE|J2>5Zcbt*w`6x;58Q=7$A\",\n  \"TagKeys\": [\n    \"{:\",\n    \"=}=Z-/\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=HealthLake.UntagResource",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.UntagResource"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"Message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:07:23.000Z",
+              "updatedAt": "2026-07-28T01:07:23.000Z",
+              "uid": "35240-7b6faa25-1c41-4e75-9c21-74f3c89f27d7"
+            }
+          ],
+          "createdAt": "2026-07-28T01:07:23.000Z",
+          "updatedAt": "2026-07-28T01:07:23.000Z",
+          "uid": "35240-4fa64edc-9760-4f50-8726-1d013f20602f"
+        }
+      ],
+      "id": "e84bce67-1c5a-45fe-9469-438f264fef2c",
+      "createdAt": "2026-07-28T01:07:23.000Z",
+      "updatedAt": "2026-07-28T01:07:23.000Z",
+      "uid": "35240-e84bce67-1c5a-45fe-9469-438f264fef2c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://healthlake.{{region}}.amazonaws.com"
+    }
+  ]
+}

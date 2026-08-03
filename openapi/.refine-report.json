@@ -1,0 +1,20 @@
+{
+  "provider": "aws-healthlake",
+  "sources": [
+    "aws-healthlake-datastore-api-openapi.yml",
+    "aws-healthlake-export-api-openapi.yml",
+    "aws-healthlake-import-api-openapi.yml",
+    "aws-healthlake-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "aws-healthlake-datastore-api-openapi.yml",
+    "aws-healthlake-export-api-openapi.yml",
+    "aws-healthlake-import-api-openapi.yml",
+    "aws-healthlake-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
