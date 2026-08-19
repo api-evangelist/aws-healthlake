@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon HealthLake Datastore Tags API",
+    "version": "2017-07-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListTagsForResource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.ListTagsForResource",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p> Returns a list of all existing tags associated with a data store. </p>"
+        },
+        {
+          "info": {
+            "name": "TagResource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.TagResource",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p> Adds a user specified key and value tag to a data store. </p>"
+        },
+        {
+          "info": {
+            "name": "UntagResource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.UntagResource",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p> Removes tags from a data store. </p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

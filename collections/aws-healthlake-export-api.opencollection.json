@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon HealthLake Datastore Export API",
+    "version": "2017-07-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Export",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "DescribeFHIRExportJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.DescribeFHIRExportJob",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p>Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.</p>"
+        },
+        {
+          "info": {
+            "name": "ListFHIRExportJobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.ListFHIRExportJobs",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p> Lists all FHIR export jobs associated with an account and their statuses. </p>"
+        },
+        {
+          "info": {
+            "name": "StartFHIRExportJob",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.StartFHIRExportJob",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p>Begins a FHIR export job.</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

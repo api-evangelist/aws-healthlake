@@ -1,0 +1,1006 @@
+{
+  "item": [
+    {
+      "id": "8e3606a1-8bf9-46e6-ba20-52e742f23a91",
+      "name": "Datastore",
+      "description": {
+        "content": "Operations for creating, describing, listing, and deleting FHIR R4 data stores",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56cde409-db9f-442b-b9ca-04959fa4a2bc",
+          "name": "CreateFHIRDatastore",
+          "request": {
+            "name": "CreateFHIRDatastore",
+            "description": {
+              "content": "<p>Creates a data store that can ingest and export FHIR formatted data.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreTypeVersion\": \"<string>\",\n  \"DatastoreName\": \"<string>\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"<string>\"\n  },\n  \"ClientToken\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"<string>\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"<string>\"\n  }\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "70f84435-3fe6-4550-97ba-01ea2b763b71",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreTypeVersion\": \"<string>\",\n  \"DatastoreName\": \"<string>\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"<string>\"\n  },\n  \"ClientToken\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"<string>\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a132c90a-ac2b-4758-b803-81d5127939f3",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreTypeVersion\": \"<string>\",\n  \"DatastoreName\": \"<string>\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"<string>\"\n  },\n  \"ClientToken\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"<string>\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a48463ba-a70b-4d05-87e1-5be3f04d2761",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.CreateFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.CreateFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreTypeVersion\": \"<string>\",\n  \"DatastoreName\": \"<string>\",\n  \"SseConfiguration\": {\n    \"KmsEncryptionConfig\": {\n      \"CmkType\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"PreloadDataConfig\": {\n    \"PreloadDataType\": \"<string>\"\n  },\n  \"ClientToken\": \"<string>\",\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ],\n  \"IdentityProviderConfiguration\": {\n    \"AuthorizationStrategy\": \"<string>\",\n    \"FineGrainedAuthorizationEnabled\": \"<boolean>\",\n    \"Metadata\": \"<string>\",\n    \"IdpLambdaArn\": \"<string>\"\n  }\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "512beec0-5061-4eec-b3fd-2506328e411f",
+          "name": "DeleteFHIRDatastore",
+          "request": {
+            "name": "DeleteFHIRDatastore",
+            "description": {
+              "content": "<p>Deletes a data store. </p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "0afbd2e5-75d2-4af8-8ec6-225d39c6a22e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a772ac8b-a222-4305-834f-19ea1c76f4af",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "960fc63b-99e5-43a7-99b0-99558fe61233",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DeleteFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73ad8e15-afc6-4d0c-8d98-a497dabb5e0a",
+          "name": "DescribeFHIRDatastore",
+          "request": {
+            "name": "DescribeFHIRDatastore",
+            "description": {
+              "content": "<p>Gets the properties associated with the FHIR data store, including the data store ID, data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store's endpoint.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "b49ce636-3cae-4c47-983a-92d4e621989b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "efab1df9-042a-4846-aa16-1a7fc399784c",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db514e7d-18b9-4ddb-b679-d66c29f5f682",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRDatastore",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1420664c-ab17-450a-89bb-4453bb81dd01",
+          "name": "ListFHIRDatastores",
+          "request": {
+            "name": "ListFHIRDatastores",
+            "description": {
+              "content": "<p>Lists all FHIR data stores that are in the user’s account, regardless of data store status.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"<string>\",\n    \"DatastoreStatus\": \"<string>\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "d93cf43a-c43c-4f33-9cdd-9be47e015755",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"<string>\",\n    \"DatastoreStatus\": \"<string>\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a57e7827-1258-49f1-86b5-20c14062b94d",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"<string>\",\n    \"DatastoreStatus\": \"<string>\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35c34b8e-247c-41e2-b8f4-6db3cea0f86a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRDatastores",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRDatastores",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Filter\": {\n    \"DatastoreName\": \"<string>\",\n    \"DatastoreStatus\": \"<string>\",\n    \"CreatedBefore\": \"<dateTime>\",\n    \"CreatedAfter\": \"<dateTime>\"\n  },\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://healthlake.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ad056942-1b6a-44f8-8f36-e4637e9169cc",
+    "name": "Amazon HealthLake Datastore API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon HealthLake Datastore API",
+    "version": "2017-07-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datastore",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "CreateFHIRDatastore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.CreateFHIRDatastore",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p>Creates a data store that can ingest and export FHIR formatted data.</p>"
+        },
+        {
+          "info": {
+            "name": "DeleteFHIRDatastore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.DeleteFHIRDatastore",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p>Deletes a data store. </p>"
+        },
+        {
+          "info": {
+            "name": "DescribeFHIRDatastore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.DescribeFHIRDatastore",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p>Gets the properties associated with the FHIR data store, including the data store ID, data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store's endpoint.</p>"
+        },
+        {
+          "info": {
+            "name": "ListFHIRDatastores",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://healthlake.{region}.amazonaws.com/#X-Amz-Target=HealthLake.ListFHIRDatastores",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<p>Lists all FHIR data stores that are in the user’s account, regardless of data store status.</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

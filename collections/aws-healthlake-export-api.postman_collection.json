@@ -1,0 +1,769 @@
+{
+  "item": [
+    {
+      "id": "1fe47c43-235b-4fcd-9fdd-7bfd969a0bf3",
+      "name": "Export",
+      "description": {
+        "content": "Asynchronous bulk export operations for exporting FHIR resources to Amazon S3",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "701ffed0-3e74-4d6c-94af-6753251b4360",
+          "name": "DescribeFHIRExportJob",
+          "request": {
+            "name": "DescribeFHIRExportJob",
+            "description": {
+              "content": "<p>Displays the properties of a FHIR export job, including the ID, ARN, name, and the status of the job.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.DescribeFHIRExportJob",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRExportJob",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"JobId\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "683c015f-3bdd-4269-b789-f2e3af0720dd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRExportJob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRExportJob",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"JobId\": \"<string>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f1a88a0c-aacd-4b53-93e8-b25a8f784c30",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRExportJob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRExportJob",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"JobId\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55cdd5a8-fce8-492b-b01e-8fc4ee3202ad",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.DescribeFHIRExportJob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.DescribeFHIRExportJob",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"JobId\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d650bfd5-aa18-4923-a8fe-ce391b6b3c78",
+          "name": "ListFHIRExportJobs",
+          "request": {
+            "name": "ListFHIRExportJobs",
+            "description": {
+              "content": "<p> Lists all FHIR export jobs associated with an account and their statuses. </p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.ListFHIRExportJobs",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS service action target: HealthLake.ListFHIRExportJobs",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"JobName\": \"<string>\",\n  \"JobStatus\": \"<string>\",\n  \"SubmittedBefore\": \"<dateTime>\",\n  \"SubmittedAfter\": \"<dateTime>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "3c3e8d96-94fd-4334-bfc9-91b6692ea721",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRExportJobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRExportJobs",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"JobName\": \"<string>\",\n  \"JobStatus\": \"<string>\",\n  \"SubmittedBefore\": \"<dateTime>\",\n  \"SubmittedAfter\": \"<dateTime>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59532416-77a5-46c7-aef3-c9769bf43634",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRExportJobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRExportJobs",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"JobName\": \"<string>\",\n  \"JobStatus\": \"<string>\",\n  \"SubmittedBefore\": \"<dateTime>\",\n  \"SubmittedAfter\": \"<dateTime>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19d0c4d0-c3a9-43fd-8a26-6276ab0b2049",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.ListFHIRExportJobs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.ListFHIRExportJobs",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"DatastoreId\": \"<string>\",\n  \"NextToken\": \"<string>\",\n  \"MaxResults\": \"<integer>\",\n  \"JobName\": \"<string>\",\n  \"JobStatus\": \"<string>\",\n  \"SubmittedBefore\": \"<dateTime>\",\n  \"SubmittedAfter\": \"<dateTime>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86731446-aeb6-434e-b164-91e27ef5e6ad",
+          "name": "StartFHIRExportJob",
+          "request": {
+            "name": "StartFHIRExportJob",
+            "description": {
+              "content": "<p>Begins a FHIR export job.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=HealthLake.StartFHIRExportJob",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The AWS service action target: HealthLake.StartFHIRExportJob",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"OutputDataConfig\": {\n    \"S3Configuration\": {\n      \"S3Uri\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"DatastoreId\": \"<string>\",\n  \"DataAccessRoleArn\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"JobName\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "2e342c7d-7724-4277-9830-cd32ad9f9df3",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.StartFHIRExportJob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.StartFHIRExportJob",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OutputDataConfig\": {\n    \"S3Configuration\": {\n      \"S3Uri\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"DatastoreId\": \"<string>\",\n  \"DataAccessRoleArn\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"JobName\": \"<string>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef9674a7-6b3e-44f2-b0fe-f8d5c0701e32",
+              "name": "Client error (validation, throttling, conflict, access denied)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.StartFHIRExportJob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.StartFHIRExportJob",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OutputDataConfig\": {\n    \"S3Configuration\": {\n      \"S3Uri\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"DatastoreId\": \"<string>\",\n  \"DataAccessRoleArn\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"JobName\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c6162e2-c121-48b5-b9e4-652287437c4b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=HealthLake.StartFHIRExportJob",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The AWS service action target: HealthLake.StartFHIRExportJob",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"OutputDataConfig\": {\n    \"S3Configuration\": {\n      \"S3Uri\": \"<string>\",\n      \"KmsKeyId\": \"<string>\"\n    }\n  },\n  \"DatastoreId\": \"<string>\",\n  \"DataAccessRoleArn\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"JobName\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region identifier (This can only be one of us-east-1,us-east-2,us-west-2,ap-southeast-2,eu-west-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://healthlake.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "172bdce0-7a72-428f-a740-3074ac876aee",
+    "name": "Amazon HealthLake Datastore Export API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}
