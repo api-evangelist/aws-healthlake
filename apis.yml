@@ -82,6 +82,13 @@ apis:
   baseURL: https://healthlake.us-east-1.amazonaws.com
   tags:
   - FHIR R4
+  - Search
+  - Validate
+  - SMART on FHIR
+  - Authentication
+  - Subscription
+  tags_raw:
+  - FHIR R4
   - Read
   - Write
   - Search
