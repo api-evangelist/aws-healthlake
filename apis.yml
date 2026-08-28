@@ -4,6 +4,18 @@ description: Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed se
   clinical systems. It provides a transactional FHIR server with bulk import/export,
   medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration
   with AWS analytics services.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
