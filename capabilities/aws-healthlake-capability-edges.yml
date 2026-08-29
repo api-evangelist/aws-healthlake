@@ -1,0 +1,26 @@
+slug: aws-healthlake
+provider: AWS HealthLake
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Healthcare Providers
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Datastore
+  spec_file: aws-healthlake-datastore-api-openapi.yml
+  capability_id: BC-2900.60
+  capability_id_l1: BC-2900
+  capability_name: Healthcare Interoperability Operations
+  confidence: 0.7
+  evidence: createFHIRDatastore ... CreateFHIRDatastore; 'FHIR R4-compliant managed service for importing,
+    transforming, storing, and querying health data'
+  reason: Provisioning and lifecycle of FHIR R4 datastores/endpoints for health data — closest honest
+    fit is healthcare interoperability operations (FHIR endpoints). Arguably generic data infrastructure,
+    so confidence is moderate.

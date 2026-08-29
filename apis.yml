@@ -182,6 +182,9 @@ apis:
   - type: GraphQL
     url: graphql/aws-healthlake-graphql.md
 common:
+- type: CapabilityMap
+  url: capabilities/aws-healthlake-capability-edges.yml
+  name: AWS HealthLake Business Capability Map
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/aws-healthlake/overview
 - type: AgenticAccess
