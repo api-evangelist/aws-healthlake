@@ -15,6 +15,12 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "aws-healthlake-datastore-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "aws-healthlake-export-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "aws-healthlake-import-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "aws-healthlake-tags-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

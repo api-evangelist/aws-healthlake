@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon HealthLake Datastore Import API
   description: Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.
@@ -196,60 +196,201 @@ paths:
               $ref: '#/components/schemas/StartFHIRImportJobRequest'
 components:
   schemas:
-    StartFHIRImportJobRequest:
+    DescribeFHIRImportJobResponse:
       type: object
       properties:
-        JobName:
-          type: string
-          minLength: 1
-          maxLength: 64
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        InputDataConfig:
+        ImportJobProperties:
           type: object
           properties:
-            S3Uri:
+            JobId:
               type: string
-              maxLength: 1024
-              pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
-        JobOutputDataConfig:
-          type: object
-          properties:
-            S3Configuration:
+              minLength: 1
+              maxLength: 32
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            JobName:
+              type: string
+              minLength: 1
+              maxLength: 64
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            JobStatus:
+              type: string
+              enum:
+              - SUBMITTED
+              - IN_PROGRESS
+              - COMPLETED_WITH_ERRORS
+              - COMPLETED
+              - FAILED
+              - CANCEL_SUBMITTED
+              - CANCEL_IN_PROGRESS
+              - CANCEL_COMPLETED
+              - CANCEL_FAILED
+            SubmitTime:
+              type: string
+              format: date-time
+            EndTime:
+              type: string
+              format: date-time
+            DatastoreId:
+              type: string
+              minLength: 1
+              maxLength: 32
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            InputDataConfig:
               type: object
               properties:
                 S3Uri:
                   type: string
                   maxLength: 1024
                   pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
-                KmsKeyId:
-                  type: string
-                  minLength: 1
-                  maxLength: 400
-                  pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
-              required:
-              - S3Uri
-              - KmsKeyId
+            JobOutputDataConfig:
+              type: object
+              properties:
+                S3Configuration:
+                  type: object
+                  properties:
+                    S3Uri:
+                      type: string
+                      maxLength: 1024
+                      pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+                    KmsKeyId:
+                      type: string
+                      minLength: 1
+                      maxLength: 400
+                      pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+                  required:
+                  - S3Uri
+                  - KmsKeyId
+            JobProgressReport:
+              type: object
+              properties:
+                TotalNumberOfScannedFiles:
+                  type: integer
+                  format: int64
+                TotalSizeOfScannedFilesInMB:
+                  type: number
+                  format: double
+                TotalNumberOfImportedFiles:
+                  type: integer
+                  format: int64
+                TotalNumberOfResourcesScanned:
+                  type: integer
+                  format: int64
+                TotalNumberOfResourcesImported:
+                  type: integer
+                  format: int64
+                TotalNumberOfResourcesWithCustomerError:
+                  type: integer
+                  format: int64
+                TotalNumberOfFilesReadWithCustomerError:
+                  type: integer
+                  format: int64
+                Throughput:
+                  type: number
+                  format: double
+            DataAccessRoleArn:
+              type: string
+              minLength: 20
+              maxLength: 2048
+              pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
+            Message:
+              type: string
+              minLength: 1
+              maxLength: 2048
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+          required:
+          - JobId
+          - JobStatus
+          - SubmitTime
+          - DatastoreId
+          - InputDataConfig
+      required:
+      - ImportJobProperties
+    ListFHIRImportJobsRequest:
+      type: object
+      properties:
         DatastoreId:
           type: string
           minLength: 1
           maxLength: 32
           pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        DataAccessRoleArn:
+        NextToken:
           type: string
-          minLength: 20
-          maxLength: 2048
-          pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
-        ClientToken:
+          maxLength: 8192
+          pattern: \p{ASCII}{0,8192}
+        MaxResults:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 500
+        JobName:
           type: string
           minLength: 1
           maxLength: 64
-          pattern: ^[a-zA-Z0-9-]+$
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobStatus:
+          type: string
+          enum:
+          - SUBMITTED
+          - IN_PROGRESS
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED
+          - FAILED
+          - CANCEL_SUBMITTED
+          - CANCEL_IN_PROGRESS
+          - CANCEL_COMPLETED
+          - CANCEL_FAILED
+        SubmittedBefore:
+          type: string
+          format: date-time
+        SubmittedAfter:
+          type: string
+          format: date-time
       required:
-      - InputDataConfig
-      - JobOutputDataConfig
       - DatastoreId
-      - DataAccessRoleArn
-      - ClientToken
+    StartFHIRImportJobResponse:
+      type: object
+      properties:
+        JobId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobStatus:
+          type: string
+          enum:
+          - SUBMITTED
+          - IN_PROGRESS
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED
+          - FAILED
+          - CANCEL_SUBMITTED
+          - CANCEL_IN_PROGRESS
+          - CANCEL_COMPLETED
+          - CANCEL_FAILED
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - JobId
+      - JobStatus
+    DescribeFHIRImportJobRequest:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - DatastoreId
+      - JobId
     ListFHIRImportJobsResponse:
       type: object
       properties:
@@ -365,201 +506,60 @@ components:
           pattern: \p{ASCII}{0,8192}
       required:
       - ImportJobPropertiesList
-    StartFHIRImportJobResponse:
+    StartFHIRImportJobRequest:
       type: object
       properties:
-        JobId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        JobStatus:
-          type: string
-          enum:
-          - SUBMITTED
-          - IN_PROGRESS
-          - COMPLETED_WITH_ERRORS
-          - COMPLETED
-          - FAILED
-          - CANCEL_SUBMITTED
-          - CANCEL_IN_PROGRESS
-          - CANCEL_COMPLETED
-          - CANCEL_FAILED
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-      required:
-      - JobId
-      - JobStatus
-    ListFHIRImportJobsRequest:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        NextToken:
-          type: string
-          maxLength: 8192
-          pattern: \p{ASCII}{0,8192}
-        MaxResults:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 500
         JobName:
           type: string
           minLength: 1
           maxLength: 64
           pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        JobStatus:
-          type: string
-          enum:
-          - SUBMITTED
-          - IN_PROGRESS
-          - COMPLETED_WITH_ERRORS
-          - COMPLETED
-          - FAILED
-          - CANCEL_SUBMITTED
-          - CANCEL_IN_PROGRESS
-          - CANCEL_COMPLETED
-          - CANCEL_FAILED
-        SubmittedBefore:
-          type: string
-          format: date-time
-        SubmittedAfter:
-          type: string
-          format: date-time
-      required:
-      - DatastoreId
-    DescribeFHIRImportJobRequest:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        JobId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-      required:
-      - DatastoreId
-      - JobId
-    DescribeFHIRImportJobResponse:
-      type: object
-      properties:
-        ImportJobProperties:
+        InputDataConfig:
           type: object
           properties:
-            JobId:
+            S3Uri:
               type: string
-              minLength: 1
-              maxLength: 32
-              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-            JobName:
-              type: string
-              minLength: 1
-              maxLength: 64
-              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-            JobStatus:
-              type: string
-              enum:
-              - SUBMITTED
-              - IN_PROGRESS
-              - COMPLETED_WITH_ERRORS
-              - COMPLETED
-              - FAILED
-              - CANCEL_SUBMITTED
-              - CANCEL_IN_PROGRESS
-              - CANCEL_COMPLETED
-              - CANCEL_FAILED
-            SubmitTime:
-              type: string
-              format: date-time
-            EndTime:
-              type: string
-              format: date-time
-            DatastoreId:
-              type: string
-              minLength: 1
-              maxLength: 32
-              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-            InputDataConfig:
+              maxLength: 1024
+              pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+        JobOutputDataConfig:
+          type: object
+          properties:
+            S3Configuration:
               type: object
               properties:
                 S3Uri:
                   type: string
                   maxLength: 1024
                   pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
-            JobOutputDataConfig:
-              type: object
-              properties:
-                S3Configuration:
-                  type: object
-                  properties:
-                    S3Uri:
-                      type: string
-                      maxLength: 1024
-                      pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
-                    KmsKeyId:
-                      type: string
-                      minLength: 1
-                      maxLength: 400
-                      pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
-                  required:
-                  - S3Uri
-                  - KmsKeyId
-            JobProgressReport:
-              type: object
-              properties:
-                TotalNumberOfScannedFiles:
-                  type: integer
-                  format: int64
-                TotalSizeOfScannedFilesInMB:
-                  type: number
-                  format: double
-                TotalNumberOfImportedFiles:
-                  type: integer
-                  format: int64
-                TotalNumberOfResourcesScanned:
-                  type: integer
-                  format: int64
-                TotalNumberOfResourcesImported:
-                  type: integer
-                  format: int64
-                TotalNumberOfResourcesWithCustomerError:
-                  type: integer
-                  format: int64
-                TotalNumberOfFilesReadWithCustomerError:
-                  type: integer
-                  format: int64
-                Throughput:
-                  type: number
-                  format: double
-            DataAccessRoleArn:
-              type: string
-              minLength: 20
-              maxLength: 2048
-              pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
-            Message:
-              type: string
-              minLength: 1
-              maxLength: 2048
-              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-          required:
-          - JobId
-          - JobStatus
-          - SubmitTime
-          - DatastoreId
-          - InputDataConfig
+                KmsKeyId:
+                  type: string
+                  minLength: 1
+                  maxLength: 400
+                  pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+              required:
+              - S3Uri
+              - KmsKeyId
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        DataAccessRoleArn:
+          type: string
+          minLength: 20
+          maxLength: 2048
+          pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
+        ClientToken:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[a-zA-Z0-9-]+$
       required:
-      - ImportJobProperties
+      - InputDataConfig
+      - JobOutputDataConfig
+      - DatastoreId
+      - DataAccessRoleArn
+      - ClientToken
   securitySchemes:
     aws_v4:
       type: apiKey

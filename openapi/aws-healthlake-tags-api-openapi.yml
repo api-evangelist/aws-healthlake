@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Amazon HealthLake Datastore Tags API
   description: Amazon HealthLake is a HIPAA-eligible, FHIR R4-compliant managed service for importing, transforming, storing, and querying health data from patients and clinical systems. It provides a transactional FHIR server with bulk import/export, medical NLP for unstructured data extraction, SMART on FHIR authorization, and integration with AWS analytics services.
@@ -196,34 +196,6 @@ paths:
               $ref: '#/components/schemas/UntagResourceRequest'
 components:
   schemas:
-    UntagResourceRequest:
-      type: object
-      properties:
-        ResourceARN:
-          type: string
-          minLength: 1
-          maxLength: 1011
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
-        TagKeys:
-          type: array
-          items:
-            type: string
-            minLength: 1
-            maxLength: 128
-            pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
-      required:
-      - ResourceARN
-      - TagKeys
-    ListTagsForResourceRequest:
-      type: object
-      properties:
-        ResourceARN:
-          type: string
-          minLength: 1
-          maxLength: 1011
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
-      required:
-      - ResourceARN
     TagResourceRequest:
       type: object
       properties:
@@ -256,6 +228,9 @@ components:
     UntagResourceResponse:
       type: object
       properties: {}
+    TagResourceResponse:
+      type: object
+      properties: {}
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -277,9 +252,34 @@ components:
             required:
             - Key
             - Value
-    TagResourceResponse:
+    UntagResourceRequest:
       type: object
-      properties: {}
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+        TagKeys:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 128
+            pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+      required:
+      - ResourceARN
+      - TagKeys
+    ListTagsForResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+      required:
+      - ResourceARN
   securitySchemes:
     aws_v4:
       type: apiKey
