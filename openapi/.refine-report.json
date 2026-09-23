@@ -1,10 +1,7 @@
 {
   "provider": "aws-healthlake",
   "sources": [
-    "aws-healthlake-datastore-api-openapi.yml",
-    "aws-healthlake-export-api-openapi.yml",
-    "aws-healthlake-import-api-openapi.yml",
-    "aws-healthlake-tags-api-openapi.yml"
+    "_original/openapi.json"
   ],
   "outputs": [
     "aws-healthlake-datastore-api-openapi.yml",
@@ -16,11 +13,14 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "aws-healthlake-datastore-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "aws-healthlake-export-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "aws-healthlake-import-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "aws-healthlake-tags-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "aws-healthlake-datastore-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aws-healthlake-export-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aws-healthlake-import-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "aws-healthlake-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

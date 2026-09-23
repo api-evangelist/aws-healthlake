@@ -33,7 +33,7 @@ paths:
     post:
       operationId: createFHIRDatastore
       summary: CreateFHIRDatastore
-      description: <p>Creates a data store that can ingest and export FHIR formatted data.</p>
+      description: Creates a data store that can ingest and export FHIR formatted data.
       tags:
       - Datastore
       parameters:
@@ -88,7 +88,7 @@ paths:
     post:
       operationId: deleteFHIRDatastore
       summary: DeleteFHIRDatastore
-      description: <p>Deletes a data store. </p>
+      description: Deletes a data store.
       tags:
       - Datastore
       parameters:
@@ -143,7 +143,7 @@ paths:
     post:
       operationId: describeFHIRDatastore
       summary: DescribeFHIRDatastore
-      description: <p>Gets the properties associated with the FHIR data store, including the data store ID, data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store's endpoint.</p>
+      description: Gets the properties associated with the FHIR data store, including the data store ID, data store ARN, data store name, data store status, when the data store was created, data store type version, and the data store's endpoint.
       tags:
       - Datastore
       parameters:
@@ -198,7 +198,7 @@ paths:
     post:
       operationId: listFHIRDatastores
       summary: ListFHIRDatastores
-      description: <p>Lists all FHIR data stores that are in the user’s account, regardless of data store status.</p>
+      description: Lists all FHIR data stores that are in the user’s account, regardless of data store status.
       tags:
       - Datastore
       parameters:
@@ -251,74 +251,6 @@ paths:
               $ref: '#/components/schemas/ListFHIRDatastoresRequest'
 components:
   schemas:
-    DeleteFHIRDatastoreResponse:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        DatastoreArn:
-          type: string
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?
-        DatastoreStatus:
-          type: string
-          enum:
-          - CREATING
-          - ACTIVE
-          - DELETING
-          - DELETED
-          - CREATE_FAILED
-        DatastoreEndpoint:
-          type: string
-          minLength: 1
-          maxLength: 5000
-          pattern: '[\P{M}\p{M}]{1,5000}'
-      required:
-      - DatastoreId
-      - DatastoreArn
-      - DatastoreStatus
-      - DatastoreEndpoint
-    DeleteFHIRDatastoreRequest:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-      required:
-      - DatastoreId
-    CreateFHIRDatastoreResponse:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        DatastoreArn:
-          type: string
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?
-        DatastoreStatus:
-          type: string
-          enum:
-          - CREATING
-          - ACTIVE
-          - DELETING
-          - DELETED
-          - CREATE_FAILED
-        DatastoreEndpoint:
-          type: string
-          minLength: 1
-          maxLength: 5000
-          pattern: '[\P{M}\p{M}]{1,5000}'
-      required:
-      - DatastoreId
-      - DatastoreArn
-      - DatastoreStatus
-      - DatastoreEndpoint
     ListFHIRDatastoresResponse:
       type: object
       properties:
@@ -431,50 +363,6 @@ components:
           pattern: \p{ASCII}{0,8192}
       required:
       - DatastorePropertiesList
-    ListFHIRDatastoresRequest:
-      type: object
-      properties:
-        Filter:
-          type: object
-          properties:
-            DatastoreName:
-              type: string
-              minLength: 1
-              maxLength: 256
-              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-            DatastoreStatus:
-              type: string
-              enum:
-              - CREATING
-              - ACTIVE
-              - DELETING
-              - DELETED
-              - CREATE_FAILED
-            CreatedBefore:
-              type: string
-              format: date-time
-            CreatedAfter:
-              type: string
-              format: date-time
-        NextToken:
-          type: string
-          maxLength: 8192
-          pattern: \p{ASCII}{0,8192}
-        MaxResults:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 500
-    DescribeFHIRDatastoreRequest:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-      required:
-      - DatastoreId
     CreateFHIRDatastoreRequest:
       type: object
       properties:
@@ -666,6 +554,118 @@ components:
           - DatastoreEndpoint
       required:
       - DatastoreProperties
+    ListFHIRDatastoresRequest:
+      type: object
+      properties:
+        Filter:
+          type: object
+          properties:
+            DatastoreName:
+              type: string
+              minLength: 1
+              maxLength: 256
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            DatastoreStatus:
+              type: string
+              enum:
+              - CREATING
+              - ACTIVE
+              - DELETING
+              - DELETED
+              - CREATE_FAILED
+            CreatedBefore:
+              type: string
+              format: date-time
+            CreatedAfter:
+              type: string
+              format: date-time
+        NextToken:
+          type: string
+          maxLength: 8192
+          pattern: \p{ASCII}{0,8192}
+        MaxResults:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 500
+    DescribeFHIRDatastoreRequest:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - DatastoreId
+    DeleteFHIRDatastoreRequest:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - DatastoreId
+    CreateFHIRDatastoreResponse:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        DatastoreArn:
+          type: string
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?
+        DatastoreStatus:
+          type: string
+          enum:
+          - CREATING
+          - ACTIVE
+          - DELETING
+          - DELETED
+          - CREATE_FAILED
+        DatastoreEndpoint:
+          type: string
+          minLength: 1
+          maxLength: 5000
+          pattern: '[\P{M}\p{M}]{1,5000}'
+      required:
+      - DatastoreId
+      - DatastoreArn
+      - DatastoreStatus
+      - DatastoreEndpoint
+    DeleteFHIRDatastoreResponse:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        DatastoreArn:
+          type: string
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?
+        DatastoreStatus:
+          type: string
+          enum:
+          - CREATING
+          - ACTIVE
+          - DELETING
+          - DELETED
+          - CREATE_FAILED
+        DatastoreEndpoint:
+          type: string
+          minLength: 1
+          maxLength: 5000
+          pattern: '[\P{M}\p{M}]{1,5000}'
+      required:
+      - DatastoreId
+      - DatastoreArn
+      - DatastoreStatus
+      - DatastoreEndpoint
   securitySchemes:
     aws_v4:
       type: apiKey
