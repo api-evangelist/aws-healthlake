@@ -94,7 +94,7 @@ apis:
   humanURL: https://docs.aws.amazon.com/healthlake/latest/devguide/working-with-FHIR-healthlake.html
   baseURL: https://healthlake.us-east-1.amazonaws.com
   tags:
-  - FHIR R4
+  - FHIR
   - Search
   - Validate
   - SMART on FHIR
@@ -138,8 +138,6 @@ apis:
     url: openapi/aws-healthlake-datastore-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
-  - type: GraphQL
-    url: graphql/aws-healthlake-graphql.md
 - aid: aws-healthlake:aws-healthlake-export-api
   name: AWS HealthLake Export API
   description: Asynchronous bulk export operations for exporting FHIR resources to Amazon S3
@@ -152,8 +150,6 @@ apis:
     url: openapi/aws-healthlake-export-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
-  - type: GraphQL
-    url: graphql/aws-healthlake-graphql.md
 - aid: aws-healthlake:aws-healthlake-import-api
   name: AWS HealthLake Import API
   description: Asynchronous bulk import operations for loading FHIR resources from Amazon S3
@@ -166,8 +162,6 @@ apis:
     url: openapi/aws-healthlake-import-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
-  - type: GraphQL
-    url: graphql/aws-healthlake-graphql.md
 - aid: aws-healthlake:aws-healthlake-tags-api
   name: AWS HealthLake Tags API
   description: Resource tagging operations for cost allocation and resource management
@@ -180,8 +174,6 @@ apis:
     url: openapi/aws-healthlake-tags-api-openapi.yml
   - type: Documentation
     url: https://docs.aws.amazon.com/healthlake/latest/APIReference/API_Operations.html
-  - type: GraphQL
-    url: graphql/aws-healthlake-graphql.md
 common:
 - type: CapabilityMap
   url: capabilities/aws-healthlake-capability-edges.yml
@@ -239,5 +231,5 @@ common:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product
