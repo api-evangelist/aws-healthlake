@@ -196,6 +196,37 @@ paths:
               $ref: '#/components/schemas/UntagResourceRequest'
 components:
   schemas:
+    UntagResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+        TagKeys:
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 128
+            pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+      required:
+      - ResourceARN
+      - TagKeys
+    TagResourceResponse:
+      type: object
+      properties: {}
+    ListTagsForResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+      required:
+      - ResourceARN
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -217,22 +248,6 @@ components:
             required:
             - Key
             - Value
-    TagResourceResponse:
-      type: object
-      properties: {}
-    ListTagsForResourceRequest:
-      type: object
-      properties:
-        ResourceARN:
-          type: string
-          minLength: 1
-          maxLength: 1011
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
-      required:
-      - ResourceARN
-    UntagResourceResponse:
-      type: object
-      properties: {}
     TagResourceRequest:
       type: object
       properties:
@@ -262,24 +277,9 @@ components:
       required:
       - ResourceARN
       - Tags
-    UntagResourceRequest:
+    UntagResourceResponse:
       type: object
-      properties:
-        ResourceARN:
-          type: string
-          minLength: 1
-          maxLength: 1011
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
-        TagKeys:
-          type: array
-          items:
-            type: string
-            minLength: 1
-            maxLength: 128
-            pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
-      required:
-      - ResourceARN
-      - TagKeys
+      properties: {}
   securitySchemes:
     aws_v4:
       type: apiKey
