@@ -214,40 +214,6 @@ components:
       required:
       - ResourceARN
       - TagKeys
-    TagResourceResponse:
-      type: object
-      properties: {}
-    ListTagsForResourceRequest:
-      type: object
-      properties:
-        ResourceARN:
-          type: string
-          minLength: 1
-          maxLength: 1011
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
-      required:
-      - ResourceARN
-    ListTagsForResourceResponse:
-      type: object
-      properties:
-        Tags:
-          type: array
-          items:
-            type: object
-            properties:
-              Key:
-                type: string
-                minLength: 1
-                maxLength: 128
-                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
-              Value:
-                type: string
-                minLength: 0
-                maxLength: 256
-                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
-            required:
-            - Key
-            - Value
     TagResourceRequest:
       type: object
       properties:
@@ -277,9 +243,43 @@ components:
       required:
       - ResourceARN
       - Tags
+    TagResourceResponse:
+      type: object
+      properties: {}
     UntagResourceResponse:
       type: object
       properties: {}
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          type: array
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+                minLength: 1
+                maxLength: 128
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+              Value:
+                type: string
+                minLength: 0
+                maxLength: 256
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+            required:
+            - Key
+            - Value
+    ListTagsForResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+      required:
+      - ResourceARN
   securitySchemes:
     aws_v4:
       type: apiKey

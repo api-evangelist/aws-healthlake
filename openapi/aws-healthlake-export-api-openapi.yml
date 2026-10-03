@@ -196,122 +196,6 @@ paths:
               $ref: '#/components/schemas/StartFHIRExportJobRequest'
 components:
   schemas:
-    StartFHIRExportJobRequest:
-      type: object
-      properties:
-        JobName:
-          type: string
-          minLength: 1
-          maxLength: 64
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        OutputDataConfig:
-          type: object
-          properties:
-            S3Configuration:
-              type: object
-              properties:
-                S3Uri:
-                  type: string
-                  maxLength: 1024
-                  pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
-                KmsKeyId:
-                  type: string
-                  minLength: 1
-                  maxLength: 400
-                  pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
-              required:
-              - S3Uri
-              - KmsKeyId
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        DataAccessRoleArn:
-          type: string
-          minLength: 20
-          maxLength: 2048
-          pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
-        ClientToken:
-          type: string
-          minLength: 1
-          maxLength: 64
-          pattern: ^[a-zA-Z0-9-]+$
-      required:
-      - OutputDataConfig
-      - DatastoreId
-      - DataAccessRoleArn
-      - ClientToken
-    StartFHIRExportJobResponse:
-      type: object
-      properties:
-        JobId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        JobStatus:
-          type: string
-          enum:
-          - SUBMITTED
-          - IN_PROGRESS
-          - COMPLETED_WITH_ERRORS
-          - COMPLETED
-          - FAILED
-          - CANCEL_SUBMITTED
-          - CANCEL_IN_PROGRESS
-          - CANCEL_COMPLETED
-          - CANCEL_FAILED
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-      required:
-      - JobId
-      - JobStatus
-    ListFHIRExportJobsRequest:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        NextToken:
-          type: string
-          maxLength: 8192
-          pattern: \p{ASCII}{0,8192}
-        MaxResults:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 500
-        JobName:
-          type: string
-          minLength: 1
-          maxLength: 64
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        JobStatus:
-          type: string
-          enum:
-          - SUBMITTED
-          - IN_PROGRESS
-          - COMPLETED_WITH_ERRORS
-          - COMPLETED
-          - FAILED
-          - CANCEL_SUBMITTED
-          - CANCEL_IN_PROGRESS
-          - CANCEL_COMPLETED
-          - CANCEL_FAILED
-        SubmittedBefore:
-          type: string
-          format: date-time
-        SubmittedAfter:
-          type: string
-          format: date-time
-      required:
-      - DatastoreId
     DescribeFHIRExportJobResponse:
       type: object
       properties:
@@ -387,22 +271,52 @@ components:
           - OutputDataConfig
       required:
       - ExportJobProperties
-    DescribeFHIRExportJobRequest:
+    StartFHIRExportJobRequest:
       type: object
       properties:
+        JobName:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        OutputDataConfig:
+          type: object
+          properties:
+            S3Configuration:
+              type: object
+              properties:
+                S3Uri:
+                  type: string
+                  maxLength: 1024
+                  pattern: s3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?
+                KmsKeyId:
+                  type: string
+                  minLength: 1
+                  maxLength: 400
+                  pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+              required:
+              - S3Uri
+              - KmsKeyId
         DatastoreId:
           type: string
           minLength: 1
           maxLength: 32
           pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        JobId:
+        DataAccessRoleArn:
+          type: string
+          minLength: 20
+          maxLength: 2048
+          pattern: arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+
+        ClientToken:
           type: string
           minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+          maxLength: 64
+          pattern: ^[a-zA-Z0-9-]+$
       required:
+      - OutputDataConfig
       - DatastoreId
-      - JobId
+      - DataAccessRoleArn
+      - ClientToken
     ListFHIRExportJobsResponse:
       type: object
       properties:
@@ -484,6 +398,92 @@ components:
           pattern: \p{ASCII}{0,8192}
       required:
       - ExportJobPropertiesList
+    DescribeFHIRExportJobRequest:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - DatastoreId
+      - JobId
+    StartFHIRExportJobResponse:
+      type: object
+      properties:
+        JobId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobStatus:
+          type: string
+          enum:
+          - SUBMITTED
+          - IN_PROGRESS
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED
+          - FAILED
+          - CANCEL_SUBMITTED
+          - CANCEL_IN_PROGRESS
+          - CANCEL_COMPLETED
+          - CANCEL_FAILED
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+      required:
+      - JobId
+      - JobStatus
+    ListFHIRExportJobsRequest:
+      type: object
+      properties:
+        DatastoreId:
+          type: string
+          minLength: 1
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        NextToken:
+          type: string
+          maxLength: 8192
+          pattern: \p{ASCII}{0,8192}
+        MaxResults:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 500
+        JobName:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        JobStatus:
+          type: string
+          enum:
+          - SUBMITTED
+          - IN_PROGRESS
+          - COMPLETED_WITH_ERRORS
+          - COMPLETED
+          - FAILED
+          - CANCEL_SUBMITTED
+          - CANCEL_IN_PROGRESS
+          - CANCEL_COMPLETED
+          - CANCEL_FAILED
+        SubmittedBefore:
+          type: string
+          format: date-time
+        SubmittedAfter:
+          type: string
+          format: date-time
+      required:
+      - DatastoreId
   securitySchemes:
     aws_v4:
       type: apiKey
