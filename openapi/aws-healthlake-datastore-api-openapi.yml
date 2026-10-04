@@ -251,17 +251,41 @@ paths:
               $ref: '#/components/schemas/ListFHIRDatastoresRequest'
 components:
   schemas:
-    DescribeFHIRDatastoreRequest:
+    ListFHIRDatastoresRequest:
       type: object
       properties:
-        DatastoreId:
+        Filter:
+          type: object
+          properties:
+            DatastoreName:
+              type: string
+              minLength: 1
+              maxLength: 256
+              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+            DatastoreStatus:
+              type: string
+              enum:
+              - CREATING
+              - ACTIVE
+              - DELETING
+              - DELETED
+              - CREATE_FAILED
+            CreatedBefore:
+              type: string
+              format: date-time
+            CreatedAfter:
+              type: string
+              format: date-time
+        NextToken:
           type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-      required:
-      - DatastoreId
-    CreateFHIRDatastoreResponse:
+          maxLength: 8192
+          pattern: \p{ASCII}{0,8192}
+        MaxResults:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 500
+    DeleteFHIRDatastoreResponse:
       type: object
       properties:
         DatastoreId:
@@ -290,92 +314,27 @@ components:
       - DatastoreArn
       - DatastoreStatus
       - DatastoreEndpoint
-    CreateFHIRDatastoreRequest:
+    DeleteFHIRDatastoreRequest:
       type: object
       properties:
-        DatastoreName:
+        DatastoreId:
           type: string
           minLength: 1
-          maxLength: 256
+          maxLength: 32
           pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-        DatastoreTypeVersion:
-          type: string
-          enum:
-          - R4
-        SseConfiguration:
-          type: object
-          properties:
-            KmsEncryptionConfig:
-              type: object
-              properties:
-                CmkType:
-                  type: string
-                  enum:
-                  - CUSTOMER_MANAGED_KMS_KEY
-                  - AWS_OWNED_KMS_KEY
-                KmsKeyId:
-                  type: string
-                  minLength: 1
-                  maxLength: 400
-                  pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
-              required:
-              - CmkType
-          required:
-          - KmsEncryptionConfig
-        PreloadDataConfig:
-          type: object
-          properties:
-            PreloadDataType:
-              type: string
-              enum:
-              - SYNTHEA
-          required:
-          - PreloadDataType
-        ClientToken:
+      required:
+      - DatastoreId
+    DescribeFHIRDatastoreRequest:
+      type: object
+      properties:
+        DatastoreId:
           type: string
           minLength: 1
-          maxLength: 64
-          pattern: ^[a-zA-Z0-9-]+$
-        Tags:
-          type: array
-          items:
-            type: object
-            properties:
-              Key:
-                type: string
-                minLength: 1
-                maxLength: 128
-                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
-              Value:
-                type: string
-                minLength: 0
-                maxLength: 256
-                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
-            required:
-            - Key
-            - Value
-        IdentityProviderConfiguration:
-          type: object
-          properties:
-            AuthorizationStrategy:
-              type: string
-              enum:
-              - SMART_ON_FHIR_V1
-              - AWS_AUTH
-            FineGrainedAuthorizationEnabled:
-              type: boolean
-            Metadata:
-              type: string
-            IdpLambdaArn:
-              type: string
-              minLength: 49
-              maxLength: 256
-              pattern: arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9\-_\.]+(:(\$LATEST|[a-zA-Z0-9\-_]+))?
-          required:
-          - AuthorizationStrategy
+          maxLength: 32
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
       required:
-      - DatastoreTypeVersion
-    DeleteFHIRDatastoreResponse:
+      - DatastoreId
+    CreateFHIRDatastoreResponse:
       type: object
       properties:
         DatastoreId:
@@ -516,6 +475,91 @@ components:
           pattern: \p{ASCII}{0,8192}
       required:
       - DatastorePropertiesList
+    CreateFHIRDatastoreRequest:
+      type: object
+      properties:
+        DatastoreName:
+          type: string
+          minLength: 1
+          maxLength: 256
+          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
+        DatastoreTypeVersion:
+          type: string
+          enum:
+          - R4
+        SseConfiguration:
+          type: object
+          properties:
+            KmsEncryptionConfig:
+              type: object
+              properties:
+                CmkType:
+                  type: string
+                  enum:
+                  - CUSTOMER_MANAGED_KMS_KEY
+                  - AWS_OWNED_KMS_KEY
+                KmsKeyId:
+                  type: string
+                  minLength: 1
+                  maxLength: 400
+                  pattern: (arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))
+              required:
+              - CmkType
+          required:
+          - KmsEncryptionConfig
+        PreloadDataConfig:
+          type: object
+          properties:
+            PreloadDataType:
+              type: string
+              enum:
+              - SYNTHEA
+          required:
+          - PreloadDataType
+        ClientToken:
+          type: string
+          minLength: 1
+          maxLength: 64
+          pattern: ^[a-zA-Z0-9-]+$
+        Tags:
+          type: array
+          items:
+            type: object
+            properties:
+              Key:
+                type: string
+                minLength: 1
+                maxLength: 128
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+              Value:
+                type: string
+                minLength: 0
+                maxLength: 256
+                pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+            required:
+            - Key
+            - Value
+        IdentityProviderConfiguration:
+          type: object
+          properties:
+            AuthorizationStrategy:
+              type: string
+              enum:
+              - SMART_ON_FHIR_V1
+              - AWS_AUTH
+            FineGrainedAuthorizationEnabled:
+              type: boolean
+            Metadata:
+              type: string
+            IdpLambdaArn:
+              type: string
+              minLength: 49
+              maxLength: 256
+              pattern: arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9\-_\.]+(:(\$LATEST|[a-zA-Z0-9\-_]+))?
+          required:
+          - AuthorizationStrategy
+      required:
+      - DatastoreTypeVersion
     DescribeFHIRDatastoreResponse:
       type: object
       properties:
@@ -622,50 +666,6 @@ components:
           - DatastoreEndpoint
       required:
       - DatastoreProperties
-    ListFHIRDatastoresRequest:
-      type: object
-      properties:
-        Filter:
-          type: object
-          properties:
-            DatastoreName:
-              type: string
-              minLength: 1
-              maxLength: 256
-              pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-            DatastoreStatus:
-              type: string
-              enum:
-              - CREATING
-              - ACTIVE
-              - DELETING
-              - DELETED
-              - CREATE_FAILED
-            CreatedBefore:
-              type: string
-              format: date-time
-            CreatedAfter:
-              type: string
-              format: date-time
-        NextToken:
-          type: string
-          maxLength: 8192
-          pattern: \p{ASCII}{0,8192}
-        MaxResults:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 500
-    DeleteFHIRDatastoreRequest:
-      type: object
-      properties:
-        DatastoreId:
-          type: string
-          minLength: 1
-          maxLength: 32
-          pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$
-      required:
-      - DatastoreId
   securitySchemes:
     aws_v4:
       type: apiKey
