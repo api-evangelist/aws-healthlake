@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: AWS HealthLake Rate Limits
 description: AWS HealthLake enforces service quotas at both the account level and the per-data-store level. Limits differ between HealthLake Advanced (data stores created after 8/21/2023) and HealthLake Standard (legacy data stores). Many limits are adjustable via the AWS Service Quotas console. Write capacity scales with payload size — each 1 KB increment above the base consumes proportionally more write capacity.
 specificationVersion: '0.1'

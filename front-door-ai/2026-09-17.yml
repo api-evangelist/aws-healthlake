@@ -14,6 +14,15 @@ front_door_ai:
   - amazon-app-mesh
   - amazon-app-runner
   - amazon-app-studio
+  - amazon-appflow
+  - amazon-application-migration-service
+  - amazon-appsync
+  - amazon-athena
+  - amazon-audit-manager
+  - amazon-augmented-ai
+  - amazon-aurora
+  - amazon-aurora-dsql
+  - amazon-b2b-data-interchange
   - amazon-backup
   - amazon-batch
   - amazon-bedrock
@@ -31,12 +40,24 @@ front_door_ai:
   - amazon-cloudshell
   - amazon-cloudtrail
   - amazon-cloudwatch
+  - amazon-codeartifact
+  - amazon-codebuild
+  - amazon-codecatalyst
+  - amazon-codedeploy
   - amazon-codeguru-profiler
+  - amazon-codeguru-reviewer
+  - amazon-codepipeline
   - amazon-codestar
   - amazon-cognito
   - amazon-comprehend
   - amazon-compute-optimizer
   - amazon-config
+  - amazon-connect
+  - amazon-control-tower
+  - amazon-data-exchange
+  - amazon-data-lifecycle-manager
+  - amazon-datasync
+  - amazon-datazone
   - amazon-deadline-cloud
   - amazon-deepracer
   - amazon-detective
@@ -45,7 +66,23 @@ front_door_ai:
   - amazon-direct-connect
   - amazon-directory-service
   - amazon-dms
+  - amazon-documentdb
   - amazon-dynamodb
+  - amazon-ebs
+  - amazon-ec2
+  - amazon-ec2-auto-scaling
+  - amazon-ec2-image-builder
+  - amazon-ecr
+  - amazon-ecs
+  - amazon-efs
+  - amazon-elastic-beanstalk
+  - amazon-elastic-load-balancing
+  - amazon-elasticache
+  - amazon-emr
+  - amazon-entity-resolution
+  - amazon-eventbridge
+  - amazon-eventbridge-pipes
+  - amazon-eventbridge-scheduler
   - amazon-fargate
   - amazon-fault-injection-simulator
   - amazon-finspace
@@ -54,6 +91,15 @@ front_door_ai:
   - amazon-fraud-detector
   - amazon-freertos
   - amazon-fsx
+  - amazon-gamelift
+  - amazon-global-accelerator
+  - amazon-glue-databrew
+  - amazon-ground-station
+  - amazon-guardduty
+  - amazon-health-dashboard
+  - amazon-healthimaging
+  - amazon-healthlake
+  - amazon-healthomics
   - amazon-iam
   - amazon-iam-access-analyzer
   - amazon-iam-identity-center
@@ -68,8 +114,35 @@ front_door_ai:
   - amazon-iot-greengrass
   - amazon-iot-sitewise
   - amazon-iot-twinmaker
+  - amazon-kendra
+  - amazon-keyspaces
+  - amazon-kinesis-firehose
+  - amazon-kinesis-video-streams
+  - amazon-kms
+  - amazon-lake-formation
+  - amazon-lambda
+  - amazon-launch-wizard
   - amazon-lex
+  - amazon-license-manager
   - amazon-lightsail
+  - amazon-location-service
+  - amazon-lookout-for-equipment
+  - amazon-macie
+  - amazon-mainframe-modernization
+  - amazon-managed-apache-flink
+  - amazon-managed-blockchain
+  - amazon-managed-grafana
+  - amazon-managed-prometheus
+  - amazon-marketplace
+  - amazon-mediaconnect
+  - amazon-mediaconvert
+  - amazon-medialive
+  - amazon-mediapackage
+  - amazon-mediatailor
+  - amazon-memorydb
+  - amazon-monitron
+  - amazon-mq
+  - amazon-msk
   - amazon-neptune
   - amazon-network-firewall
   - amazon-nova
@@ -80,10 +153,37 @@ front_door_ai:
   - amazon-parallel-computing-service
   - amazon-payment-cryptography
   - amazon-personalize
+  - amazon-pinpoint
+  - amazon-polly
+  - amazon-private-ca
+  - amazon-privatelink
+  - amazon-proton
+  - amazon-q
   - amazon-qldb
+  - amazon-quicksight
+  - amazon-rds
+  - amazon-redshift
+  - amazon-rekognition
   - amazon-resilience-hub
+  - amazon-resource-explorer
+  - amazon-route53-resolver
+  - amazon-s3
+  - amazon-s3-glacier
+  - amazon-sagemaker
+  - amazon-secrets-manager
+  - amazon-security-hub
+  - amazon-security-lake
+  - amazon-serverless-application-repository
   - amazon-service-catalog
   - amazon-ses
+  - amazon-shield
+  - amazon-simpledb
+  - amazon-snow-family
+  - amazon-sns
+  - amazon-sqs
+  - amazon-step-functions
+  - amazon-storage-gateway
+  - amazon-supply-chain
   - amazon-swf
   - amazon-systems-manager
   - amazon-textract
@@ -99,6 +199,7 @@ front_door_ai:
   - amazon-vpc-lattice
   - amazon-vpn
   - amazon-waf
+  - amazon-web-services
   - amazon-web-services-aws
   - amazon-well-architected-tool
   - amazon-workmail
@@ -115,6 +216,7 @@ front_door_ai:
   - aws-codebuild
   - aws-elastic-beanstalk
   - aws-glue
+  - aws-lambda
   - aws-marketplace
   - aws-redshift
   - aws-security-hub
@@ -126,8 +228,11 @@ front_door_ai:
   - kinesis
   - restful-services
   inherited_from: null
+  alias_of: null
   verdict: scored
   score: null
+  band: null
+  band_label: null
   host_score: 35
   density: null
   words: 1687

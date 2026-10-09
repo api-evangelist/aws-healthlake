@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: AWS HealthLake Plans and Pricing
 description: AWS HealthLake uses a pay-as-you-go model with no upfront costs. Two service tiers are available — HealthLake Advanced (default, with higher FHIR transaction quotas and newer API capabilities) and HealthLake Standard (legacy tier). Charges are based on data store hours, storage consumed, queries beyond the bundled allowance, medical NLP character processing, data export volume, and FHIR Subscription event delivery.
 specificationVersion: '0.1'
@@ -51,3 +55,22 @@ plans:
       medicalNLP: '$0.0010 per 100 characters analyzed'
       exportTransform: '$0.19 per GB exported or transformed'
       dataImport: Free (indefinite)
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: HealthLake Advanced
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: HealthLake Standard
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
