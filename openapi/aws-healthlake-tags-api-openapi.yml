@@ -196,22 +196,6 @@ paths:
               $ref: '#/components/schemas/UntagResourceRequest'
 components:
   schemas:
-    ListTagsForResourceRequest:
-      type: object
-      properties:
-        ResourceARN:
-          type: string
-          minLength: 1
-          maxLength: 1011
-          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
-      required:
-      - ResourceARN
-    TagResourceResponse:
-      type: object
-      properties: {}
-    UntagResourceResponse:
-      type: object
-      properties: {}
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -262,6 +246,16 @@ components:
       required:
       - ResourceARN
       - Tags
+    ListTagsForResourceRequest:
+      type: object
+      properties:
+        ResourceARN:
+          type: string
+          minLength: 1
+          maxLength: 1011
+          pattern: ^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-z0-9-]+:\d{12}:datastore\/fhir\/.{32}
+      required:
+      - ResourceARN
     UntagResourceRequest:
       type: object
       properties:
@@ -280,6 +274,12 @@ components:
       required:
       - ResourceARN
       - TagKeys
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
   securitySchemes:
     aws_v4:
       type: apiKey
